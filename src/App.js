@@ -5,6 +5,7 @@ import Header from "./components/header/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Menu from "pages/menu/Menu";
 import NotFound from "./pages/NotFound";
+import Login from "pages/member/Login";
 // api
 import instance from "./api/axios";
 import requests from "./api/request";
@@ -17,15 +18,15 @@ const App = () => {
     <Router>
       <Reset />
       <Header />
-      <div className="container">
-        <Routes>
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/menudetail" element={<Menudetail />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+
+      <Routes>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/menudetail" element={<Menudetail />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </Router>
   );
 };
