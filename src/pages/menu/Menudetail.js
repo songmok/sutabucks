@@ -34,35 +34,35 @@ const Menudetail = () => {
               </summary>
             </details>
             <div className="mt-4">
-              <div className="flex justify-between py-5">
+              <div className="flex justify-between py-5 border-y">
                 <span>제품 영양 정보</span>
                 <span>Tall(톨) / 355ml (12 fl oz)</span>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-5">
                 <div className="flex-1">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-3">
                     <span>1회 제공량 (kcal)</span>
                     <span>265</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-3">
                     <span>1회 제공량 (kcal)</span>
                     <span>265</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-3">
                     <span>1회 제공량 (kcal)</span>
                     <span>265</span>
                   </div>
                 </div>
                 <div className="flex-1">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-3">
                     <span>1회 제공량 (kcal)</span>
                     <span>265</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-3">
                     <span>1회 제공량 (kcal)</span>
                     <span>265</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-3">
                     <span>1회 제공량 (kcal)</span>
                     <span>265</span>
                   </div>
