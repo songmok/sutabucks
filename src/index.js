@@ -11,9 +11,9 @@ import { Provider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // Provider 필수 store={store}
-  <Provider>
-    <PersistGate loading={null}>
-      <App />
-    </PersistGate>
-  </Provider>
+  // <Provider>
+  //   <PersistGate loading={null}>
+  <App />
+  //   </PersistGate>
+  // </Provider>
 );
