@@ -73,7 +73,7 @@ const HeaderCss = styled.header`
           justify-content: space-between;
           .member-list {
             position: relative;
-            &:nth-child(1) {
+            &:nth-of-type(1) {
               margin-right: 30px;
               &::after {
                 content: "";
