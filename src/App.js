@@ -8,15 +8,24 @@ import NotFound from "./pages/NotFound";
 // api
 import instance from "./api/axios";
 import requests from "./api/request";
+import Menudetail from "pages/menu/Menudetail";
+import Cart from "pages/cart/Cart";
+import Order from "pages/cart/Order";
 
 const App = () => {
   return (
     <Router>
       <Reset />
       <Header />
-      <Routes>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/menudetail" element={<Menudetail />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </Router>
   );
 };
