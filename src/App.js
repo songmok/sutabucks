@@ -1,19 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Header from "./components/Header/Header";
+import { Reset } from "styled-reset";
+// Routes
+import Header from "./components/header/Header";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Menu from "pages/menu/Menu";
 import NotFound from "./pages/NotFound";
+// api
 import instance from "./api/axios";
 import requests from "./api/request";
 
 const App = () => {
   return (
     <Router>
+      <Reset />
       <Header />
-      <div className="container">
-        <Routes>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </Router>
   );
 };
