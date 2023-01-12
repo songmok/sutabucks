@@ -1,6 +1,34 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+// import Modal from "./Modal";
+import OrderModal from "./OrderModal";
+import "./OrderModal.css";
 
-const Menu = () => {
+const Order = () => {
+  // useState를 사용하여 open상태를 변경한다. (open일때 true로 만들어 열리는 방식)
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const orderOpen = useRef();
+
+  const modalCloseHandler = ({ target }) => {
+    if (modalOpen && !orderOpen.current.contains(target)) {
+      setModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", modalCloseHandler);
+    return () => {
+      window.removeEventListener("click", modalCloseHandler);
+    };
+  }, []);
+
   return (
     <div className="container">
       <div class="pt-16 px-10 grid lg:grid-cols-5 pb-20">
@@ -99,7 +127,7 @@ const Menu = () => {
             </div>
             <div class="mt-5 grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
               {/* <!--card--> */}
-              <div class="block group">
+              <div class="block group cursor-pointer" onClick={openModal}>
                 <img
                   src="./coffee.jpg"
                   alt="coffee"
@@ -114,6 +142,18 @@ const Menu = () => {
                   </div>
                 </div>
               </div>
+              {openModal && (
+                <OrderModal
+                  open={modalOpen}
+                  close={closeModal}
+                  ref={orderOpen}
+                />
+              )}
+              {/* <OrderModal
+              open={modalOpen}
+              close={closeModal}
+              onBackdropPress={() => setModalOpen(false)}
+            /> */}
               {/* <!--card end--> */}
               {/* <!--card--> */}
               <div class="block group">
@@ -375,4 +415,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default Order;
