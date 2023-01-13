@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   return (
-    <section className="container">
+    <section className="container mx-auto">
       <div class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
         <div class="max-w-3xl mx-auto">
           <header class="text-center">
@@ -204,12 +205,11 @@ const Cart = () => {
                 </dl>
 
                 <div class="flex justify-end">
-                  <a
-                    href="#"
+                  <Link
                     class="block px-5 py-3 text-sm text-gray-100 transition bg-gray-700 rounded hover:bg-gray-600"
                   >
                     Checkout
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
