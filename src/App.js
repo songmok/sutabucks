@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Reset } from "styled-reset";
 // Routes
-import Header from "./components/header/Header";
+import Header from "./components/Header/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Menu from "pages/menu/Menu";
 import NotFound from "./pages/NotFound";
@@ -18,7 +18,6 @@ const App = () => {
     <Router>
       <Reset />
       <Header />
-
       <Routes>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/menu" element={<Menu />} />

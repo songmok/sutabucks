@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   return (
-    <div className="container">
+    <section className="container mx-auto">
       <div class="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div class="lg:col-span-1">
           <nav aria-label="Main Nav" class="flex flex-col space-y-1">
@@ -28,18 +29,16 @@ const Menu = () => {
                 aria-label="Users Nav"
                 class="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <a
-                  href=""
+                <Link
                   class="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
                 >
                   Banned Users
-                </a>
-                <a
-                  href=""
+                </Link>
+                <Link
                   class="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
                 >
                   Calendar
-                </a>
+                </Link>
               </nav>
             </details>
             <details class="group [&_summary::-webkit-details-marker]:hidden">
@@ -66,19 +65,17 @@ const Menu = () => {
                 aria-label="Account Nav"
                 class="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <a
-                  href=""
+                <Link
                   class="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
                 >
                   Details
-                </a>
+                </Link>
 
-                <a
-                  href=""
+                <Link
                   class="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
                 >
                   Security
-                </a>
+                </Link>
 
                 <form action="/logout">
                   <button
@@ -371,7 +368,7 @@ const Menu = () => {
           </div>
         </main>
       </div>
-    </div>
+    </section>
   );
 };
 
