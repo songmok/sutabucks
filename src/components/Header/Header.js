@@ -18,9 +18,22 @@ const Header = () => {
               <ul className="gnb">
                 <li className="depth1">
                   <Link to="/">새소식</Link>
+                  <ul className="submenu">
+                    <li className="depth2">
+                      <Link to="/">공지사항</Link>
+                    </li>
+                    <li className="depth2">
+                      <Link to="/">이벤트</Link>
+                    </li>
+                  </ul>
                 </li>
                 <li className="depth1">
-                  <Link to="/menu">매뉴보기</Link>
+                  <Link to="/menu">메뉴보기</Link>
+                  <ul className="submenu">
+                    <li className="depth2">
+                      <Link to="/">음료</Link>
+                    </li>
+                  </ul>
                 </li>
                 <li className="depth1">
                   <Link to="/delivery">매장선택</Link>
