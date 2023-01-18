@@ -19,7 +19,7 @@ const App = () => {
       <Reset />
       <Header />
       <Routes>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/login" element={<Login />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/menudetail" element={<Menudetail />} />
         <Route path="/order" element={<Order />} />
