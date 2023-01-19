@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import FindDiv from "./findCSS";
-import { Bt } from "./findCSS";
+import { Link } from "react-router-dom";
+import FindDiv from "../../style/memberCss/findCSS";
+import { Bt } from "../../style/memberCss/findCSS";
 
 const IdFind = () => {
   const [name, setName] = useState("");
@@ -32,7 +33,9 @@ const IdFind = () => {
         </form>
       </FindDiv>
       <div className="flex justify-center">
-        <Bt>아이디 찾기</Bt>
+        <Link to="/idresult">
+          <Bt>아이디 찾기</Bt>
+        </Link>
       </div>
     </>
   );

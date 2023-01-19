@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logoImg from "asset/icon/homepage-logo.png";
+import logo1 from "asset/images/logo1.png";
 import cartImg from "asset/images/cart.png";
 import HeaderCss from "./HeaderCss";
 import SubNews from "./SubNews";
 import SubMenu from "./SubMenu";
 import SubMaps from "./SubMaps";
-// import { set } from "immer/dist/internal";
+
 const Header = () => {
   // console.log(Nav[1].submenu[0].name);
   const [count, setCount] = useState(0);
@@ -59,7 +59,7 @@ const Header = () => {
       <HeaderCss>
         <div className="header-wrap">
           <Link to="/" className="logo">
-            <img src={logoImg} alt="logo" />
+            <img src={logo1} alt="logo" />
           </Link>
           <div className="header-center">
             <h1 className="title">SUTABUCKS</h1>
@@ -95,9 +95,9 @@ const Header = () => {
                       onMouseOver={() => {
                         setCount(v.id);
                       }}
-                      // onMouseOut={() => {
-                      //   setCount(0);
-                      // }}
+                      onMouseOut={() => {
+                        setCount(0);
+                      }}
                       key={i}
                     >
                       <Link to={v.url}>{v.name}</Link>

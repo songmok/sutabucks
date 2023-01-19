@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import FindDiv from "./findCSS";
-import { Bt } from "./findCSS";
+import { Link } from "react-router-dom";
+import FindDiv from "../../style/memberCss/findCSS";
+import { Bt } from "../../style/memberCss/findCSS";
 
 const PwFind = () => {
   const [email, setEmail] = useState("");
@@ -33,7 +34,9 @@ const PwFind = () => {
         </form>
       </FindDiv>
       <div className="flex justify-center">
-        <Bt>비밀번호 찾기</Bt>
+        <Link to="/pwresult">
+          <Bt>비밀번호 찾기</Bt>
+        </Link>
       </div>
     </>
   );
