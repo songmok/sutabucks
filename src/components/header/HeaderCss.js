@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
 const HeaderCss = styled.header`
+  position: relative;
   width: 100%;
   height: 200px;
   background-color: #1b3c34;
+  display: flex;
+  justify-content: center;
   * {
-    color: #fff;
+    color: red !important;
     font-weight: bold;
   }
   .header-wrap {
-    position: relative;
-    margin: 0 auto;
     width: 1440px;
     height: 100%;
     display: grid;
@@ -19,7 +20,6 @@ const HeaderCss = styled.header`
       width: 140px;
       height: 140px;
       display: block;
-      margin-left: 10px;
       align-self: center;
       img {
         display: block;
@@ -28,21 +28,77 @@ const HeaderCss = styled.header`
     }
     .header-center {
       justify-self: center;
-      align-self: center;
+      text-align: center;
       .title {
+        align-self: center;
         font-size: 4.06rem;
         display: block;
-        margin-bottom: 42px;
+        padding-top: 30px;
+        margin-bottom: 32px;
       }
-    }
-    nav {
-      .gnb {
-        display: flex;
-        justify-content: space-between;
-        .depth1 {
-          a {
-            font-size: 1.25rem;
-            font-weight: bold;
+      nav {
+        /* padding-top: 0px; */
+        .gnb {
+          display: flex;
+          .depth1 {
+            display: block;
+            text-align: center;
+            width: calc(480px / 3);
+            background-color: #1e20c5;
+            /* height: 70px; */
+            a {
+              padding-top: 10px;
+              padding-bottom: 43px;
+              display: block;
+              font-size: 1.25rem;
+              font-weight: bold;
+            }
+            /* &:nth-child(2) > .depth1-wrap {
+            display: none;
+          } */
+            .depth1-wrap {
+              width: 100%;
+              height: 120px;
+              position: absolute;
+              background-color: #999;
+              left: 0;
+              top: 100%;
+              display: none;
+              justify-content: center;
+              &.active {
+                display: block;
+                animation-name: opacity;
+                animation-duration: 500ms;
+                @keyframes opacity {
+                  0% {
+                    height: 0;
+                    opacity: 0;
+                    display: none;
+                  }
+
+                  100% {
+                    z-index: 999;
+                    height: 120px;
+                    opacity: 1;
+                    display: block;
+                  }
+                }
+              }
+              &.active2 {
+                display: block;
+              }
+              &.active3 {
+                display: block;
+              }
+              .submenu {
+                width: 1440px;
+                .depth2 {
+                  position: relative;
+                  width: 200px;
+                  float: left;
+                }
+              }
+            }
           }
         }
       }
@@ -50,7 +106,6 @@ const HeaderCss = styled.header`
     .header-right {
       padding-top: 30px;
       justify-self: right;
-      margin-right: 30px;
       .header-right-top {
         display: flex;
         align-items: center;

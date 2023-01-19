@@ -1,12 +1,61 @@
-import React from "react";
-import cartImg from "asset/images/cart.png";
-import HeaderCss from "style/HeaderCss";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo1 from "asset/images/logo1.png";
+import cartImg from "asset/images/cart.png";
+import HeaderCss from "./HeaderCss";
+import SubNews from "./SubNews";
+import SubMenu from "./SubMenu";
+import SubMaps from "./SubMaps";
 
 const Header = () => {
+  // console.log(Nav[1].submenu[0].name);
+  const [count, setCount] = useState(0);
+  // const coffe = [{ menu: "커피", id: 0, menu1: "커피2", menu2: "커피3" }];
+  // const bread = [{ menu: "빵", id: 1, menu1: "빵2", menu2: "빵3" }];
+  const news = [
+    {
+      id: 1,
+      name: "새소식",
+      url: "/",
+      sub: [
+        { id: 11, name: "이벤트" },
+        { id: 12, name: "공지사항" },
+      ],
+    },
+  ];
+  const menu = [
+    {
+      id: 2,
+      name: "메뉴보기",
+      url: "/menu",
+      sub: [
+        {
+          id: 1,
+          name: "음료",
+          submenu: [{ menu: "커피1" }, { menu: "커피2" }, { menu: "커피" }],
+        },
+        {
+          id: 2,
+          name: "음식",
+          submenu: [{ menu: "빵1" }, { menu: "빵2" }, { menu: "빵" }],
+        },
+      ],
+    },
+  ];
+  const maps = [
+    {
+      id: 3,
+      name: "매장찾기",
+      url: "/maps",
+      sub: [{ submenu: [] }],
+    },
+  ];
+  const ne = [...news];
+
+  console.log(ne);
+  console.log(count);
   return (
-    <>
+    <div style={{ zIndex: 99999 }}>
       <HeaderCss>
         <div className="header-wrap">
           <Link to="/" className="logo">
@@ -16,15 +65,75 @@ const Header = () => {
             <h1 className="title">SUTABUCKS</h1>
             <nav>
               <ul className="gnb">
-                <li className="depth1">
-                  <Link to="/">새소식</Link>
-                </li>
-                <li className="depth1">
-                  <Link to="/menu">매뉴보기</Link>
-                </li>
-                <li className="depth1">
-                  <Link to="/delivery">매장선택</Link>
-                </li>
+                {news.map((v, i) => {
+                  return (
+                    <li
+                      className="depth1"
+                      onMouseOver={() => {
+                        setCount(v.id);
+                      }}
+                      onMouseOut={() => {
+                        setCount(0);
+                      }}
+                      key={i}
+                    >
+                      <Link to={v.url}>{v.name}</Link>
+                      <ul className="submenu">
+                        <SubNews
+                          sub={v.sub}
+                          count={count}
+                          setCount={setCount}
+                        />
+                      </ul>
+                    </li>
+                  );
+                })}
+                {menu.map((v, i) => {
+                  return (
+                    <li
+                      className="depth1"
+                      onMouseOver={() => {
+                        setCount(v.id);
+                      }}
+                      // onMouseOut={() => {
+                      //   setCount(0);
+                      // }}
+                      key={i}
+                    >
+                      <Link to={v.url}>{v.name}</Link>
+                      <ul className="submenu">
+                        <SubMenu
+                          sub={v.sub}
+                          count={count}
+                          setCount={setCount}
+                        />
+                      </ul>
+                    </li>
+                  );
+                })}
+                {maps.map((v, i) => {
+                  return (
+                    <li
+                      className="depth1"
+                      onMouseOver={() => {
+                        setCount(v.id);
+                      }}
+                      onMouseOut={() => {
+                        setCount(0);
+                      }}
+                      key={i}
+                    >
+                      <Link to={v.url}>{v.name}</Link>
+                      <ul className="submenu">
+                        <SubMaps
+                          sub={v.sub}
+                          count={count}
+                          setCount={setCount}
+                        />
+                      </ul>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
           </div>
@@ -47,7 +156,7 @@ const Header = () => {
             </div>
             <div className="header-right-bottom">
               <div className="order">
-                <Link to="/delivery">
+                <Link to="/order">
                   <span>주문하기</span>
                 </Link>
               </div>
@@ -55,7 +164,7 @@ const Header = () => {
           </div>
         </div>
       </HeaderCss>
-    </>
+    </div>
   );
 };
 
