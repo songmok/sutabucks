@@ -16,10 +16,10 @@ const HeaderCss = styled.header`
     grid-template-columns: repeat(3, 1fr);
 
     .logo {
-      width: 100px;
-      height: 100px;
+      width: 140px;
+      height: 140px;
       display: block;
-      margin-left: 20px;
+      margin-left: 10px;
       align-self: center;
       img {
         display: block;

@@ -1,8 +1,8 @@
 import React from "react";
-import logoImg from "asset/icon/homepage-logo.png";
 import cartImg from "asset/images/cart.png";
 import HeaderCss from "style/HeaderCss";
 import { Link } from "react-router-dom";
+import logo1 from "asset/images/logo1.png";
 
 const Header = () => {
   return (
@@ -10,7 +10,7 @@ const Header = () => {
       <HeaderCss>
         <div className="header-wrap">
           <Link to="/" className="logo">
-            <img src={logoImg} alt="logo" />
+            <img src={logo1} alt="logo" />
           </Link>
           <div className="header-center">
             <h1 className="title">SUTABUCKS</h1>
