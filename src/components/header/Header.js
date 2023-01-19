@@ -95,9 +95,9 @@ const Header = () => {
                       onMouseOver={() => {
                         setCount(v.id);
                       }}
-                      // onMouseOut={() => {
-                      //   setCount(0);
-                      // }}
+                      onMouseOut={() => {
+                        setCount(0);
+                      }}
                       key={i}
                     >
                       <Link to={v.url}>{v.name}</Link>
