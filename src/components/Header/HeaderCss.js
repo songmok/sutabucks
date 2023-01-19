@@ -6,9 +6,7 @@ const HeaderCss = styled.header`
   background-color: #1b3c34;
   display: flex;
   justify-content: center;
-  z-index: 9999;
-  /* padding-bottom: 200px; */
-  \ * {
+  * {
     color: red !important;
     font-weight: bold;
   }
