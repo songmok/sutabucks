@@ -47,7 +47,7 @@ const Header = () => {
             </div>
             <div className="header-right-bottom">
               <div className="order">
-                <Link to="/delivery">
+                <Link to="/order">
                   <span>주문하기</span>
                 </Link>
               </div>
