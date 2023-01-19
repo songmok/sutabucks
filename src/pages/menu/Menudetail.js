@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import MenudetailCss from "style/MenudetailCss";
+import MenudetailCss from "./MenudetailCss";
 
 const Menudetail = () => {
   return (

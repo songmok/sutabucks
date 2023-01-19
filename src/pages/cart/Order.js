@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 // import OrderModal from "./OrderModal";
-import OrderModalCss from "style/OrderModalCss";
+import OrderModalCss from "./OrderModalCss";
 import axios from "axios";
 import { cartActions } from "reducer/cartSlice";
 import { useDispatch } from "react-redux";

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import OrderModalCss from "style/OrderModalCss";
+import OrderModalCss from "./OrderModalCss";
 
 const OrderModal = ({ open, close, modalOpen, setModalOpen, item }) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
