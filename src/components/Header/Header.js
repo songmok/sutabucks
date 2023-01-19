@@ -6,12 +6,9 @@ import HeaderCss from "./HeaderCss";
 import SubNews from "./SubNews";
 import SubMenu from "./SubMenu";
 import SubMaps from "./SubMaps";
-// import { set } from "immer/dist/internal";
+
 const Header = () => {
-  // console.log(Nav[1].submenu[0].name);
   const [count, setCount] = useState(0);
-  // const coffe = [{ menu: "커피", id: 0, menu1: "커피2", menu2: "커피3" }];
-  // const bread = [{ menu: "빵", id: 1, menu1: "빵2", menu2: "빵3" }];
   const news = [
     {
       id: 1,
@@ -50,12 +47,8 @@ const Header = () => {
       sub: [{ submenu: [] }],
     },
   ];
-  const ne = [...news];
-
-  console.log(ne);
-  console.log(count);
   return (
-    <div style={{ zIndex: 99999 }}>
+    <div style={{ marginBottom: 200 }}>
       <HeaderCss>
         <div className="header-wrap">
           <Link to="/" className="logo">
@@ -95,9 +88,9 @@ const Header = () => {
                       onMouseOver={() => {
                         setCount(v.id);
                       }}
-                      // onMouseOut={() => {
-                      //   setCount(0);
-                      // }}
+                      onMouseOut={() => {
+                        setCount(0);
+                      }}
                       key={i}
                     >
                       <Link to={v.url}>{v.name}</Link>
