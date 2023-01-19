@@ -8,14 +8,15 @@ import ReactModal from "react-modal";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
+import store from "reducer/store";
 
 ReactModal.setAppElement("#root");
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // Provider 필수 store={store}
-  // <Provider>
-  //   <PersistGate loading={null}>
-  <App />
-  //   </PersistGate>
-  // </Provider>
+  <Provider store={store}>
+    {/* <PersistGate loading={null}> */}
+    <App />
+    {/* </PersistGate> */}
+  </Provider>
 );

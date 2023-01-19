@@ -22,6 +22,7 @@ img {
 }
 body {
   font-family: "Montserrat", "nbg", sans-serif;
+  height: 5000px;
 }
 em {
   font-style: normal;
