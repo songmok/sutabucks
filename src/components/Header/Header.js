@@ -18,9 +18,51 @@ const Header = () => {
               <ul className="gnb">
                 <li className="depth1">
                   <Link to="/">새소식</Link>
+                  <div className="depth1-wrap">
+                    <ul className="submenu">
+                      <li className="depth2">
+                        <Link to="/">공지사항</Link>
+                      </li>
+                      <li className="depth2">
+                        <Link to="/">이벤트</Link>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li className="depth1">
-                  <Link to="/menu">매뉴보기</Link>
+                  <Link to="/menu">메뉴보기</Link>
+                  <div className="depth1-wrap">
+                    <ul className="submenu">
+                      <li className="depth2">
+                        <Link to="/">음료</Link>
+                        <ul className="depth2-sub">
+                          <li className="sub-list">
+                            <Link to="/">커피</Link>
+                          </li>
+                          <li className="sub-list">
+                            <Link to="/">커피</Link>
+                          </li>
+                          <li className="sub-list">
+                            <Link to="/">커피</Link>
+                          </li>
+                        </ul>
+                      </li>
+                      <li className="depth2">
+                        <Link to="/">푸드</Link>
+                        <ul className="depth2-sub">
+                          <li className="sub-list">
+                            <Link to="/">브래드</Link>
+                          </li>
+                          <li className="sub-list">
+                            <Link to="/">브래드</Link>
+                          </li>
+                          <li className="sub-list">
+                            <Link to="/">브래드</Link>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li className="depth1">
                   <Link to="/delivery">매장선택</Link>
