@@ -18,6 +18,7 @@ import Order from "pages/cart/Order";
 import IdResult from "pages/member/IdResult";
 import PwResult from "pages/member/PwResult";
 import MyPage from "pages/member/MyPage";
+import Checkout from "pages/cart/Checkout";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/menudetail" element={<Menudetail />} />
         <Route path="/order" element={<Order />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
