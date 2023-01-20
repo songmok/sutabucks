@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import FindDiv from "../../style/memberCss/findCSS";
-import { Bt } from "../../style/memberCss/findCSS";
+import { FindDiv, Bt } from "../../style/memberCss/findCSS";
 
 const PwFind = () => {
   const [email, setEmail] = useState("");
