@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Reset } from "styled-reset";
 // Routes
@@ -20,6 +21,15 @@ import PwResult from "pages/member/PwResult";
 import MyPage from "pages/member/MyPage";
 
 const App = () => {
+  const [list, setList] = useState([]);
+  const fetchData = async () => {
+    const rsList = await instance.get(requests.fetchList);
+    setList(rsList);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  console.log(list);
   return (
     <Router>
       <Reset />

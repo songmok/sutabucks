@@ -1,2 +1,4 @@
-const requests = {};
+const requests = {
+  fetchList: "admin/list",
+};
 export default requests;

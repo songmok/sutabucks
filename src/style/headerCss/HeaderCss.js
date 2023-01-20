@@ -6,10 +6,12 @@ const HeaderCss = styled.header`
   background-color: #1b3c34;
   display: flex;
   justify-content: center;
+  z-index: 9999;
   * {
-    color: red !important;
+    color: #fff;
     font-weight: bold;
   }
+
   .header-wrap {
     width: 1440px;
     height: 100%;
@@ -21,7 +23,7 @@ const HeaderCss = styled.header`
       height: 140px;
       display: block;
       align-self: center;
-      img {
+      > img {
         display: block;
         width: 100%;
       }
@@ -37,7 +39,6 @@ const HeaderCss = styled.header`
         margin-bottom: 32px;
       }
       nav {
-        /* padding-top: 0px; */
         .gnb {
           display: flex;
           .depth1 {
@@ -45,20 +46,18 @@ const HeaderCss = styled.header`
             text-align: center;
             width: calc(480px / 3);
             background-color: #1e20c5;
-            /* height: 70px; */
-            a {
+            &:hover {
+              background-color: #999;
+            }
+            > a {
               padding-top: 10px;
               padding-bottom: 43px;
               display: block;
               font-size: 1.25rem;
-              font-weight: bold;
             }
-            /* &:nth-child(2) > .depth1-wrap {
-            display: none;
-          } */
             .depth1-wrap {
               width: 100%;
-              height: 120px;
+              height: 140px;
               position: absolute;
               background-color: #999;
               left: 0;
@@ -78,24 +77,51 @@ const HeaderCss = styled.header`
 
                   100% {
                     z-index: 999;
-                    height: 120px;
+                    height: 140px;
                     opacity: 1;
                     display: block;
                   }
                 }
               }
-              &.active2 {
-                display: block;
-              }
-              &.active3 {
-                display: block;
-              }
               .submenu {
+                position: relative;
+                margin: 0 auto;
                 width: 1440px;
+                display: flex;
+                a {
+                  position: relative;
+                  display: block;
+                  &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0px;
+                    width: 0;
+                    height: 1px;
+                    background-color: red;
+                    transition: all 0.3s;
+                  }
+                  &:hover::after {
+                    content: "";
+                    width: 100%;
+                  }
+                }
                 .depth2 {
                   position: relative;
-                  width: 200px;
-                  float: left;
+                  height: 140px;
+                  width: 100px;
+                  > a {
+                    background-color: #000;
+                    font-size: 16px;
+                  }
+                  .depth2-sub {
+                    .sub-list {
+                      height: calc((100px - 25px) / 3);
+                      > a {
+                        font-size: 12px;
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -114,11 +140,11 @@ const HeaderCss = styled.header`
           .cart-link {
             display: flex;
             align-items: center;
-            img {
+            > img {
               height: 20px;
               display: block;
             }
-            span {
+            > span {
               font-size: 1em;
             }
           }
@@ -141,7 +167,7 @@ const HeaderCss = styled.header`
                 background-color: #fff;
               }
             }
-            a {
+            > a {
               display: block;
               font-size: 1em;
             }
@@ -158,12 +184,12 @@ const HeaderCss = styled.header`
           border-radius: 30px;
           position: relative;
           background-color: #bf170c;
-          a {
+          > a {
             width: 100%;
             height: 100%;
             font-size: 1.5em;
             display: block;
-            span {
+            > span {
               position: absolute;
               left: 50%;
               top: 50%;

@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo1 from "asset/images/logo1.png";
 import cartImg from "asset/images/cart.png";
-import HeaderCss from "./HeaderCss";
+import HeaderCss from "style/headerCss/HeaderCss";
 import SubNews from "./SubNews";
 import SubMenu from "./SubMenu";
 import SubMaps from "./SubMaps";
-
+import instance from "api/axios";
+import axios from "axios";
 const Header = () => {
-  // console.log(Nav[1].submenu[0].name);
   const [count, setCount] = useState(0);
-  // const coffe = [{ menu: "커피", id: 0, menu1: "커피2", menu2: "커피3" }];
-  // const bread = [{ menu: "빵", id: 1, menu1: "빵2", menu2: "빵3" }];
+  const [use, setUse] = useState([]);
+  const qa = async () => {
+    // 멤버목록 가져오기
+    const test = await axios.get("http://haeji.mawani.kro.kr:9999/admin/list");
+    setUse(test.data.member);
+  };
+  useEffect(() => {
+    qa();
+  }, []);
   const news = [
     {
       id: 1,
@@ -32,12 +39,12 @@ const Header = () => {
         {
           id: 1,
           name: "음료",
-          submenu: [{ menu: "커피1" }, { menu: "커피2" }, { menu: "커피" }],
+          submenu: [{ menu: "커피1" }, { menu: "커피2" }, { menu: "커피3" }],
         },
         {
           id: 2,
           name: "음식",
-          submenu: [{ menu: "빵1" }, { menu: "빵2" }, { menu: "빵" }],
+          submenu: [{ menu: "빵1" }, { menu: "빵2" }, { menu: "빵3" }],
         },
       ],
     },
@@ -50,14 +57,14 @@ const Header = () => {
       sub: [{ submenu: [] }],
     },
   ];
-  const ne = [...news];
-
-  console.log(ne);
-  console.log(count);
   return (
-    <div style={{ zIndex: 99999 }}>
+    <div>
+      {/* {use.map((v) => console.log(v))} */}
       <HeaderCss>
         <div className="header-wrap">
+          {/* {use.map((v) => {
+            return <div className="d">{v.miName}</div>;
+          })} */}
           <Link to="/" className="logo">
             <img src={logo1} alt="logo" />
           </Link>
@@ -95,9 +102,9 @@ const Header = () => {
                       onMouseOver={() => {
                         setCount(v.id);
                       }}
-                      onMouseOut={() => {
-                        setCount(0);
-                      }}
+                      // onMouseOut={() => {
+                      //   setCount(0);
+                      // }}
                       key={i}
                     >
                       <Link to={v.url}>{v.name}</Link>
