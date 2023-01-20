@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import SignUpDiv from "../../style/memberCss/signUpCSS";
 import { Err, Div } from "../../style/memberCss/basicCSS";
 import { useForm } from "react-hook-form";
@@ -52,19 +51,49 @@ const MyPage = () => {
       <SignUpDiv>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label>아이디(이메일)</label>
+            <label>아이디</label>
             <input type="email" required maxLength={20} value={id} disabled />
           </div>
-          <div>
-            <label>이름(필수)</label>
+          <div className="relative items-start ">
+            <label>이름</label>
             <input
               type="text"
+              className="w-72"
               {...register("name", {
                 required: "이름을 입력해주세요.",
                 maxLength: 10,
               })}
             />
+            <span className="absolute top-16 right-16 ">
+              <label className="pr-5">
+                <input
+                  type="radio"
+                  name="gender"
+                  className="accent-green-800 shadow-none"
+                />
+                남자
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  className="accent-green-800"
+                />
+                여자
+              </label>
+            </span>
             {errors.name && <Err>{errors.name.message}</Err>}
+          </div>
+          <div>
+            <label>닉네임</label>
+            <input
+              type="text"
+              {...register("nickName", {
+                required: "닉네임을 입력해주세요.",
+                maxLength: 10,
+              })}
+            />
+            {errors.nickName && <Err>{errors.nickName.message}</Err>}
           </div>
           <div>
             <label>생년월일(필수)</label>

@@ -53,8 +53,10 @@ const SignUpDiv = styled.div`
         outline: none;
       }
     }
+    input[type="radio"] {
+      box-shadow: none;
+    }
   }
 `;
-
 
 export default SignUpDiv;

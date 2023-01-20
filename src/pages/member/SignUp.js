@@ -78,23 +78,53 @@ const SignUp = () => {
               />
               {errors.pwConfirm && <Err>{errors.pwConfirm.message}</Err>}
             </div>
-            <div>
-              <label>이름(필수)</label>
+            <div className="relative items-start ">
+              <label>이름</label>
               <input
                 type="text"
+                className="w-72"
                 {...register("name", {
                   required: "이름을 입력해주세요.",
                   maxLength: 10,
                 })}
               />
+              <span className="absolute top-16 right-16 ">
+                <label className="pr-5">
+                  <input
+                    type="radio"
+                    name="gender"
+                    className="accent-green-800 shadow-none"
+                  />
+                  남자
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    className="accent-green-800"
+                  />
+                  여자
+                </label>
+              </span>
               {errors.name && <Err>{errors.name.message}</Err>}
             </div>
             <div>
-              <label>생년월일(필수)</label>
+              <label>닉네임</label>
+              <input
+                type="text"
+                {...register("nickName", {
+                  required: "닉네임을 입력해주세요.",
+                  maxLength: 10,
+                })}
+              />
+              {errors.nickName && <Err>{errors.nickName.message}</Err>}
+            </div>
+            <div>
+              <label>생년월일</label>
               <input
                 type="date"
                 placeholder="생년월일을 입력하세요."
-                className="mr-56"
+                className="mr-56 box"
                 {...register("year", {
                   required: "생년월일을 입력해주세요.",
                 })}
@@ -107,7 +137,7 @@ const SignUp = () => {
               </span>
             </div>
             <div>
-              <label>휴대폰(필수)</label>
+              <label>휴대폰</label>
               <input
                 type="tel"
                 {...register("tel", {

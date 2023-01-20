@@ -65,5 +65,4 @@ const Bt = styled.button`
   }
 `;
 
-export { Bt };
-export default FindDiv;
+export { Bt, FindDiv };
