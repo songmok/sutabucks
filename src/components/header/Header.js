@@ -6,8 +6,11 @@ import HeaderCss from "./HeaderCss";
 import SubNews from "./SubNews";
 import SubMenu from "./SubMenu";
 import SubMaps from "./SubMaps";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const cartAmount = useSelector((state) => state.cart);
+
   // console.log(Nav[1].submenu[0].name);
   const [count, setCount] = useState(0);
   // const coffe = [{ menu: "커피", id: 0, menu1: "커피2", menu2: "커피3" }];
@@ -143,6 +146,7 @@ const Header = () => {
                 <Link to="/cart" className="cart-link">
                   <img src={cartImg} alt="cart" />
                   <span>장바구니</span>
+                  <span>_{cartAmount.totalAmount}</span>
                 </Link>
               </div>
               <ul className="member">

@@ -9,14 +9,13 @@ import { useDispatch } from "react-redux";
 
 const Order = () => {
   const [data, setData] = useState([]);
-  // useState를 사용하여 open상태를 변경한다. (open일때 true로 만들어 열리는 방식)
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  // };
+  const [amount, setAmount] = useState(1);
+
+  const increase = () => setAmount(parseInt(amount) + 1);
+
+  const decrease = () => {
+    amount > 1 && setAmount(parseInt(amount) - 1);
+  };
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -50,11 +49,14 @@ const Order = () => {
   }, []);
 
   // console.log(data);
-  console.log(modalData);
+  // console.log(modalData);
   const dispatch = useDispatch();
 
   const pushCart = () => {
-    dispatch(cartActions.addCartItem(modalData));
+    const item = { ...modalData, amount };
+    dispatch(cartActions.addCartItem(item));
+    setAmount(1);
+    setModalIsOpen(false);
   };
 
   return (
@@ -244,7 +246,7 @@ const Order = () => {
                           {modalData.mbiExplain}
                         </span>
                         <span className="block text-custom-yellow mt-6 font-bold text-3xl text-center">
-                          {modalData.mbiCost}원
+                          {modalData.mbiCost * amount} 원
                         </span>
                       </div>
                       <div className="flex justify-center">
@@ -252,20 +254,21 @@ const Order = () => {
                           <button
                             type="button"
                             className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                            onClick={decrease}
                           >
                             -
                           </button>
-
-                          <input
+                          {amount}
+                          {/* <input
                             type="number"
                             id="Quantity"
                             value="1"
                             className="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                          />
-
+                          /> */}
                           <button
                             type="button"
                             className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                            onClick={increase}
                           >
                             +
                           </button>

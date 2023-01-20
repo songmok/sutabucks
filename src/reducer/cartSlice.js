@@ -4,6 +4,7 @@ import React from "react";
 const defaultCartState = {
   items: [],
   totalAmount: 0,
+  totalPrice: 0,
 };
 
 //modalData: mbiSeq, mbiName, mbiCost
@@ -14,33 +15,59 @@ const cartSlice = createSlice({
   reducers: {
     addCartItem: (state, action) => {
       const newItem = action.payload;
-      const existingItem = state.item.find((item) => item.mbiSeq === newItem.id);
+      const existingItem = state.items.find(
+        (item) => item.mbiSeq === newItem.mbiSeq
+      );
       if (!existingItem) {
-        state.item.push({
-          id: newItem.mbiSeq,
-          title: newItem.mbiName,
-          price: newItem.mbiCost,
-          totalPrice: newItem.mbiCost,
-          amount: 1,
-        });
+        // state.items.push({
+        //   id: newItem.mbiSeq,
+        //   title: newItem.mbiName,
+        //   price: newItem.mbiCost,
+        //   totalPrice: newItem.mbiCost,
+        //   img: newItem.img,
+        //   amount: newItem.amount,
+        // });
+        state.items = [newItem, ...state.items];
+        state.totalAmount += newItem.amount;
+        state.totalPrice += newItem.mbiCost * newItem.amount;
       } else {
-        existingItem.totalPrice = existingItem.totalPrice + existingItem.price;
-        existingItem.amount++;
+        // existingItem.totalPrice = existingItem.totalPrice + existingItem.price;
+        // existingItem.totalamount++;
+        existingItem.amount += newItem.amount;
       }
-      state.totalAmount++;
-      state.cartChange = true;
+      // state.totalAmount++;
     },
     removeCartItem: (state, action) => {
       const currentItem = action.payload;
-      const targetItem = state.item.find((item) => item.id === currentItem.id);
-      if (targetItem.amount === 1) {
-        targetItem.amount--;
-        state.item = state.item.filter((item) => item.amount !== 0);
+      state.items = state.items.filter(
+        (item) => item.mbiSeq !== currentItem.mbiSeq
+      );
+      state.totalAmount -= currentItem.amount;
+      state.totalPrice -= currentItem.mbiCost * currentItem.amount;
+    },
+    addAmount: (state, action) => {
+      const currentItem = action.payload;
+      const existingItem = state.items.find(
+        (item) => item.mbiSeq === currentItem.mbiSeq
+      );
+      if (existingItem) {
+        existingItem.amount += 1;
+        state.totalAmount += 1;
+        state.totalPrice += currentItem.mbiCost;
       }
-      state.totalAmount--;
-      targetItem.amount--;
-      targetItem.totalPrice -= targetItem.price;
-      state.cartChange = true;
+    },
+    removeAmount: (state, action) => {
+      const currentItem = action.payload;
+      const existingItem = state.items.find(
+        (item) => item.mbiSeq === currentItem.mbiSeq
+      );
+      if (existingItem) {
+        if (existingItem.amount > 1) {
+          existingItem.amount -= 1;
+          state.totalAmount -= 1;
+          state.totalPrice -= currentItem.mbiCost;
+        }
+      }
     },
   },
 });
