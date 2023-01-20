@@ -7,7 +7,6 @@ import SubNews from "./SubNews";
 import SubMenu from "./SubMenu";
 import SubMaps from "./SubMaps";
 import { useSelector } from "react-redux";
-
 import instance from "api/axios";
 import axios from "axios";
 const Header = () => {
