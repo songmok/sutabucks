@@ -6,9 +6,14 @@ import HeaderCss from "style/headerCss/HeaderCss";
 import SubNews from "./SubNews";
 import SubMenu from "./SubMenu";
 import SubMaps from "./SubMaps";
+import { useSelector } from "react-redux";
+
 import instance from "api/axios";
 import axios from "axios";
 const Header = () => {
+  const cartAmount = useSelector((state) => state.cart);
+
+  // console.log(Nav[1].submenu[0].name);
   const [count, setCount] = useState(0);
   const [use, setUse] = useState([]);
   const qa = async () => {
@@ -150,6 +155,7 @@ const Header = () => {
                 <Link to="/cart" className="cart-link">
                   <img src={cartImg} alt="cart" />
                   <span>장바구니</span>
+                  <span>_{cartAmount.totalAmount}</span>
                 </Link>
               </div>
               <ul className="member">
