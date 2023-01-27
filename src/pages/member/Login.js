@@ -14,7 +14,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   // const [validText, setValidText] = useState("");
@@ -134,7 +134,9 @@ const Login = () => {
             </label>
             <span className="ml-2 mt-3">아이디 저장</span>
           </div>
-          <button type="submit">로그인</button>
+          <button type="submit" disabled={isSubmitting}>
+            로그인
+          </button>
           <div className="flex items-center justify-around m-5">
             <Link to="/signup">회원가입</Link>|
             <Link to="/idfind">아이디 찾기</Link>|

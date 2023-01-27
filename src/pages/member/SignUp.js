@@ -11,7 +11,6 @@ import { loginAccount, logoutAccount } from "../../reducer/loggedState";
 import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = () => {
-  const [btFlag, setBtFlag] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -21,12 +20,11 @@ const SignUp = () => {
     register,
     handleSubmit,
     getValues,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log("데이터", data);
-    setBtFlag(true);
     const body = {
       miId: data.email,
       miPwd: data.pw,
@@ -59,7 +57,6 @@ const SignUp = () => {
       })
       .catch((err) => {
         console.log(err);
-        setBtFlag(true);
       });
   };
 
@@ -231,7 +228,7 @@ const SignUp = () => {
             </div>
           </div>
           {/* 성공하면 /login 위에 함수에서 구현 */}
-          <button type="submit" disabled={btFlag}>
+          <button type="submit" disabled={isSubmitting}>
             회원가입
           </button>
         </form>
