@@ -4,16 +4,7 @@ import EventCss from "style/newsCss/eventCss";
 import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
 import axios from "axios";
 
-const Event = () => {
-  const [event, setEvent] = useState([]);
-  const eventItem = async () => {
-    const item = await axios.get("http://haeji.mawani.kro.kr:9999/admin/event");
-    setEvent(item.data.event);
-  };
-  useEffect(() => {
-    eventItem();
-  }, []);
-  console.log(event);
+const Event = ({ event }) => {
   return (
     <>
       <SubHeaderCss>
@@ -49,13 +40,15 @@ const Event = () => {
               {event.map((v, i) => {
                 return (
                   <div className="group relative" key={i}>
-                    <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                      <img
-                        src={v.evFile}
-                        alt="Front of men&#039;s Basic Tee in black."
-                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                      />
-                    </div>
+                    <Link to={`/detail/${v.evSeq}`}>
+                      <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80">
+                        <img
+                          src={v.evUri}
+                          alt="Front of men&#039;s Basic Tee in black."
+                          className="h-full w-full object-cover object-center lg:h-full lg:w-full focus"
+                        />
+                      </div>
+                    </Link>
                     <div className="mt-4 flex">
                       <div className="text">
                         <span>{v.evEndDate}</span>

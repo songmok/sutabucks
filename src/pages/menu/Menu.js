@@ -252,7 +252,6 @@ const Menu = () => {
           </div>
           <div className="coffee mb-10">
             <div>
-
               {/* <span className="font-bold text-2xl md:text-3xl">
                 콜드 브루 커피
               </span> */}

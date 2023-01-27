@@ -26,11 +26,24 @@ import Event from "pages/news/event/Event";
 import News from "pages/news/News";
 import Notice from "pages/news/notice/Notice";
 import Maps from "pages/maps/Maps";
+import EventDetail from "pages/news/event/EventDetail";
+import axios from "axios";
 function App() {
+  const [event, setEvent] = useState([]);
+  const [eventDetail, setEventDetail] = useState([]);
   const [list, setList] = useState([]);
+
   const fetchData = async () => {
     const rsList = await instance.get(requests.fetchList);
     setList(rsList);
+    const event = await axios.get(
+      "http://haeji.mawani.kro.kr:9999/admin/event"
+    );
+    setEvent(event.data.event);
+    const eventDetail = await axios.get(
+      "http://haeji.mawani.kro.kr:9999/admin/event"
+    );
+    setEventDetail(event.data.detail);
   };
   useEffect(() => {
     fetchData();
@@ -42,7 +55,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/event" element={<Event />} />
+        <Route path="/event" element={<Event event={event} />} />
         <Route path="/notice" element={<Notice />} />
         <Route path="/news" element={<News />} />
         <Route path="/login" element={<Login />} />
@@ -55,7 +68,10 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/menudetail/:seq" element={<Menudetail />} />
         <Route path="/maps" element={<Maps />} />
-  
+        <Route
+          path="/eventdetail/:seq"
+          element={<EventDetail eventDetail={eventDetail} />}
+        />
         <Route path="/order" element={<Order />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
