@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import SignUpDiv from "../../style/memberCss/signUpCSS";
-import { Err, Div } from "../../style/memberCss/basicCSS";
+import { Err } from "../../style/memberCss/basicCSS";
 import { useForm } from "react-hook-form";
-import CloseModal from "./CloseModal";
+import CloseModal from "././modals/CloseModal";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAccount, logoutAccount } from "../../reducer/loggedState";
+import axios from "../../api/axios";
 
 const MyPage = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
   const {
     register,
     handleSubmit,
@@ -12,12 +18,11 @@ const MyPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
-
-  const [id, setId] = useState("aaa@aaa.net");
-  const modifyFn = () => {
-    alert("정보수정이 완료되었습니다.");
+  const onSubmit = async (data) => {
+    console.log(data);
   };
+
+  const [id, setId] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
   const closeAccount = () => {
@@ -43,6 +48,7 @@ const MyPage = () => {
       backgroundColor: "#F3F3F3",
     },
   };
+
   return (
     <>
       <div className="text-center text-3xl mb-8 mt-14 ">
@@ -52,7 +58,13 @@ const MyPage = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label>아이디</label>
-            <input type="email" required maxLength={20} value={id} disabled />
+            <input
+              type="email"
+              required
+              maxLength={20}
+              value={user.email}
+              disabled
+            />
           </div>
           <div className="relative items-start ">
             <label>이름</label>
@@ -135,6 +147,7 @@ const MyPage = () => {
             <label>비밀번호</label>
             <input
               type="password"
+              autoComplete="on"
               {...register("pw", {
                 required: "비밀번호를 입력해주세요.",
                 minLength: {
@@ -157,6 +170,7 @@ const MyPage = () => {
             <label>비밀번호 확인</label>
             <input
               type="password"
+              autoComplete="on"
               {...register("pwConfirm", {
                 required: "비밀번호를 확인해주세요!",
                 validate: {

@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import SignUpDiv from "../../style/memberCss/signUpCSS";
 import { Err, Div } from "../../style/memberCss/basicCSS";
 import FindImg from "asset/images/icon_find_sally.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // 리엑트 훅 폼 라이브러리 사용
 import { useForm } from "react-hook-form";
+import Post from "pages/member/Post";
+import axios from "../../api/axios";
+import { loginAccount, logoutAccount } from "../../reducer/loggedState";
+import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = () => {
+  const [btFlag, setBtFlag] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  // react-hook0-form 적용
   const {
     register,
     handleSubmit,
@@ -14,7 +24,61 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log("데이터", data);
+    setBtFlag(true);
+    const body = {
+      miId: data.email,
+      miPwd: data.pw,
+      miName: data.name,
+      miNickname: data.nickname,
+      miBirth: data.birth,
+      miPhoneNum: data.tel,
+      miAddress: enroll_company.address,
+      miDetailAddress: detailAddress,
+    };
+    axios
+      .post("member/join", body)
+      .then((res) => {
+        if (res.data.true) {
+          const userInfo = {
+            email: data.email,
+            name: data.name,
+            nickname: data.nickname,
+            birth: data.birth,
+            tel: data.tel,
+            address: enroll_company.address,
+            detailAddress: detailAddress,
+          };
+          dispatch(loginAccount(userInfo));
+          alert("수타벅스의 회원이 되신 것을 환영합니다.");
+          navigate("/login");
+        } else {
+          alert("회원등록에 실패하였습니다. /n 다시 시도해주세요.");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setBtFlag(true);
+      });
+  };
+
+  const [detailAddress, setDetailAddress] = useState("");
+  // 다음 배송주소
+  const [enroll_company, setEnroll_company] = useState({
+    address: "",
+  });
+  const [popup, setPopup] = useState(false);
+  const handleInput = (e) => {
+    setEnroll_company({
+      ...enroll_company,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleComplete = (e, data) => {
+    e.preventDefault();
+    setPopup(!popup);
+  };
 
   return (
     <>
@@ -47,15 +111,15 @@ const SignUp = () => {
                 {...register("pw", {
                   required: "비밀번호를 입력해주세요.",
                   minLength: {
-                    value: 6,
-                    message: "최소 6자 이상의 비밀번호를 입력해주세요.",
+                    value: 8,
+                    message: "최소 8자 이상의 비밀번호를 입력해주세요.",
                   },
                   maxLength: {
                     value: 16,
                     message: "최소 16자 이하의 비밀번호를 입력해주세요.",
                   },
                   pattern: {
-                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
                     message: "영문, 숫자를 혼용하여 입력해주세요.",
                   },
                 })}
@@ -112,12 +176,12 @@ const SignUp = () => {
               <label>닉네임</label>
               <input
                 type="text"
-                {...register("nickName", {
+                {...register("nickname", {
                   required: "닉네임을 입력해주세요.",
                   maxLength: 10,
                 })}
               />
-              {errors.nickName && <Err>{errors.nickName.message}</Err>}
+              {errors.nickname && <Err>{errors.nickname.message}</Err>}
             </div>
             <div>
               <label>생년월일</label>
@@ -125,11 +189,11 @@ const SignUp = () => {
                 type="date"
                 placeholder="생년월일을 입력하세요."
                 className="mr-56 box"
-                {...register("year", {
+                {...register("birth", {
                   required: "생년월일을 입력해주세요.",
                 })}
               />
-              {errors.year && <Err>{errors.year.message}</Err>}
+              {errors.birth && <Err>{errors.birth.message}</Err>}
               <span className="mt-2">
                 회원 가입 완료 후 스타벅스 카드를 등록하시면 생일 무료음료
                 <br />
@@ -149,15 +213,27 @@ const SignUp = () => {
             </div>
             <div>
               <label>배송 주소</label>
-              <input type="text" />
+              <input
+                name="address"
+                type="text"
+                required={true}
+                onChange={handleInput}
+                value={enroll_company.address}
+                onClick={handleComplete}
+              />
+              {popup && (
+                <Post company={enroll_company} setcompany={setEnroll_company} />
+              )}
             </div>
             <div>
               <label>상세 주소</label>
-              <input type="text" />
+              <input type="text" value={detailAddress} />
             </div>
           </div>
           {/* 성공하면 /login 위에 함수에서 구현 */}
-          <button type="submit">회원가입</button>
+          <button type="submit" disabled={btFlag}>
+            회원가입
+          </button>
         </form>
         <Link to="/login" className="pb-8 ml-64">
           이미 가입하셨다면, 로그인해주세요!
