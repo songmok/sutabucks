@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SubCate from "./SubCate";
 
 const SubMenu = ({ sub, count, setCount }) => {
-  console.log(sub);
+  // console.log(sub);
   return (
     <>
       {count === 2 ? (

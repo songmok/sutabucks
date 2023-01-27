@@ -53,8 +53,9 @@ function App() {
         <Route path="/pwfind" element={<PwFind />} />
         <Route path="/pwresult" element={<PwResult />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/menudetail/:seq" element={<Menudetail />} />
         <Route path="/maps" element={<Maps />} />
-        <Route path="/menudetail" element={<Menudetail />} />
+  
         <Route path="/order" element={<Order />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />

@@ -1,67 +1,13 @@
-
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import MenudetailCss from "../../style/menuCss/MenudetailCss";
-import instance from "../../api/axios";
-import request from "../../api/request";
-
-import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
-
 
 const Menudetail = () => {
-  // URI 처리 및 데이터 연동
-  const [detail, setDetail] = useState([]);
-
-  const { seq } = useParams();
-
-  const fetchData = async () => {
-    const params = {
-      mbiSeq: seq,
-    };
-    const resultDetail = await instance.get(request.fetchMenuDetail, { params });
-    setDetail(resultDetail.data.detail);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  console.log(detail);
-
   return (
     <MenudetailCss>
-      <SubHeaderCss>
-        <div className="SubHeader wrap">
-          <h1 className="subHeader">메뉴</h1>
-          <div className="link">
-            <ul>
-              <li>
-                <Link to="/" className="item">
-                  홈
-                </Link>
-              </li>
-              <li className="arrow">{">"}</li>
-              <li>
-                <Link to="/menu" className="item">
-                  메뉴보기
-                </Link>
-              </li>
-              <li className="arrow">{">"}</li>
-              <li>
-                <Link to="/menudetail" className="item">
-                  돌체 콜드 블루
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </SubHeaderCss>
       <section className="container mx-auto my-10">
         <div className="relative block rounded-lg shadow-lg bg-white">
-          <Link
-            to="/menu"
-            className="absolute block top-7 right-7 text-gray-600"
-          >
+          <Link to="/menu" className="absolute block top-7 right-7 text-gray-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -89,15 +35,20 @@ const Menudetail = () => {
               <div className="px-6 py-12 md:px-12">
                 <div className="flex justify-between mt-8">
                   <div className="max-w-[35ch]">
-                    <h1 className="text-2xl font-bold">{detail.mbiName}</h1>
+                    <h1 className="text-2xl font-bold">돌체 콜드 브루</h1>
+                    {/* <p className="mt-0.5 text-sm">Dolce Cold Brew</p> */}
                   </div>
-                  <p className="text-2xl font-bold">{detail.mbiCost}</p>
+                  <p className="text-2xl font-bold">4,000</p>
                 </div>
                 <details className="group relative my-10">
                   <summary className="block">
                     <div>
                       <div className="max-w-none leading-5">
-                        <p>{detail.menuExplain}</p>
+                        <p>
+                          무더운 여름철, 동남아 휴가지에서 즐기는 커피를
+                          떠오르게 하는 스타벅스 음료의 베스트 x 베스트 조합인
+                          돌체 콜드 브루를 만나보세요!
+                        </p>
                       </div>
                     </div>
                   </summary>

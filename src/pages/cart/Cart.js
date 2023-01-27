@@ -8,30 +8,55 @@ const Carttest = () => {
 
   const cartData = useSelector((state) => state.cart);
 
-  const cartTotal = cartData.totalAmount;
-  const cartTotalPrice = cartData.totalPrice;
-
   const cartItemData = cartData.items;
 
-  console.log(cartTotal);
+  const checkedItem = cartItemData.filter((item) => item.checked);
 
-  // const removeItem = ;
+  console.log(checkedItem);
+
+  const itemNumber = checkedItem.length;
+
+  const totalPrice = checkedItem.reduce(
+    (acc, cur) => acc + cur.mbiCost * cur.amount,
+    0
+  );
+  // console.log(totalPrice);
 
   return (
     <>
       <div className="container mx-auto mt-10">
         <div className="flex flex-wrap shadow-md my-10">
           <div className="w-full lg:w-3/4 bg-white px-10 py-10">
-            <div className="flex justify-between border-b pb-8">
+            <div className="flex justify-between border-b mb-5">
               <h1 className="font-semibold text-2xl text-[#1B3C34]">
                 장바구니
               </h1>
-              <h2 className="font-semibold text-2xl">{cartTotal} Items</h2>
+              <h2 className="font-semibold text-2xl">{itemNumber} Items</h2>
+            </div>
+            <div className="flex justify-end">
+              <button
+                className="text-sm"
+                onClick={() => {
+                  dispatch(cartActions.removeChecked());
+                }}
+              >
+                선택삭제
+              </button>
             </div>
             <div className="flex justify-center -mx-8 px-6 mt-10 mb-5">
-              <h3 className="font-semibold text-gray-600 text-xs uppercase w-3/6">
-                상품명
-              </h3>
+              <div className="flex w-3/6 items-center">
+                <input
+                  className="mr-3 checkbox appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                  type="checkbox"
+                  checked={cartData.allChecked}
+                  onChange={() => {
+                    dispatch(cartActions.allClick());
+                  }}
+                />
+                <h3 className="font-semibold text-gray-600 text-xs uppercase">
+                  상품명
+                </h3>
+              </div>
               <h3 className="font-semibold text-gray-600 text-xs uppercase w-1/6 text-center">
                 수량
               </h3>
@@ -47,7 +72,16 @@ const Carttest = () => {
                 key={item.mbiSeq}
                 className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"
               >
-                <div className="flex w-3/6">
+                <div className="flex w-3/6 items-center">
+                  <input
+                    className="mr-3 checkbox appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                    type="checkbox"
+                    id={item.mbiSeq}
+                    onChange={() => {
+                      dispatch(cartActions.handleClick(item));
+                    }}
+                    checked={item.checked}
+                  />
                   <div className="w-20">
                     <img
                       src={item.img}
@@ -56,7 +90,7 @@ const Carttest = () => {
                     />
                   </div>
                   <div className="flex flex-col justify-center ml-4 flex-grow">
-                    <span className="font-bold text-sm">{item.mbiName}</span>
+                    <span className="font-bold text-sm">{item.mbiName} - {item.option}</span>
                   </div>
                 </div>
                 <div className="w-1/6 flex justify-center">
@@ -140,17 +174,20 @@ const Carttest = () => {
               Continue Shopping
             </Link>
           </div>
-          <div id="summary" className="w-full lg:w-1/4 px-8 py-10 bg-gray-100">
-            <h1 className="font-semibold text-2xl text-[#1B3C34] border-b pb-8">
+          <div
+            id="summary"
+            className="w-full lg:w-1/4 flex flex-col justify-between px-8 py-10 bg-gray-100"
+          >
+            <h1 className="font-semibold text-2xl text-[#1B3C34]">
               Order Summary
             </h1>
-            <div className="flex justify-between mt-10 mb-5">
+            {/* <div className="flex justify-between">
               <span className="font-semibold text-sm uppercase">
-                {cartTotal} items
+                {itemNumber} items
               </span>
-              <span className="text-sm">{cartTotalPrice}원</span>
+              <span className="text-sm">{totalPrice}원</span>
             </div>
-            <div className="py10">
+            <div>
               <label
                 for="promo"
                 className="font-semibold inline-block mb-3 text-sm uppercase"
@@ -166,15 +203,12 @@ const Carttest = () => {
               <button className="bg-red-500 hover:bg-red-600 px-5 py-2 mt-5 text-sm text-white uppercase">
                 Apply
               </button>
-            </div>
-            <div className="border-t mt-8">
+            </div> */}
+            <div className="border-t">
               <div className="flex font-semibold justify-between items-center py-6 text-sm uppercase">
                 <span>총 주문 금액</span>
-                <span className="text-xl">{cartTotalPrice}원</span>
+                <span className="text-xl">{totalPrice}원</span>
               </div>
-              {/* <button className="bg-[#1B3C34] font-semibold py-3 text-sm text-white uppercase w-full">
-                Checkout
-              </button> */}
               <Link
                 to="/checkout"
                 className="bg-[#1B3C34] font-semibold py-3 text-sm text-white uppercase text-center w-full block"

@@ -1,20 +1,104 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import instance from "../../api/axios";
+import request from "../../api/request";
+
 import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
 
 const Menu = () => {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
+  const [word, setWord] = useState("");
+  const [searchData, setSearchData] = useState([]);
 
-  const getPosts = async () => {
-    const posts = await axios.get("/test.json");
-    setData(posts.data.list);
+  // const getPosts = async () => {
+  //   const posts = await instance.get(request.fetchMenu);
+  //   setData(posts.data.list);
+  // };
+
+  // useEffect(() => {
+  //   getPosts();
+  // }, []);
+
+  const fetchData = async () => {
+    const params = {
+      menuName: word,
+    };
+    const resultSearchData = await instance.get(request.fetchMenuSearch, {
+      params,
+    });
+    // .then()
+    // .catch();
+    // console.log(resultSearchData.data);
+    setSearchData(resultSearchData.data.list);
+    // setSearchData(resultSearchData.data);
   };
-
   useEffect(() => {
-    getPosts();
+    fetchData();
   }, []);
 
+  // const menuList = data.map((item) => (
+  //   <Link
+  //     // to="/menudetail"
+  //     to={`/menudetail/${item.mbiSeq}`}
+  //     key={item.mbiSeq}
+  //     className="block group cursor-pointer"
+  //   >
+  //     <img
+  //       // src={item.img}
+  //       src="./coffee.jpg"
+  //       alt="coffee"
+  //       className="w-full transform hover:scale-95 transition duration-300"
+  //     />
+  //     <div className="relative pt-3 bg-white">
+  //       <h3 className="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
+  //         {item.mbiName}
+  //       </h3>
+  //       <div className="mt-1.5 flex items-center justify-between text-gray-900">
+  //         <p className="tracking-wide">{item.mbiCost}원</p>
+  //       </div>
+  //     </div>
+  //   </Link>
+  // ));
+
+  console.log(searchData.list);
+
+  const searchDataList = searchData.list;
+  console.log(searchDataList);
+  const searchMenuList = searchData.map((item) => (
+    <Link
+      // to="/menudetail"
+      to={`/menudetail/${item.mbiSeq}`}
+      key={item.mbiSeq}
+      className="block group cursor-pointer"
+    >
+      <img
+        // src={item.img}
+        src="./coffee.jpg"
+        alt="coffee"
+        className="w-full transform hover:scale-95 transition duration-300"
+      />
+      <div className="relative pt-3 bg-white">
+        <h3 className="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
+          {item.mbiName}
+        </h3>
+        <div className="mt-1.5 flex items-center justify-between text-gray-900">
+          <p className="tracking-wide">{item.mbiCost}원</p>
+        </div>
+      </div>
+    </Link>
+  ));
+
+  const handleOnClick = () => {
+    fetchData();
+  };
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleOnClick(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+  // console.log(searchData);
   return (
     <section className="container mx-auto">
       <SubHeaderCss>
@@ -107,7 +191,7 @@ const Menu = () => {
             <h2 className="font-bold text-3xl lg:text-4xl text-[#1B3C34] mb-3 lg:mb-0">
               Menu
             </h2>
-            <form className="w-full lg:w-[35%]">
+            {/* <form className="w-full lg:w-[35%]">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <svg
@@ -125,30 +209,65 @@ const Menu = () => {
                   </svg>
                 </div>
                 <input
-                  type="text"
+                  type="search"
                   id="simple-search"
                   className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                   placeholder="Search"
                   required
+                  // value={word}
+                  onChange={(e) => {
+                    setWord(e.target.value);
+                  }}
+                  onKeyPress={handleOnKeyPress}
                 />
+                <input type="button" value="검색" onClick={handleOnClick} />
               </div>
-            </form>
+            </form> */}
+            <div className="flex border-2 rounded">
+              <input
+                type="search"
+                className="px-4 py-2 w-80"
+                placeholder="Search Books..."
+                required
+                onChange={(e) => {
+                  setWord(e.target.value);
+                }}
+                onKeyPress={handleOnKeyPress}
+              />
+              <button
+                type="button"
+                className="flex items-center justify-center px-4 border-l"
+                onClick={handleOnClick}
+              >
+                <svg
+                  className="w-6 h-6 text-gray-600"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                </svg>
+              </button>
+            </div>
           </div>
           <div className="coffee mb-10">
             <div>
-              <span className="font-bold text-2xl md:text-3xl">
+
+              {/* <span className="font-bold text-2xl md:text-3xl">
                 콜드 브루 커피
-              </span>
+              </span> */}
             </div>
             <div className="mt-5 grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
-              {data.map((item) => (
+              {/* {searchData.map((item) => (
                 <Link
-                  to="/menudetail"
+                  // to="/menudetail"
+                  to={`/menudetail/${item.mbiSeq}`}
                   key={item.mbiSeq}
                   className="block group cursor-pointer"
                 >
                   <img
-                    src={item.img}
+                    // src={item.img}
+                    src="./coffee.jpg"
                     alt="coffee"
                     className="w-full transform hover:scale-95 transition duration-300"
                   />
@@ -161,7 +280,8 @@ const Menu = () => {
                     </div>
                   </div>
                 </Link>
-              ))}
+              ))} */}
+              {searchMenuList}
             </div>
           </div>
         </main>
