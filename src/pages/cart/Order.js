@@ -6,6 +6,7 @@ import OrderModalCss from "./OrderModalCss";
 import axios from "axios";
 import { cartActions } from "reducer/cartSlice";
 import { useDispatch } from "react-redux";
+import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
 
 const Order = () => {
   const [data, setData] = useState([]);
@@ -61,6 +62,32 @@ const Order = () => {
 
   return (
     <OrderModalCss>
+      <SubHeaderCss>
+        <div className="SubHeader wrap">
+          <h1 className="subHeader">주문메뉴</h1>
+          <div className="link">
+            <ul>
+              <li>
+                <Link to="/" className="item">
+                  홈
+                </Link>
+              </li>
+              <li className="arrow">{">"}</li>
+              <li>
+                <Link to="/maps" className="item">
+                  매장찾기
+                </Link>
+              </li>
+              <li className="arrow">{">"}</li>
+              <li>
+                <Link to="/order" className="item">
+                  주문메뉴
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </SubHeaderCss>
       <div className="container mx-auto">
         <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
           <div className="lg:col-span-1">

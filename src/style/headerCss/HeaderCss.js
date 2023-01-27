@@ -1,23 +1,20 @@
 import styled from "@emotion/styled";
-const HeaderCss = styled.header`
+const headerCss = styled.header`
   position: relative;
   width: 100%;
   height: 200px;
   background-color: #1b3c34;
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
   z-index: 9999;
   * {
     color: #fff;
     font-weight: bold;
   }
-
-  .header-wrap {
-    width: 1440px;
-    height: 100%;
+  .header {
+    position: static;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
     .logo {
       width: 140px;
       height: 140px;
@@ -46,6 +43,10 @@ const HeaderCss = styled.header`
             text-align: center;
             width: calc(480px / 3);
             background-color: #1e20c5;
+            margin-right: 20px;
+            &:last-child {
+              margin: 0;
+            }
             &:hover {
               background-color: #999;
             }
@@ -203,4 +204,4 @@ const HeaderCss = styled.header`
     }
   }
 `;
-export default HeaderCss;
+export default headerCss;

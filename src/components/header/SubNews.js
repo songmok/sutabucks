@@ -16,7 +16,7 @@ const SubNews = ({ sub, count, setCount }) => {
             {sub.map((v, i) => {
               return (
                 <li className="depth2" key={i}>
-                  <Link to="/">{v.name}</Link>
+                  <Link to={v.url}>{v.name}</Link>
                 </li>
               );
             })}

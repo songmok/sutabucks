@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
 
 const Menu = () => {
   const [data, setData] = useState([]);
@@ -16,6 +17,26 @@ const Menu = () => {
 
   return (
     <section className="container mx-auto">
+      <SubHeaderCss>
+        <div className="SubHeader wrap">
+          <h1 className="subHeader">메뉴</h1>
+          <div className="link">
+            <ul>
+              <li>
+                <Link to="/" className="item">
+                  홈
+                </Link>
+              </li>
+              <li className="arrow">{">"}</li>
+              <li>
+                <Link to="/menu" className="item">
+                  메뉴보기
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </SubHeaderCss>
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1">
           <nav aria-label="Main Nav" className="flex flex-col space-y-1">
@@ -115,11 +136,17 @@ const Menu = () => {
           </div>
           <div className="coffee mb-10">
             <div>
-              <span className="font-bold text-2xl md:text-3xl">콜드 브루 커피</span>
+              <span className="font-bold text-2xl md:text-3xl">
+                콜드 브루 커피
+              </span>
             </div>
             <div className="mt-5 grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
               {data.map((item) => (
-                <Link to="/menudetail" key={item.mbiSeq} className="block group cursor-pointer">
+                <Link
+                  to="/menudetail"
+                  key={item.mbiSeq}
+                  className="block group cursor-pointer"
+                >
                   <img
                     src={item.img}
                     alt="coffee"

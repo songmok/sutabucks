@@ -175,7 +175,10 @@ const Carttest = () => {
               {/* <button className="bg-[#1B3C34] font-semibold py-3 text-sm text-white uppercase w-full">
                 Checkout
               </button> */}
-              <Link to="/checkout" className="bg-[#1B3C34] font-semibold py-3 text-sm text-white uppercase text-center w-full block">
+              <Link
+                to="/checkout"
+                className="bg-[#1B3C34] font-semibold py-3 text-sm text-white uppercase text-center w-full block"
+              >
                 Checkout
               </Link>
             </div>
