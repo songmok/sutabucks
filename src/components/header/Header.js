@@ -154,7 +154,7 @@ const Header = () => {
                 <Link to="/cart" className="cart-link">
                   <img src={cartImg} alt="cart" />
                   <span>장바구니</span>
-                  <span>_{cartAmount.totalAmount}</span>
+                  <span>_{cartAmount.items.length}</span>
                 </Link>
               </div>
               <ul className="member">
