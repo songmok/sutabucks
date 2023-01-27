@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo1 from "asset/images/logo1.png";
 import cartImg from "asset/images/cart.png";
-import HeaderCss from "style/headerCss/HeaderCss";
+import HeaderCss from "style/headerCss/headerCss";
 import SubNews from "./SubNews";
 import SubMenu from "./SubMenu";
 import SubMaps from "./SubMaps";
 import { useSelector } from "react-redux";
-import instance from "api/axios";
 import axios from "axios";
 const Header = () => {
   const cartAmount = useSelector((state) => state.cart);
@@ -15,22 +14,22 @@ const Header = () => {
   // console.log(Nav[1].submenu[0].name);
   const [count, setCount] = useState(0);
   const [use, setUse] = useState([]);
-  const qa = async () => {
-    // 멤버목록 가져오기
-    const test = await axios.get("http://haeji.mawani.kro.kr:9999/admin/list");
-    setUse(test.data.member);
-  };
-  useEffect(() => {
-    qa();
-  }, []);
+  // const qa = async () => {
+  //   // 멤버목록 가져오기
+  //   const test = await axios.get("http://haeji.mawani.kro.kr:9999/admin/list");
+  //   setUse(test.data.member);
+  // };
+  // useEffect(() => {
+  //   qa();
+  // }, []);
   const news = [
     {
       id: 1,
       name: "새소식",
-      url: "/",
+      url: "/news",
       sub: [
-        { id: 11, name: "이벤트" },
-        { id: 12, name: "공지사항" },
+        { id: 11, name: "이벤트", url: "/event" },
+        { id: 12, name: "공지사항", url: "/notice" },
       ],
     },
   ];
@@ -65,7 +64,7 @@ const Header = () => {
     <div>
       {/* {use.map((v) => console.log(v))} */}
       <HeaderCss>
-        <div className="header-wrap">
+        <div className="header wrap">
           {/* {use.map((v) => {
             return <div className="d">{v.miName}</div>;
           })} */}
@@ -169,7 +168,7 @@ const Header = () => {
             <div className="header-right-bottom">
               <div className="order">
                 <Link to="/order">
-                  <span>주문하기</span>
+                  <span>주문메뉴</span>
                 </Link>
               </div>
             </div>
