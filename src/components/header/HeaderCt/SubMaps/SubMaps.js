@@ -1,22 +1,21 @@
+import React from "react";
 import { Link } from "react-router-dom";
-
-const SubNews = ({ sub, count, setCount }) => {
-  console.log();
-
+const SubMaps = ({ subMaps, count, setCount }) => {
+  // console.log(sub);
   return (
     <>
-      {count === 1 ? (
+      {count === 3 ? (
         <div
           className="depth1-wrap active"
           onMouseOver={() => {
-            setCount(1);
+            setCount(3);
           }}
         >
           <ul className="submenu">
-            {sub.map((v, i) => {
+            {subMaps.map((v, i) => {
               return (
                 <li className="depth2" key={i}>
-                  <Link to={v.url}>{v.name}</Link>
+                  <Link to="/">{v.name}</Link>
                 </li>
               );
             })}
@@ -29,4 +28,5 @@ const SubNews = ({ sub, count, setCount }) => {
   );
 };
 
-export default SubNews;
+export default SubMaps;
+// <SubMaps />

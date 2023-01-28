@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const SubCate = ({ cate }) => {
+const SubMenuNews = ({ news }) => {
+  console.log(news);
   return (
     <>
       <ul className="depth2-sub">
-        {cate.map((v, i) => {
+        {news.map((v, i) => {
           return (
             <li className="sub-list" key={i}>
-              <Link to=""> {v.menu}</Link>
+              <Link to="/"> {v.menu}</Link>
             </li>
           );
         })}
@@ -16,4 +17,4 @@ const SubCate = ({ cate }) => {
   );
 };
 
-export default SubCate;
+export default SubMenuNews;

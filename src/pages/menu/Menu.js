@@ -1,11 +1,10 @@
 // import axios from "axios";
+import MenuHeader from "components/pagesHeader/MenuHeader";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import instance from "../../api/axios";
 import request from "../../api/request";
-
-import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
 
 const Menu = () => {
   // const [data, setData] = useState([]);
@@ -101,26 +100,7 @@ const Menu = () => {
   // console.log(searchData);
   return (
     <section className="container mx-auto">
-      <SubHeaderCss>
-        <div className="SubHeader wrap">
-          <h1 className="subHeader">메뉴</h1>
-          <div className="link">
-            <ul>
-              <li>
-                <Link to="/" className="item">
-                  홈
-                </Link>
-              </li>
-              <li className="arrow">{">"}</li>
-              <li>
-                <Link to="/menu" className="item">
-                  메뉴보기
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </SubHeaderCss>
+      <MenuHeader />
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1">
           <nav aria-label="Main Nav" className="flex flex-col space-y-1">

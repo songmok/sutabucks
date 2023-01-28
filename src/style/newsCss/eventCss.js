@@ -2,8 +2,6 @@ import styled from "@emotion/styled";
 
 const EventCss = styled.section`
   position: relative;
-  background-color: coral;
-  height: 100vh;
   .focus {
     transition: all 0.5s ease-out;
     &:hover {
