@@ -3,22 +3,11 @@ import ReactModal from "react-modal";
 import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
 
-const FindModal = ({ isopen, setIsOpen }) => {
+const CardQrModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
 
   const clickSubmit = () => {
-    axios
-      .get("/member/finddid")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("인증번호 인증에 실패하였습니다.");
-      });
-
-    alert("인증번호가 확인되었습니다.");
-    navigate("/IdResult");
+    alert("충전이 완료되었습니다.");
   };
 
   const customStyles = {
@@ -35,7 +24,7 @@ const FindModal = ({ isopen, setIsOpen }) => {
       left: "50%",
       right: "auto",
       bottom: "auto",
-      width: "29%%",
+      width: "35%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#fff",
     },
@@ -72,16 +61,16 @@ const FindModal = ({ isopen, setIsOpen }) => {
                 className="w-56 mx-auto mt-16 mb-8"
               />
             </div> */}
-            <span>회원정보에 등록한 휴대폰으로 인증</span>
+            <span>충전을 위해 QR코드를 스캔해주세요.</span>
             <form className=" flex flex-col flex- space-y-4 text-cente r">
-              <label className="justify-items-start">인증번호 입력</label>
-              <input type="text" className=" border border-black pt-4" />
+              {/* QR코드 */}
+              <img />
               <button
                 onClick={() => clickSubmit()}
                 className="block w-full px-5 py-3 text-sm text-gray-100
                 bg-[#1B3C34] rounded"
               >
-                아이디 찾기
+                완료
               </button>
               <button
                 className="inline-block text-sm text-gray-500 underline transition underline-offset-4 hover:text-gray-600"
@@ -97,4 +86,4 @@ const FindModal = ({ isopen, setIsOpen }) => {
   );
 };
 
-export default FindModal;
+export default CardQrModal;

@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  email: "",
-  name: "",
-  nickname: "",
-  birth: "",
-  tel: "",
-  address: "",
-  detailAddress: "",
+  miId: "",
+  miName: "",
+  miNickname: "",
+  miBirth: "",
+  miGen: "",
+  miPhoneNum: "",
+  miAddress: "",
+  miDetailAddress: "",
 };
 
 const loggedState = createSlice({
@@ -15,22 +16,22 @@ const loggedState = createSlice({
   initialState: initialState,
   reducers: {
     loginAccount: (state, action) => {
-      state.email = action.payload.email;
-      state.name = action.payload.name;
-      state.nickname = action.payload.nickname;
-      state.birth = action.payload.birth;
-      state.tel = action.payload.tel;
-      state.address = action.payload.address;
-      state.detailAddress = action.payload.detailAddress;
+      state.miId = action.payload.miId;
+      state.miName = action.payload.miName;
+      state.miNickname = action.payload.miNickname;
+      state.miBirth = action.payload.miBirth;
+      state.miPhoneNum = action.payload.miPhoneNum;
+      state.miAddress = action.payload.miAddress;
+      state.miDetailAddress = action.payload.miDetailAddress;
     },
     logoutAccount: (state) => {
-      state.email = null;
-      state.name = null;
-      state.nickname = null;
-      state.birth = null;
-      state.tel = null;
-      state.address = null;
-      state.detailAddress = null;
+      state.miId = "";
+      state.miName = "";
+      state.miNickname = "";
+      state.miBirth = "";
+      state.miPhoneNum = "";
+      state.miAddress = "";
+      state.miDetailAddress = "";
     },
   },
 });

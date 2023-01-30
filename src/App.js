@@ -20,6 +20,7 @@ import IdResult from "pages/member/IdResult";
 import PwResult from "pages/member/PwResult";
 import MyPage from "pages/member/MyPage";
 import Checkout from "pages/cart/Checkout";
+import MemberCard from "pages/member/MemberCard";
 
 const App = () => {
   const [list, setList] = useState([]);
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/idresult" element={<IdResult />} />
         <Route path="/pwfind" element={<PwFind />} />
         <Route path="/pwresult" element={<PwResult />} />
+        <Route path="/membercard" element={<MemberCard />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/menudetail" element={<Menudetail />} />
         <Route path="/order" element={<Order />} />

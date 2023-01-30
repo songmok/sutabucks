@@ -1,24 +1,13 @@
 import React, { useState } from "react";
 import ReactModal from "react-modal";
-import axios from "../../../api/axios";
+
+import FindImg from "asset/images/icon_find_sally.png";
 import { useNavigate } from "react-router-dom";
 
-const FindModal = ({ isopen, setIsOpen }) => {
+const CardModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
-
   const clickSubmit = () => {
-    axios
-      .get("/member/finddid")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("인증번호 인증에 실패하였습니다.");
-      });
-
-    alert("인증번호가 확인되었습니다.");
-    navigate("/IdResult");
+    navigate("/membercard");
   };
 
   const customStyles = {
@@ -35,7 +24,7 @@ const FindModal = ({ isopen, setIsOpen }) => {
       left: "50%",
       right: "auto",
       bottom: "auto",
-      width: "29%%",
+      width: "35%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#fff",
     },
@@ -44,7 +33,12 @@ const FindModal = ({ isopen, setIsOpen }) => {
   return (
     <ReactModal isOpen={isopen} style={customStyles}>
       <section>
-        <div className="p-8 pt-4 border border-[#1B3C34]" aria-modal="true">
+        <div
+          className="p-8 pt-4 border border-[#1B3C34]"
+          aria-modal="true"
+          role="dialog"
+          tabIndex="-1"
+        >
           <button
             className="absolute block top-7 right-7 text-gray-600"
             onClick={() => setIsOpen(false)}
@@ -64,32 +58,29 @@ const FindModal = ({ isopen, setIsOpen }) => {
               />
             </svg>
           </button>
-          <div className="mt-6 space-y-6 ">
-            {/* <div>
+          <div className="mt-6 space-y-6">
+            <div>
               <img
                 src={FindImg}
                 alt="coffee"
                 className="w-56 mx-auto mt-16 mb-8"
               />
-            </div> */}
-            <span>회원정보에 등록한 휴대폰으로 인증</span>
-            <form className=" flex flex-col flex- space-y-4 text-cente r">
-              <label className="justify-items-start">인증번호 입력</label>
-              <input type="text" className=" border border-black pt-4" />
+            </div>
+            <div className="space-y-4 text-center">
               <button
                 onClick={() => clickSubmit()}
                 className="block w-full px-5 py-3 text-sm text-gray-100
                 bg-[#1B3C34] rounded"
               >
-                아이디 찾기
+                맴버십 카드를 만들겠습니까?
               </button>
               <button
                 className="inline-block text-sm text-gray-500 underline transition underline-offset-4 hover:text-gray-600"
                 onClick={() => setIsOpen(false)}
               >
-                되돌아가기
+                회원정보로 되돌아가기
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </section>
@@ -97,4 +88,4 @@ const FindModal = ({ isopen, setIsOpen }) => {
   );
 };
 
-export default FindModal;
+export default CardModal;

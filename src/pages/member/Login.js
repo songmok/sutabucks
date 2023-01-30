@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import LoginDiv from "../../style/memberCss/loginCSS";
+// import { bgCover } from "../../style/memberCss/loginCSS";
 import { Err } from "../../style/memberCss/basicCSS";
 import axios from "../../api/axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,14 +35,15 @@ const Login = () => {
     // }
 
     const body = {
-      id: data.email,
-      pwd: data.pw,
+      miId: data.email,
+      miPwd: data.pw,
     };
+
     axios
       .post("member/login", body)
       .then((res) => {
-        // console.log(res.data);
-        console.log(res.data.loginAccount);
+        console.log("뭐있냐", res.data);
+        console.log("넌?", res.data.loginAccount);
         dispatch(loginAccount(res.data.loginAccount));
         alert(`${user.nickname}님 환영합니다.`);
         // 나중에 홈으로 변경
@@ -50,6 +52,20 @@ const Login = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    // axios
+    //   .post("member/myinfo")
+    //   .then((res) => {
+    //     console.log("설마?", res.data);
+    //     console.log("넌?", res.data.loginAccount);
+    //     dispatch(loginAccount(res.data.loginAccount));
+    //     alert(`${user.nickname}님 환영합니다.`);
+    //     // 나중에 홈으로 변경
+    //     navigate("/mypage");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   // 아이디 저장체크시
@@ -79,6 +95,7 @@ const Login = () => {
   return (
     <>
       {/* 배경이미지 삽입 */}
+
       <div className="text-center text-4xl font-semibold my-8">로그인</div>
       {/*  text-white 배경 삽입 후 추가 */}
       <LoginDiv>

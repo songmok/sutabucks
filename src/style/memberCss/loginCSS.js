@@ -56,4 +56,10 @@ const LoginDiv = styled.div`
   }
 `;
 
+// const bgCover = styled.div`
+//   // background-image: url("asset/images/bg.jpg");
+//   background-color: red;
+// `;
+
+// export { bgCover };
 export default LoginDiv;

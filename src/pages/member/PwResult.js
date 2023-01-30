@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FindDiv, Bt } from "../../style/memberCss/findCSS";
+import { FindDiv, Bt } from "style/memberCss/findCSS";
 import FindImg from "asset/images/icon_find_sally.png";
 
 const PwResult = () => {
