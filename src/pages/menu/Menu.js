@@ -1,6 +1,8 @@
 // import axios from "axios";
+import MenuHeader from "components/pagesHeader/MenuHeader";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import instance from "../../api/axios";
 import request from "../../api/request";
 import MenuList from "./MenuList";
@@ -52,6 +54,7 @@ const Menu = () => {
   };
   return (
     <section className="container mx-auto">
+      <MenuHeader />
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1">
           <nav aria-label="Main Nav" className="flex flex-col space-y-1">

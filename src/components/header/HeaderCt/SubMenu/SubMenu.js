@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SubCate from "./SubCate";
+import SubMenuCate from "./SubMenuCate";
 
-const SubMenu = ({ sub, count, setCount }) => {
+const SubMenu = ({ subMenu, count, setCount }) => {
   // console.log(sub);
   return (
     <>
@@ -14,11 +14,11 @@ const SubMenu = ({ sub, count, setCount }) => {
           }}
         >
           <ul className="submenu">
-            {sub.map((v, i) => {
+            {subMenu.map((v, i) => {
               return (
                 <li className="depth2" key={i}>
                   <Link to="/">{v.name}</Link>
-                  <SubCate cate={v.submenu} />
+                  <SubMenuCate cate={v.submenu} />
                 </li>
               );
             })}

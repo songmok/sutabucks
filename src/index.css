@@ -3,7 +3,7 @@
 @tailwind utilities;
 * {
   padding: 0;
-  margin: 0 ;
+  margin: 0;
   box-sizing: border-box;
 }
 a {
@@ -21,9 +21,13 @@ img {
   vertical-align: middle;
 }
 body {
-  font-family: "Montserrat", "nbg", sans-serif;
-  height: 5000px;
+  font-family: "Montserrat", "nbg", sans-serif !important;
 }
 em {
   font-style: normal;
+}
+.wrap {
+  position: relative;
+  width: 75vw;
+  margin: 0 auto;
 }
