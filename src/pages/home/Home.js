@@ -1,12 +1,60 @@
 import React from "react";
-import banner from "asset/images/banner.jpg";
+import { Link } from "react-router-dom";
+//img
+// import banner from "asset/images/banner.jpg";
 import bannerHeader from "asset/images/event-header.png";
 import banneritem1 from "asset/images/item1.png";
 import banneritem2 from "asset/images/item2.png";
 import banneritem3 from "asset/images/item3.png";
-import { Link } from "react-router-dom";
+//css
 import HomeCss from "style/homeCss/homeCss";
+//swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+// import required modules
+
 const Home = () => {
+  const news = [
+    {
+      id: 1,
+      name: "새소식",
+      url: "/news",
+      cl: "prev",
+    },
+    {
+      id: 2,
+      name: "곰소식",
+      url: "/news",
+      cl: "current",
+    },
+    {
+      id: 3,
+      name: "괴소식",
+      url: "/news",
+      cl: "next",
+    },
+    {
+      id: 3,
+      name: "공소식",
+      url: "/news",
+      cl: "",
+    },
+    {
+      id: 3,
+      name: "쥐소식",
+      url: "/news",
+      cl: "",
+    },
+    {
+      id: 3,
+      name: "용소식",
+      url: "/news",
+      cl: "",
+    },
+  ];
+
   return (
     <>
       <HomeCss>
@@ -23,25 +71,26 @@ const Home = () => {
             </div>
           </div>
         </article>
-        <article className="notice">
-          <div className="notice-wrap wrap">
-            <div className="notice-list">
-              <h3>공지사항</h3>
-              <div className="notice-items">
-                <span style={{}} id="item">
-                  커피의 효능
-                </span>
-                <span style={{}} id="item">
-                  스타벅스만의 비법
-                </span>
-                <span style={{}} id="item">
-                  맛없을 시 100% 환불!!
-                </span>
-              </div>
-              <span className="plus-box"></span>
-            </div>
+        <div className="rollingbanner">
+          <div className="title">속보</div>
+          <div className="wrap">
+            <Swiper
+              direction={"vertical"}
+              spaceBetween={30}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              modules={[Autoplay]}
+              loop="true"
+              className="mySwiper"
+            >
+              {news.map((v, i) => {
+                return <SwiperSlide key={i}>{v.name}</SwiperSlide>;
+              })}
+            </Swiper>
           </div>
-        </article>
+        </div>
         <article className="cate"></article>
       </HomeCss>
     </>

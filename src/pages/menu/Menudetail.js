@@ -5,8 +5,11 @@ import instance from "../../api/axios";
 import request from "../../api/request";
 import Modal from "react-modal";
 
+<<<<<<< HEAD
 import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
 
+=======
+>>>>>>> 37d9cfe3d5ba8f7670def5a3aa023a4f267ecb48
 const Menudetail = () => {
   // URI 처리 및 데이터 연동
   const [detail, setDetail] = useState([]);
