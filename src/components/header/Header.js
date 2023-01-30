@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logo1 from "asset/images/logo1.png";
-import HeaderCss from "style/headerCss/headerCss";
+import HeaderCss from "style/headerCss/HeaderCss";
 import HeaderRt from "./HeaderRt/HeaderRt";
 import HeaderCt from "./HeaderCt/HeaderCt";
 

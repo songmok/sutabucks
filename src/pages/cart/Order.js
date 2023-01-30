@@ -240,7 +240,7 @@ const Order = () => {
               >
                 <section>
                   <div
-                    className="p-8 pt-4 border border-[#1B3C34]"
+                    className="p-4 border border-[#1B3C34]"
                     aria-modal="true"
                     role="dialog"
                     tabIndex="-1"
@@ -264,7 +264,7 @@ const Order = () => {
                         />
                       </svg>
                     </button>
-                    <div className="mt-6 space-y-6">
+                    <div className="mt-6 space-y-3">
                       <div>
                         <img
                           src={modalData.img}
@@ -281,7 +281,7 @@ const Order = () => {
                           {modalData.mbiCost * amount} 원
                         </span>
                       </div>
-                      <div className="flex flex-col  items-center">
+                      <div className="flex flex-col items-center">
                         <div className="flex items-center gap-1">
                           <button
                             type="button"
