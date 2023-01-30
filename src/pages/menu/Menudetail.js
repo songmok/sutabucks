@@ -12,9 +12,11 @@ const Menudetail = () => {
 
   const fetchData = async () => {
     const params = {
-      mbiSeq: seq,
+      menuNo: seq,
     };
-    const resultDetail = await instance.get(request.fetchMenuDetail, { params });
+    const resultDetail = await instance.get(request.fetchMenuDetail, {
+      params,
+    });
     setDetail(resultDetail.data.detail);
   };
 
@@ -50,8 +52,8 @@ const Menudetail = () => {
           <div className="flex flex-wrap items-center p-5">
             <div className="block w-full lg:flex grow-0 shrink-0 basis-auto lg:w-6/12 xl:w-4/12">
               <img
-                alt="coffee"
                 src="./coffee.jpg"
+                alt="coffee"
                 className="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg"
               />
             </div>
@@ -59,9 +61,9 @@ const Menudetail = () => {
               <div className="px-6 py-12 md:px-12">
                 <div className="flex justify-between mt-8">
                   <div className="max-w-[35ch]">
-                    <h1 className="text-2xl font-bold">{detail.mbiName}</h1>
+                    <h1 className="text-2xl font-bold">{detail.menuName}</h1>
                   </div>
-                  <p className="text-2xl font-bold">{detail.mbiCost}</p>
+                  <p className="text-2xl font-bold">{detail.menuCost}원</p>
                 </div>
                 <details className="group relative my-10">
                   <summary className="block">

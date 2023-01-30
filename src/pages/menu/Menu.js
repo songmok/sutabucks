@@ -3,89 +3,40 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import instance from "../../api/axios";
 import request from "../../api/request";
+import MenuList from "./MenuList";
+import NoResult from "./NoResult";
 
 const Menu = () => {
   // const [data, setData] = useState([]);
   const [word, setWord] = useState("");
   const [searchData, setSearchData] = useState([]);
-
-  // const getPosts = async () => {
-  //   const posts = await instance.get(request.fetchMenu);
-  //   setData(posts.data.list);
-  // };
-
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
+  const [status, setStatus] = useState(true);
 
   const fetchData = async () => {
     const params = {
       menuName: word,
     };
-    const resultSearchData = await instance.get(request.fetchMenuSearch, {
-      params,
-    });
-    // .then()
-    // .catch();
-    // console.log(resultSearchData.data);
-    setSearchData(resultSearchData.data.list);
-    // setSearchData(resultSearchData.data);
+    await instance
+      .get(request.fetchMenuSearch, {
+        params,
+      })
+      .then((res) => {
+        setSearchData(res.data.list);
+        setStatus(res.data.status);
+      })
+      .catch((err) => {
+        console.log(err);
+        setStatus(err.response.data.status);
+      });
+    // setSearchData(resultSearchData.data.list);
+    // setStatus(resultSearchData.data.status);
   };
   useEffect(() => {
     fetchData();
   }, []);
 
-  // const menuList = data.map((item) => (
-  //   <Link
-  //     // to="/menudetail"
-  //     to={`/menudetail/${item.mbiSeq}`}
-  //     key={item.mbiSeq}
-  //     className="block group cursor-pointer"
-  //   >
-  //     <img
-  //       // src={item.img}
-  //       src="./coffee.jpg"
-  //       alt="coffee"
-  //       className="w-full transform hover:scale-95 transition duration-300"
-  //     />
-  //     <div className="relative pt-3 bg-white">
-  //       <h3 className="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
-  //         {item.mbiName}
-  //       </h3>
-  //       <div className="mt-1.5 flex items-center justify-between text-gray-900">
-  //         <p className="tracking-wide">{item.mbiCost}원</p>
-  //       </div>
-  //     </div>
-  //   </Link>
-  // ));
-
-  console.log(searchData.list);
-
-  const searchDataList = searchData.list;
-  console.log(searchDataList);
-  const searchMenuList = searchData.map((item) => (
-    <Link
-      // to="/menudetail"
-      to={`/menudetail/${item.mbiSeq}`}
-      key={item.mbiSeq}
-      className="block group cursor-pointer"
-    >
-      <img
-        // src={item.img}
-        src="./coffee.jpg"
-        alt="coffee"
-        className="w-full transform hover:scale-95 transition duration-300"
-      />
-      <div className="relative pt-3 bg-white">
-        <h3 className="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
-          {item.mbiName}
-        </h3>
-        <div className="mt-1.5 flex items-center justify-between text-gray-900">
-          <p className="tracking-wide">{item.mbiCost}원</p>
-        </div>
-      </div>
-    </Link>
-  ));
+  // console.log(searchData);
+  // console.log(status);
 
   const handleOnClick = () => {
     fetchData();
@@ -96,11 +47,21 @@ const Menu = () => {
     }
   };
   // console.log(searchData);
+  const clearList = () => {
+    setWord("").then(fetchData());
+  };
   return (
     <section className="container mx-auto">
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1">
           <nav aria-label="Main Nav" className="flex flex-col space-y-1">
+            <Link
+              // to="/menu"
+              className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+              onClick={clearList}
+            >
+              전체 메뉴
+            </Link>
             <details className="group [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center px-4 py-2 text-gray-500 rounded-lg cursor-pointer hover:bg-[#1B3C34] hover:text-white">
                 <span className="text-sm font-medium"> 음료 </span>
@@ -195,25 +156,29 @@ const Menu = () => {
                   onChange={(e) => {
                     setWord(e.target.value);
                   }}
-                  onKeyPress={handleOnKeyPress}
+                  onKeyPressName={handleOnKeyPress}
                 />
                 <input type="button" value="검색" onClick={handleOnClick} />
               </div>
             </form> */}
-            <div className="flex border-2 rounded">
+            <form
+              className="flex w-full lg:w-[35%] rounded"
+              style={{ border: "1px solid #1B3C34" }}
+            >
               <input
                 type="search"
-                className="px-4 py-2 w-80"
-                placeholder="Search Books..."
+                className="px-5 py-2 w-4/5"
+                placeholder="Search Menu"
                 required
+                value={word}
                 onChange={(e) => {
                   setWord(e.target.value);
                 }}
-                onKeyPress={handleOnKeyPress}
+                onKeyPressName={handleOnKeyPress}
               />
               <button
                 type="button"
-                className="flex items-center justify-center px-4 border-l"
+                className="flex w-1/1 items-center justify-center px-4"
                 onClick={handleOnClick}
               >
                 <svg
@@ -225,40 +190,16 @@ const Menu = () => {
                   <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
                 </svg>
               </button>
-            </div>
+            </form>
           </div>
           <div className="coffee mb-10">
-            <div>
-              {/* <span className="font-bold text-2xl md:text-3xl">
-                콜드 브루 커피
-              </span> */}
-            </div>
-            <div className="mt-5 grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
-              {/* {searchData.map((item) => (
-                <Link
-                  // to="/menudetail"
-                  to={`/menudetail/${item.mbiSeq}`}
-                  key={item.mbiSeq}
-                  className="block group cursor-pointer"
-                >
-                  <img
-                    // src={item.img}
-                    src="./coffee.jpg"
-                    alt="coffee"
-                    className="w-full transform hover:scale-95 transition duration-300"
-                  />
-                  <div className="relative pt-3 bg-white">
-                    <h3 className="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
-                      {item.mbiName}
-                    </h3>
-                    <div className="mt-1.5 flex items-center justify-between text-gray-900">
-                      <p className="tracking-wide">{item.mbiCost}원</p>
-                    </div>
-                  </div>
-                </Link>
-              ))} */}
-              {searchMenuList}
-            </div>
+            {status ? (
+              <div className="mt-5 grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
+                <MenuList searchData={searchData} />
+              </div>
+            ) : (
+              <NoResult />
+            )}
           </div>
         </main>
       </div>
