@@ -7,12 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Post from "pages/member/Post";
 import axios from "../../api/axios";
+import { useHistory } from "react-router-dom";
 import { loginAccount, logoutAccount } from "../../reducer/loggedState";
 import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state) => state.user);
 
   // react-hook0-form 적용
@@ -21,7 +23,7 @@ const SignUp = () => {
     handleSubmit,
     getValues,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({ defaultValues: user });
 
   const onSubmit = (data) => {
     console.log("데이터", data);
@@ -39,16 +41,18 @@ const SignUp = () => {
       .post("member/join", body)
       .then((res) => {
         if (res.data.true) {
-          const userInfo = {
-            email: data.email,
-            name: data.name,
-            nickname: data.nickname,
-            birth: data.birth,
-            tel: data.tel,
-            address: enroll_company.address,
-            detailAddress: detailAddress,
-          };
-          dispatch(loginAccount(userInfo));
+          dispatch(loginAccount(data.user));
+          history.push("./sighnup");
+          // const userInfo = {
+          //   email: data.email,
+          //   name: data.name,
+          //   nickname: data.nickname,
+          //   birth: data.birth,
+          //   tel: data.tel,
+          //   address: enroll_company.address,
+          //   detailAddress: detailAddress,
+          // };
+          // dispatch(loginAccount(userInfo));
           alert("수타벅스의 회원이 되신 것을 환영합니다.");
           navigate("/login");
         } else {

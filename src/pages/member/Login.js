@@ -41,12 +41,9 @@ const Login = () => {
       .post("member/login", body)
       .then((res) => {
         // console.log(res.data);
-        const userInfo = {
-          email: data.email,
-          name: user.name,
-        };
-        console.log("유저", userInfo);
-        dispatch(loginAccount(userInfo));
+        console.log(res.data.loginAccount);
+        dispatch(loginAccount(res.data.loginAccount));
+        alert(`${user.nickname}님 환영합니다.`);
         // 나중에 홈으로 변경
         navigate("/mypage");
       })
