@@ -5,11 +5,6 @@ import instance from "../../api/axios";
 import request from "../../api/request";
 import Modal from "react-modal";
 
-<<<<<<< HEAD
-import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
-
-=======
->>>>>>> 37d9cfe3d5ba8f7670def5a3aa023a4f267ecb48
 const Menudetail = () => {
   // URI 처리 및 데이터 연동
   const [detail, setDetail] = useState([]);
@@ -55,32 +50,6 @@ const Menudetail = () => {
 
   return (
     <MenudetailCss>
-      <SubHeaderCss>
-        <div className="SubHeader wrap">
-          <h1 className="subHeader">메뉴</h1>
-          <div className="link">
-            <ul>
-              <li>
-                <Link to="/" className="item">
-                  홈
-                </Link>
-              </li>
-              <li className="arrow">{">"}</li>
-              <li>
-                <Link to="/menu" className="item">
-                  메뉴보기
-                </Link>
-              </li>
-              <li className="arrow">{">"}</li>
-              <li>
-                <Link to="/menudetail" className="item">
-                  {detail.menuName}
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </SubHeaderCss>
       <section className="container mx-auto my-10">
         <div className="relative block rounded-lg shadow-lg bg-white">
           <Link
