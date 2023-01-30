@@ -1,12 +1,8 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import MenudetailCss from "../../style/menuCss/MenudetailCss";
 import instance from "../../api/axios";
 import request from "../../api/request";
-
-import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
-
 
 const Menudetail = () => {
   // URI 처리 및 데이터 연동
@@ -18,7 +14,9 @@ const Menudetail = () => {
     const params = {
       mbiSeq: seq,
     };
-    const resultDetail = await instance.get(request.fetchMenuDetail, { params });
+    const resultDetail = await instance.get(request.fetchMenuDetail, {
+      params,
+    });
     setDetail(resultDetail.data.detail);
   };
 
@@ -30,32 +28,7 @@ const Menudetail = () => {
 
   return (
     <MenudetailCss>
-      <SubHeaderCss>
-        <div className="SubHeader wrap">
-          <h1 className="subHeader">메뉴</h1>
-          <div className="link">
-            <ul>
-              <li>
-                <Link to="/" className="item">
-                  홈
-                </Link>
-              </li>
-              <li className="arrow">{">"}</li>
-              <li>
-                <Link to="/menu" className="item">
-                  메뉴보기
-                </Link>
-              </li>
-              <li className="arrow">{">"}</li>
-              <li>
-                <Link to="/menudetail" className="item">
-                  돌체 콜드 블루
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </SubHeaderCss>
+      <MenudetailCss />
       <section className="container mx-auto my-10">
         <div className="relative block rounded-lg shadow-lg bg-white">
           <Link

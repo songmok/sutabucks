@@ -4,14 +4,15 @@ const headerCss = styled.header`
   width: 100%;
   height: 200px;
   background-color: #1b3c34;
-  /* display: flex;
-  justify-content: center; */
   z-index: 9999;
   * {
     color: #fff;
     font-weight: bold;
   }
-  .header {
+  .change_header {
+    display: none;
+  }
+  .original_header {
     position: static;
     display: grid;
     grid-template-columns: repeat(3, 1fr);

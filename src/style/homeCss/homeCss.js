@@ -50,57 +50,68 @@ const homeCss = styled.section`
       }
     }
   }
-  .notice {
+  /* 배너 컨테이너 */
+  .rollingbanner {
     position: relative;
-    height: 50px;
-    background-color: #000;
-    > * {
-      color: #fff;
-    }
-    .notice-wrap {
-      .notice-list {
-        display: grid;
-        width: 450px;
-        height: 50px;
-        background-color: blue;
-        grid-template-columns: repeat(3, 1fr);
-        justify-items: end;
-        align-items: center;
-        > h3 {
-          justify-self: start;
-          font-weight: bold;
-          font-size: 30px;
-        }
-        .notice-items {
-          position: relative;
-          justify-self: center;
-          height: 16px;
-          > span {
-            position: absolute;
-            white-space: nowrap;
-            top: 0;
-            z-index: 1;
-            &::after {
-              content: "";
-              position: absolute;
-              left: 0;
-              bottom: 0;
-              width: 100%;
-              height: 16px;
-              background-color: red;
-              z-index: -1;
-            }
-          }
-        }
-        .plus-box {
-          width: 30px;
-          height: 30px;
-          border-radius: 30px;
-          background-color: #fff;
-          display: block;
-        }
-      }
-    }
+    width: 380px;
+    height: 32px;
+    font-size: 0.875rem;
+    letter-spacing: -1px;
+    padding: 7px 15px;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+    border-radius: 16px;
+  }
+  /* 타이틀 */
+  .rollingbanner > .title {
+    font-weight: bold;
+    float: left;
+    padding-right: 10px;
+  }
+  /* 롤링 배너 */
+  .rollingbanner > .wrap {
+    position: relative;
+    width: auto;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .rollingbanner ul {
+    list-style: none;
+  }
+  .rollingbanner li {
+    position: absolute;
+    top: -36px;
+    left: 0;
+  }
+  /* 이전, 현재, 다음 롤링 배너 표시 */
+  .rollingbanner li.prev {
+    top: 36px;
+    transition: top 0.5s ease;
+  }
+  .rollingbanner li.current {
+    top: 0;
+    transition: top 0.5s ease;
+  }
+  .rollingbanner li.next {
+    top: -36px;
+  }
+  .rollingbanner a {
+    display: block;
+    display: -webkit-box;
+    text-decoration: none;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #000;
+  }
+  /* 반대 방향으로 진행 */
+  .rollingbanner.reverse li.prev {
+    top: -36px;
+    transition: top 0.5s ease;
+  }
+  .rollingbanner.reverse li.next {
+    top: 36px;
   }
   .cate {
     > a {

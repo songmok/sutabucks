@@ -45,6 +45,7 @@ function App() {
     const event = await instance.get(requests.fetchEvent);
     setEvent(event.data.event);
     setEventDetail(event.data.detail);
+
     const notice = await instance.get(requests.fetchNotice);
     setNotice(notice.data.event); //수정
     setNoticeDetail(notice.data.detail); //수정
@@ -52,7 +53,8 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
-
+  console.log(event);
+  console.log(eventDetail);
   return (
     <Router>
       <Reset />
@@ -63,7 +65,7 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/event" element={<Event event={event} />} />
         <Route
-          path="/eventdetail/:seq"
+          path="/detail/:seq"
           element={<EventDetail eventDetail={eventDetail} />}
         />
         <Route path="/notice" element={<Notice />} />
