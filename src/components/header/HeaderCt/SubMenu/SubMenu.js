@@ -1,21 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const SubMaps = ({ sub, count, setCount }) => {
-  console.log(sub);
+import SubMenuCate from "./SubMenuCate";
+
+const SubMenu = ({ subMenu, count, setCount }) => {
+  // console.log(sub);
   return (
     <>
-      {count === 3 ? (
+      {count === 2 ? (
         <div
           className="depth1-wrap active"
           onMouseOver={() => {
-            setCount(3);
+            setCount(2);
           }}
         >
           <ul className="submenu">
-            {sub.map((v, i) => {
+            {subMenu.map((v, i) => {
               return (
                 <li className="depth2" key={i}>
                   <Link to="/">{v.name}</Link>
+                  <SubMenuCate cate={v.submenu} />
                 </li>
               );
             })}
@@ -28,5 +31,5 @@ const SubMaps = ({ sub, count, setCount }) => {
   );
 };
 
-export default SubMaps;
-// <SubMaps />
+export default SubMenu;
+// <SubMenu />

@@ -46,10 +46,8 @@ function App() {
     setList(rsList);
     const ev = await instance.get(requests.fetchEvent);
     setEvent(ev.data.event);
-
     const evDetail = await instance.get(requests.fetchEventDetail);
     setEventDetail(evDetail);
-
     const notice = await instance.get(requests.fetchNotice);
     setNotice(notice.data.event); //수정
     setNoticeDetail(notice.data.detail); //수정
@@ -101,3 +99,4 @@ function App() {
 }
 
 export default App;
+

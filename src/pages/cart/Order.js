@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
-// import OrderModal from "./OrderModal";
-import OrderModalCss from "./OrderModalCss";
 import axios from "axios";
 import { cartActions } from "reducer/cartSlice";
 import { useDispatch } from "react-redux";
+import OrderHeader from "components/pagesHeader/OrderHeader";
 
 const Order = () => {
   const [data, setData] = useState([]);
   const [amount, setAmount] = useState(1);
+
+  const [option, setOption] = React.useState("tall");
+
+  const handleOptionChange = (changeEvent) => {
+    setOption(changeEvent.target.value);
+  };
 
   const increase = () => setAmount(parseInt(amount) + 1);
 
@@ -26,6 +31,7 @@ const Order = () => {
       left: 0,
       right: 0,
       bottom: 0,
+      zIndex: "9999",
       backgroundColor: "rgba(0, 0, 0, 0.4)",
     },
     content: {
@@ -53,14 +59,15 @@ const Order = () => {
   const dispatch = useDispatch();
 
   const pushCart = () => {
-    const item = { ...modalData, amount };
+    const item = { ...modalData, amount, option, checked: true };
     dispatch(cartActions.addCartItem(item));
     setAmount(1);
     setModalIsOpen(false);
   };
 
   return (
-    <OrderModalCss>
+    <>
+      <OrderHeader />
       <div className="container mx-auto">
         <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
           <div className="lg:col-span-1">
@@ -87,10 +94,16 @@ const Order = () => {
                   aria-label="Users Nav"
                   className="flex flex-col mt-2 ml-8 space-y-1"
                 >
-                  <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                  >
                     콜드 브루
                   </Link>
-                  <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                  >
                     브루드 커피
                   </Link>
                 </nav>
@@ -117,10 +130,16 @@ const Order = () => {
                   aria-label="Account Nav"
                   className="flex flex-col mt-2 ml-8 space-y-1"
                 >
-                  <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                  >
                     브레드
                   </Link>
-                  <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                  >
                     케이크
                   </Link>
                 </nav>
@@ -245,11 +264,11 @@ const Order = () => {
                         <span className="block text-gray-600 text-sm px-5 mt-2">
                           {modalData.mbiExplain}
                         </span>
-                        <span className="block text-custom-yellow mt-6 font-bold text-3xl text-center">
+                        <span className="block text-custom-yellow mt-5 font-bold text-3xl text-center">
                           {modalData.mbiCost * amount} 원
                         </span>
                       </div>
-                      <div className="flex justify-center">
+                      <div className="flex flex-col  items-center">
                         <div className="flex items-center gap-1">
                           <button
                             type="button"
@@ -273,6 +292,60 @@ const Order = () => {
                             +
                           </button>
                         </div>
+                        <ul className="grid grid-cols-3 gap-x-3 my-2">
+                          {/* <ul className="grid grid-cols-3 gap-x-3 m-1 max-w-md mx-auto"> */}
+                          <li className="relative">
+                            <input
+                              className="sr-only peer"
+                              type="radio"
+                              value="tall"
+                              name="size"
+                              id="tall"
+                              checked={option === "tall"}
+                              onChange={handleOptionChange}
+                            />
+                            <label
+                              className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#CCAA86] peer-checked:ring-2 peer-checked:border-transparent"
+                              htmlFor="tall"
+                            >
+                              Tall
+                            </label>
+                          </li>
+                          <li className="relative">
+                            <input
+                              className="sr-only peer"
+                              type="radio"
+                              value="grande"
+                              name="size"
+                              id="grande"
+                              checked={option === "grande"}
+                              onChange={handleOptionChange}
+                            />
+                            <label
+                              className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#B05B10] peer-checked:ring-2 peer-checked:border-transparent"
+                              htmlFor="grande"
+                            >
+                              Grande
+                            </label>
+                          </li>
+                          <li className="relative">
+                            <input
+                              className="sr-only peer"
+                              type="radio"
+                              value="venti"
+                              name="size"
+                              id="venti"
+                              checked={option === "venti"}
+                              onChange={handleOptionChange}
+                            />
+                            <label
+                              className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#480405] peer-checked:ring-2 peer-checked:border-transparent"
+                              htmlFor="venti"
+                            >
+                              Venti
+                            </label>
+                          </li>
+                        </ul>
                       </div>
                       <div className="space-y-4 text-center">
                         <button
@@ -296,7 +369,7 @@ const Order = () => {
           </main>
         </div>
       </div>
-    </OrderModalCss>
+    </>
   );
 };
 

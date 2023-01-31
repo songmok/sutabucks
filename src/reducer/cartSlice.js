@@ -3,8 +3,7 @@ import React from "react";
 
 const defaultCartState = {
   items: [],
-  totalAmount: 0,
-  totalPrice: 0,
+  allChecked: true,
 };
 
 //modalData: mbiSeq, mbiName, mbiCost
@@ -16,57 +15,85 @@ const cartSlice = createSlice({
     addCartItem: (state, action) => {
       const newItem = action.payload;
       const existingItem = state.items.find(
-        (item) => item.mbiSeq === newItem.mbiSeq
+        (item) =>
+          item.mbiSeq === newItem.mbiSeq && item.option === newItem.option
       );
       if (!existingItem) {
-        // state.items.push({
-        //   id: newItem.mbiSeq,
-        //   title: newItem.mbiName,
-        //   price: newItem.mbiCost,
-        //   totalPrice: newItem.mbiCost,
-        //   img: newItem.img,
-        //   amount: newItem.amount,
-        // });
         state.items = [newItem, ...state.items];
-        state.totalAmount += newItem.amount;
-        state.totalPrice += newItem.mbiCost * newItem.amount;
       } else {
-        // existingItem.totalPrice = existingItem.totalPrice + existingItem.price;
-        // existingItem.totalamount++;
         existingItem.amount += newItem.amount;
+        existingItem.checked = true;
       }
-      // state.totalAmount++;
+      const checkedItem = state.items.find((item) => item.checked === false);
+      if (!checkedItem) {
+        state.allChecked = true;
+      }
     },
     removeCartItem: (state, action) => {
       const currentItem = action.payload;
       state.items = state.items.filter(
         (item) => item.mbiSeq !== currentItem.mbiSeq
       );
-      state.totalAmount -= currentItem.amount;
-      state.totalPrice -= currentItem.mbiCost * currentItem.amount;
     },
     addAmount: (state, action) => {
       const currentItem = action.payload;
       const existingItem = state.items.find(
-        (item) => item.mbiSeq === currentItem.mbiSeq
+        (item) => item.mbiSeq === currentItem.mbiSeq && item.option === currentItem.option
       );
       if (existingItem) {
         existingItem.amount += 1;
-        state.totalAmount += 1;
-        state.totalPrice += currentItem.mbiCost;
       }
     },
     removeAmount: (state, action) => {
       const currentItem = action.payload;
       const existingItem = state.items.find(
-        (item) => item.mbiSeq === currentItem.mbiSeq
+        (item) => item.mbiSeq === currentItem.mbiSeq && item.option === currentItem.option
       );
       if (existingItem) {
         if (existingItem.amount > 1) {
           existingItem.amount -= 1;
-          state.totalAmount -= 1;
-          state.totalPrice -= currentItem.mbiCost;
         }
+      }
+    },
+    removeChecked: (state) => {
+      state.items = state.items.filter((item) => !item.checked);
+      const existingItem = state.items.find((item) => item.checked);
+      // if (existingItem) {
+      //   state.allChecked = true;
+      // }
+      if (existingItem) {
+        state.allChecked = true;
+      }
+      const checkedItem = state.items.find((item) => item.checked === false);
+      if (!checkedItem) {
+        state.allChecked = true;
+      }
+    },
+    handleClick: (state, action) => {
+      const currentItem = action.payload;
+      const existingItem = state.items.find(
+        (item) => item.mbiSeq === currentItem.mbiSeq
+      );
+      if (existingItem) {
+        existingItem.checked = !currentItem.checked;
+      }
+      if (!existingItem.checked) {
+        state.allChecked = false;
+      }
+      const checkedItem = state.items.find((item) => item.checked === false);
+      if (!checkedItem) {
+        state.allChecked = true;
+      }
+    },
+    allClick: (state) => {
+      // const currentItem = action.payload;
+      const existingItem = state.items.find((item) => item.checked === false);
+      if (existingItem) {
+        state.items.map((item) => (item.checked = true));
+        state.allChecked = true;
+      } else {
+        state.items.map((item) => (item.checked = false));
+        state.allChecked = false;
       }
     },
   },
