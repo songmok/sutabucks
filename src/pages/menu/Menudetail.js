@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import MenudetailCss from "../../style/menuCss/MenudetailCss";
 import instance from "../../api/axios";
 import request from "../../api/request";
-import Modal from "react-modal";
 
 const Menudetail = () => {
   // URI 처리 및 데이터 연동
@@ -99,13 +98,13 @@ const Menudetail = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
                       className="w-7 h-7"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>
@@ -115,7 +114,7 @@ const Menudetail = () => {
                     alt="test"
                     className="absolute w-1/2 h-1/2 top-1/4 left-1/4 z-10"
                   />
-                  <div className="absolute w-full h-full bg-slate-200 opacity-50"></div>
+                  <div className="absolute w-full h-full bg-white opacity-50"></div>
                 </div>
               )}
               {/* <Modal

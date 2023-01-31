@@ -10,7 +10,7 @@ const Order = () => {
   const [data, setData] = useState([]);
   const [amount, setAmount] = useState(1);
 
-  const [option, setOption] = React.useState("tall");
+  const [option, setOption] = useState("Tall");
 
   const handleOptionChange = (changeEvent) => {
     setOption(changeEvent.target.value);
@@ -311,10 +311,10 @@ const Order = () => {
                             <input
                               className="sr-only peer"
                               type="radio"
-                              value="tall"
+                              value="Tall"
                               name="size"
                               id="tall"
-                              checked={option === "tall"}
+                              checked={option === "Tall"}
                               onChange={handleOptionChange}
                             />
                             <label
@@ -328,10 +328,10 @@ const Order = () => {
                             <input
                               className="sr-only peer"
                               type="radio"
-                              value="grande"
+                              value="Grande"
                               name="size"
                               id="grande"
-                              checked={option === "grande"}
+                              checked={option === "Grande"}
                               onChange={handleOptionChange}
                             />
                             <label
@@ -345,10 +345,10 @@ const Order = () => {
                             <input
                               className="sr-only peer"
                               type="radio"
-                              value="venti"
+                              value="Venti"
                               name="size"
                               id="venti"
-                              checked={option === "venti"}
+                              checked={option === "Venti"}
                               onChange={handleOptionChange}
                             />
                             <label

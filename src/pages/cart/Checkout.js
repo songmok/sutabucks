@@ -48,7 +48,7 @@ const Checkout = () => {
               </span>
             </div>
             <div className="flex flex-col justify-center space-y-6 w-full">
-              <div className="flex flex-col bg-gray-100 py-7 sm:py-0 xl:py-10 px-10 xl:w-full shadow-md">
+              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   주문매장
                 </span>
@@ -92,7 +92,7 @@ const Checkout = () => {
                   </table>
                 </div>
               </div>
-              <div className="flex flex-col bg-gray-100 py-7 sm:py-0 xl:py-10 px-10 xl:w-full shadow-md">
+              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   주문메뉴
                 </span>
@@ -128,7 +128,7 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col bg-gray-100 py-7 sm:py-0 xl:py-10 px-10 xl:w-full shadow-md">
+              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   할인 및 포인트
                 </span>
@@ -140,10 +140,7 @@ const Checkout = () => {
                         className="relative w-1/4"
                         onClick={() => setMenu(!menu)}
                       >
-                        <button
-                          className="text-left border rounded-tr rounded-tl border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600 bg-white"
-                          type="email"
-                        >
+                        <button className="text-left border rounded-tr rounded-tl border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600 bg-white">
                           {coupon}
                         </button>
                         <svg
@@ -189,7 +186,13 @@ const Checkout = () => {
                   </table>
                 </div>
               </div>
-              <div className="flex flex-col bg-gray-100 py-7 sm:py-0 xl:py-10 px-10 xl:w-full shadow-md">
+              <div className="flex justify-between items-center bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
+                <span className="text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
+                  최종 결제 금액
+                </span>
+                <span className="text-2xl mr-24">원</span>
+              </div>
+              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   결제
                 </span>
@@ -199,7 +202,10 @@ const Checkout = () => {
                       <td className="w-1/4 flex items-center text-xl font-semibold">
                         <input
                           className="mr-3 checkbox appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
-                          type="checkbox"
+                          type="radio"
+                          name="choice"
+                          value="membership"
+                          checked
                         />
                         <span>멤버십 결제</span>
                       </td>
@@ -214,7 +220,9 @@ const Checkout = () => {
                       <td className="w-1/4 flex items-center text-xl font-semibold">
                         <input
                           className="mr-3 checkbox appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
-                          type="checkbox"
+                          type="radio"
+                          name="choice"
+                          value="payment"
                         />
                         <span>일반 결제</span>
                       </td>
