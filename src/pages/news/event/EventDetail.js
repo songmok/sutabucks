@@ -1,34 +1,31 @@
 import instance from "api/axios";
 import requests from "api/request";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const EventDetail = ({ eventDetail }) => {
+const EventDetail = () => {
   // const { seq } = useParams();
+  const [evDetail, setEvDetail] = useState([]);
+  const { seq } = useParams();
 
-  // const ev = eventDetail.find((item) => {
-  //   if (item.ediSeq === parseInt(seq)) {
-  //     return item;
-  //   }
-  // });
-  // const fetchData = async () => {
-  //   const params = {
-  //     ediseq: seq,
-  //   };
-  //   const resultDetail = await instance.get(requests.fetchMenuDetail, {
-  //     params,
-  //   });
-  //   setDetail(resultDetail.data.detail);
-  // };
+  const fetchData = async () => {
+    const params = {
+      ediSeq: seq,
+    };
+    const resultDetail = await instance.get(requests.fetchEventDetail, {
+      params,
+    });
+    setEvDetail(resultDetail.event);
+  };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  console.log(eventDetail);
+  console.log(evDetail);
   return (
     <>
-      <div className="df"></div>
+      <div className="df">{evDetail}ss</div>
     </>
   );
 };

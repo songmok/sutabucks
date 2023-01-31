@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo1 from "asset/images/logo1.png";
-import HeaderCss from "style/headerCss/headerCss";
-import HeaderRt from "./HeaderRt/HeaderRt";
-import HeaderCt from "./HeaderCt/HeaderCt";
+import HeaderCss from "style/headerCss/HeaderCss";
+import HeaderRt from "./headerRt/HeaderRt";
+import HeaderCt from "./headerCt/HeaderCt";
 
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -18,7 +18,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", updateScroll);
     };
-    //  className={scrollPosition > 110 ? "original_header" : "change_header"}
+      // className={scrollPosition > 110 ? "original_header" : "change_header"}
   }, []);
   return (
     <div>
@@ -40,3 +40,4 @@ const Header = () => {
 };
 
 export default Header;
+ 

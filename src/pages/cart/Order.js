@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import axios from "axios";
 import { cartActions } from "reducer/cartSlice";
 import { useDispatch } from "react-redux";
-import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
+import OrderHeader from "components/pagesHeader/OrderHeader";
 
 const Order = () => {
   const [data, setData] = useState([]);
@@ -67,32 +67,7 @@ const Order = () => {
 
   return (
     <>
-      <SubHeaderCss>
-        <div className="SubHeader wrap">
-          <h1 className="subHeader">주문메뉴</h1>
-          <div className="link">
-            <ul>
-              <li>
-                <Link to="/" className="item">
-                  홈
-                </Link>
-              </li>
-              <li className="arrow">{">"}</li>
-              <li>
-                <Link to="/maps" className="item">
-                  매장찾기
-                </Link>
-              </li>
-              <li className="arrow">{">"}</li>
-              <li>
-                <Link to="/order" className="item">
-                  주문메뉴
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </SubHeaderCss>
+      <OrderHeader />
       <div className="container mx-auto">
         <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
           <div className="lg:col-span-1">
@@ -119,10 +94,16 @@ const Order = () => {
                   aria-label="Users Nav"
                   className="flex flex-col mt-2 ml-8 space-y-1"
                 >
-                  <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                  >
                     콜드 브루
                   </Link>
-                  <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                  >
                     브루드 커피
                   </Link>
                 </nav>
@@ -149,10 +130,16 @@ const Order = () => {
                   aria-label="Account Nav"
                   className="flex flex-col mt-2 ml-8 space-y-1"
                 >
-                  <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                  >
                     브레드
                   </Link>
-                  <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                  >
                     케이크
                   </Link>
                 </nav>

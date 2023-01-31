@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import MenudetailCss from "../../style/menuCss/MenudetailCss";
 import instance from "../../api/axios";
 import request from "../../api/request";
+import MenuDetailHeader from "components/pagesHeader/MenuDetailHeader";
 
 const Menudetail = () => {
   // URI 처리 및 데이터 연동
@@ -28,7 +29,7 @@ const Menudetail = () => {
 
   return (
     <MenudetailCss>
-      <MenudetailCss />
+      <MenuDetailHeader />
       <section className="container mx-auto my-10">
         <div className="relative block rounded-lg shadow-lg bg-white">
           <Link

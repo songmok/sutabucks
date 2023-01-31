@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import MapsGnb from "./SubMaps/MapsGnb";
-import MenuGnb from "./SubMenu/MenuGnb";
-import NewsGnb from "./SubNews/NewsGnb";
+import MapsGnb from "./subMaps/MapsGnb";
+import MenuGnb from "./subMenu/MenuGnb";
+import NewsGnb from "./subNews/NewsGnb";
 
 const HeaderCt = () => {
   const [count, setCount] = useState(0);

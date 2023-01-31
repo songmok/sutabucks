@@ -8,12 +8,11 @@ import banneritem2 from "asset/images/item2.png";
 import banneritem3 from "asset/images/item3.png";
 //css
 import HomeCss from "style/homeCss/homeCss";
-//swiper
+// swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-// import required modules
 
 const Home = () => {
   const news = [
@@ -76,17 +75,22 @@ const Home = () => {
           <div className="wrap">
             <Swiper
               direction={"vertical"}
-              spaceBetween={30}
+              cssMode={true}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
               }}
+              // touchRatio="0"
               modules={[Autoplay]}
               loop="true"
               className="mySwiper"
             >
               {news.map((v, i) => {
-                return <SwiperSlide key={i}>{v.name}</SwiperSlide>;
+                return (
+                  <SwiperSlide key={i}>
+                    <Link to="/news">{v.name}</Link>
+                  </SwiperSlide>
+                );
               })}
             </Swiper>
           </div>

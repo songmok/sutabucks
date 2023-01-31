@@ -12,10 +12,10 @@ const EventList = ({ event }) => {
               {event.map((v, i) => {
                 return (
                   <div className="group relative" key={i}>
-                    <Link to={`/detail/${v.evSeq}`}>
+                    <Link to={`/eventdetail/${v.evSeq}`}>
                       <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80">
                         <img
-                          src={v.evUri}
+                          src={`http://haeji.mawani.kro.kr:9999/${v.evUri}`}
                           alt="Front of men&#039;s Basic Tee in black."
                           className="h-full w-full object-cover object-center lg:h-full lg:w-full focus"
                         />

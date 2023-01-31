@@ -3,7 +3,9 @@ const requests = {
   fetchMenu: "menu/list",
   fetchMenuSearch: "menu/search",
   fetchMenuDetail: "menu/list/detail",
-  fetchEvent: "admin/event",
-  fetchNotice: "admin/notice",
+  fetchEvent: "admin/eventlist",
+  fetchEventDetail: "/admin/eventdetail",
+  fetchNotice: "admin/noticelist",
+  fetchNoticeDetail: "admin/noticedetail",
 };
 export default requests;
