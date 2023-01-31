@@ -21,8 +21,13 @@ img {
   vertical-align: middle;
 }
 body {
-  font-family: "Montserrat", "nbg", sans-serif;
+  font-family: "Montserrat", "nbg", sans-serif !important;
 }
 em {
   font-style: normal;
+}
+.wrap {
+  position: relative;
+  width: 75vw;
+  margin: 0 auto;
 }

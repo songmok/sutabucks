@@ -5,15 +5,12 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@fullpage/react-fullpage": "^0.1.31",
     "@reduxjs/toolkit": "^1.9.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.2",
     "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
-    "react-daum-postcode": "^3.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.42.1",
     "react-modal": "^3.16.1",
@@ -24,6 +21,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "styled-reset": "^4.4.5",
+    "swiper": "^8.4.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
