@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
 
-const MenuDetail = () => {
+const MenuDetailHeader = () => {
   return (
     <SubHeaderCss>
       <div className="SubHeader wrap">
@@ -33,4 +33,4 @@ const MenuDetail = () => {
   );
 };
 
-export default MenuDetail;
+export default MenuDetailHeader;

@@ -25,6 +25,7 @@ import PwFind from "pages/member/PwFind";
 import IdResult from "pages/member/IdResult";
 import PwResult from "pages/member/PwResult";
 import MyPage from "pages/member/MyPage";
+import MemberCard from "pages/member/MemberCard";
 // 메뉴 및 상품
 import Cart from "pages/cart/Cart";
 import Order from "pages/cart/Order";
@@ -32,6 +33,7 @@ import Checkout from "pages/cart/Checkout";
 import Menu from "pages/menu/Menu";
 import Menudetail from "pages/menu/Menudetail";
 import Maps from "pages/maps/Maps";
+
 function App() {
   const [event, setEvent] = useState([]);
   const [eventDetail, setEventDetail] = useState([]);
@@ -42,10 +44,10 @@ function App() {
   const fetchData = async () => {
     const rsList = await instance.get(requests.fetchList);
     setList(rsList);
-    const event = await instance.get(requests.fetchEvent);
-    setEvent(event.data.event);
-    setEventDetail(event.data.detail);
-
+    const ev = await instance.get(requests.fetchEvent);
+    setEvent(ev.data.event);
+    const evDetail = await instance.get(requests.fetchEventDetail);
+    setEventDetail(evDetail);
     const notice = await instance.get(requests.fetchNotice);
     setNotice(notice.data.event); //수정
     setNoticeDetail(notice.data.detail); //수정
@@ -59,13 +61,14 @@ function App() {
     <Router>
       <Reset />
       <Header />
+
       <Routes>
         <Route path="/" element={<Home />} />
         {/* 새소식 */}
         <Route path="/news" element={<News />} />
         <Route path="/event" element={<Event event={event} />} />
         <Route
-          path="/detail/:seq"
+          path="/eventdetail/:seq"
           element={<EventDetail eventDetail={eventDetail} />}
         />
         <Route path="/notice" element={<Notice />} />
@@ -81,6 +84,7 @@ function App() {
         <Route path="/idresult" element={<IdResult />} />
         <Route path="/pwfind" element={<PwFind />} />
         <Route path="/pwresult" element={<PwResult />} />
+        <Route path="/membercard" element={<MemberCard />} />
         {/* 메뉴 및 상품 */}
         <Route path="/menu" element={<Menu />} />
         <Route path="/menudetail/:seq" element={<Menudetail />} />
@@ -95,3 +99,4 @@ function App() {
 }
 
 export default App;
+

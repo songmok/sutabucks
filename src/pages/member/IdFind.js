@@ -1,10 +1,29 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "../../api/axios";
+import { Link, useNavigate } from "react-router-dom";
 import { FindDiv, Bt } from "../../style/memberCss/findCSS";
+import FindModal from "././modals/FindModal";
 
 const IdFind = () => {
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const idFind = () => {
+    setIsOpen(true);
+
+    axios
+      .post("member/findId/phone", { miName: name, miPhoneNum: tel })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsOpen(false);
+        alert("정보를 재입력해주세요.");
+      });
+  };
 
   return (
     <>
@@ -18,7 +37,7 @@ const IdFind = () => {
             required
             maxLength={20}
             value={name}
-            onClick={(e) => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
           <br />
           <label>전화번호</label>
@@ -27,15 +46,15 @@ const IdFind = () => {
             placeholder="전화번호를 입력 해주세요."
             required
             value={tel}
-            onClick={(e) => setTel(e.target.value)}
+            onChange={(e) => setTel(e.target.value)}
           />
         </form>
       </FindDiv>
       <div className="flex justify-center">
-        <Link to="/idresult">
-          <Bt>아이디 찾기</Bt>
-        </Link>
+        <Bt onClick={idFind}>아이디 찾기</Bt>
       </div>
+      {}
+      <FindModal isopen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

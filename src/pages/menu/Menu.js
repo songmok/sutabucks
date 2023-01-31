@@ -87,10 +87,16 @@ const Menu = () => {
                 aria-label="Users Nav"
                 className="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                <Link
+                  to="/"
+                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                >
                   콜드 브루
                 </Link>
-                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                <Link
+                  to="/"
+                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                >
                   브루드 커피
                 </Link>
               </nav>
@@ -117,10 +123,16 @@ const Menu = () => {
                 aria-label="Account Nav"
                 className="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                <Link
+                  to="/"
+                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                >
                   브레드
                 </Link>
-                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                <Link
+                  to="/"
+                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+                >
                   케이크
                 </Link>
               </nav>

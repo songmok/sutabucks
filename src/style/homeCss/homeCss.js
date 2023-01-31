@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import img from "asset/images/banner.jpg";
 const homeCss = styled.section`
   position: relative;
+
   .event {
     width: 100%;
     height: 34vw;
@@ -75,43 +76,9 @@ const homeCss = styled.section`
     height: 100%;
     box-sizing: border-box;
     overflow: hidden;
-  }
-  .rollingbanner ul {
-    list-style: none;
-  }
-  .rollingbanner li {
-    position: absolute;
-    top: -36px;
-    left: 0;
-  }
-  /* 이전, 현재, 다음 롤링 배너 표시 */
-  .rollingbanner li.prev {
-    top: 36px;
-    transition: top 0.5s ease;
-  }
-  .rollingbanner li.current {
-    top: 0;
-    transition: top 0.5s ease;
-  }
-  .rollingbanner li.next {
-    top: -36px;
-  }
-  .rollingbanner a {
-    display: block;
-    display: -webkit-box;
-    text-decoration: none;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    color: #000;
-  }
-  /* 반대 방향으로 진행 */
-  .rollingbanner.reverse li.prev {
-    top: -36px;
-    transition: top 0.5s ease;
-  }
-  .rollingbanner.reverse li.next {
-    top: 36px;
+    .swiper {
+      height: 100% !important;
+    }
   }
   .cate {
     > a {
