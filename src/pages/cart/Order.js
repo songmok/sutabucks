@@ -1,49 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Modal from "react-modal";
 import axios from "axios";
-import { cartActions } from "reducer/cartSlice";
-import { useDispatch } from "react-redux";
 import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
+import OrderModal from "./OrderModal";
 
 const Order = () => {
   const [data, setData] = useState([]);
   const [amount, setAmount] = useState(1);
 
-  const [option, setOption] = useState("Tall");
+  // const [option, setOption] = useState("Tall");
 
-  const handleOptionChange = (changeEvent) => {
-    setOption(changeEvent.target.value);
-  };
+  // const handleOptionChange = (changeEvent) => {
+  //   setOption(changeEvent.target.value);
+  // };
 
-  const increase = () => setAmount(parseInt(amount) + 1);
+  // const increase = () => setAmount(parseInt(amount) + 1);
 
-  const decrease = () => {
-    amount > 1 && setAmount(parseInt(amount) - 1);
-  };
+  // const decrease = () => {
+  //   amount > 1 && setAmount(parseInt(amount) - 1);
+  // };
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState([]);
-  const customStyles = {
-    overlay: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      zIndex: "9999",
-      backgroundColor: "rgba(0, 0, 0, 0.4)",
-    },
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "35%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "#f3f3f3",
-    },
-  };
 
   const getPosts = async () => {
     const posts = await axios.get("/test.json");
@@ -53,17 +31,6 @@ const Order = () => {
   useEffect(() => {
     getPosts();
   }, []);
-
-  // console.log(data);
-  // console.log(modalData);
-  const dispatch = useDispatch();
-
-  const pushCart = () => {
-    const item = { ...modalData, amount, option, checked: true };
-    dispatch(cartActions.addCartItem(item));
-    setAmount(1);
-    setModalIsOpen(false);
-  };
 
   return (
     <>
@@ -221,19 +188,10 @@ const Order = () => {
                         <p className="tracking-wide">{item.mbiCost}원</p>
                       </div>
                     </div>
-                    {/* {modalOpen && (
-                      <OrderModal
-                        open={modalOpen}
-                        close={closeModal}
-                        modalOpen={modalOpen}
-                        setModalOpen={setModalOpen}
-                        item={item}
-                      />
-                    )} */}
                   </div>
                 ))}
               </div>
-              <Modal
+              {/* <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
                 style={customStyles}
@@ -291,12 +249,6 @@ const Order = () => {
                             -
                           </button>
                           {amount}
-                          {/* <input
-                            type="number"
-                            id="Quantity"
-                            value="1"
-                            className="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                          /> */}
                           <button
                             type="button"
                             className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
@@ -306,7 +258,6 @@ const Order = () => {
                           </button>
                         </div>
                         <ul className="grid grid-cols-3 gap-x-3 my-2">
-                          {/* <ul className="grid grid-cols-3 gap-x-3 m-1 max-w-md mx-auto"> */}
                           <li className="relative">
                             <input
                               className="sr-only peer"
@@ -377,7 +328,8 @@ const Order = () => {
                     </div>
                   </div>
                 </section>
-              </Modal>
+              </Modal> */}
+              <OrderModal amount={amount} setAmount={setAmount} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} modalData={modalData} />
             </div>
           </main>
         </div>
