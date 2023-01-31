@@ -64,10 +64,6 @@ function App() {
       <Reset />
       <Header />
 
-      <Route path="/qrcode">
-        <Header type={"none"} />
-      </Route>
-
       <Routes>
         <Route path="/" element={<Home />} />
         {/* 새소식 */}
