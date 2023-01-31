@@ -90,7 +90,9 @@ const Carttest = () => {
                     />
                   </div>
                   <div className="flex flex-col justify-center ml-4 flex-grow">
-                    <span className="font-bold text-sm">{item.mbiName} - {item.option}</span>
+                    <span className="font-bold text-sm">
+                      {item.mbiName} - {item.option}
+                    </span>
                   </div>
                 </div>
                 <div className="w-1/6 flex justify-center">
@@ -176,36 +178,34 @@ const Carttest = () => {
           </div>
           <div
             id="summary"
-            className="w-full lg:w-1/4 flex flex-col justify-between px-8 py-10 bg-gray-100"
+            className="w-full lg:w-1/4 flex flex-col justify-between px-8 py-10 space-y-10 bg-gray-100"
           >
             <h1 className="font-semibold text-2xl text-[#1B3C34]">
               Order Summary
             </h1>
-            {/* <div className="flex justify-between">
-              <span className="font-semibold text-sm uppercase">
-                {itemNumber} items
-              </span>
-              <span className="text-sm">{totalPrice}원</span>
+            <div className="space-y-4">
+              <div className="flex items-center">
+                <input
+                  className="mr-3  appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                  type="radio"
+                  name="choice"
+                  value="pickup"
+                  checked
+                />
+                <span>매장픽업</span>
+              </div>
+              <div className="flex items-center">
+                <input
+                  className="mr-3  appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                  type="radio"
+                  name="choice"
+                  value="delivery"
+                />
+                <span>배달</span>
+              </div>
             </div>
-            <div>
-              <label
-                for="promo"
-                className="font-semibold inline-block mb-3 text-sm uppercase"
-              >
-                Promo Code
-              </label>
-              <input
-                type="text"
-                id="promo"
-                placeholder="Enter your code"
-                className="p-2 text-sm w-full"
-              />
-              <button className="bg-red-500 hover:bg-red-600 px-5 py-2 mt-5 text-sm text-white uppercase">
-                Apply
-              </button>
-            </div> */}
-            <div className="border-t">
-              <div className="flex font-semibold justify-between items-center py-6 text-sm uppercase">
+            <div className="border-t space-y-3">
+              <div className="flex font-semibold justify-between items-center text-sm uppercase">
                 <span>총 주문 금액</span>
                 <span className="text-xl">{totalPrice}원</span>
               </div>

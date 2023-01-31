@@ -1,49 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Modal from "react-modal";
 import axios from "axios";
-import { cartActions } from "reducer/cartSlice";
-import { useDispatch } from "react-redux";
+import SubHeaderCss from "style/subHeaderCss/SubHeaderCss";
+import OrderModal from "./OrderModal";
 import OrderHeader from "components/pagesHeader/OrderHeader";
+
 
 const Order = () => {
   const [data, setData] = useState([]);
   const [amount, setAmount] = useState(1);
 
-  const [option, setOption] = React.useState("tall");
+  // const [option, setOption] = useState("Tall");
 
-  const handleOptionChange = (changeEvent) => {
-    setOption(changeEvent.target.value);
-  };
+  // const handleOptionChange = (changeEvent) => {
+  //   setOption(changeEvent.target.value);
+  // };
 
-  const increase = () => setAmount(parseInt(amount) + 1);
+  // const increase = () => setAmount(parseInt(amount) + 1);
 
-  const decrease = () => {
-    amount > 1 && setAmount(parseInt(amount) - 1);
-  };
+  // const decrease = () => {
+  //   amount > 1 && setAmount(parseInt(amount) - 1);
+  // };
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState([]);
-  const customStyles = {
-    overlay: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      zIndex: "9999",
-      backgroundColor: "rgba(0, 0, 0, 0.4)",
-    },
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "35%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "#f3f3f3",
-    },
-  };
 
   const getPosts = async () => {
     const posts = await axios.get("/test.json");
@@ -53,17 +33,6 @@ const Order = () => {
   useEffect(() => {
     getPosts();
   }, []);
-
-  // console.log(data);
-  // console.log(modalData);
-  const dispatch = useDispatch();
-
-  const pushCart = () => {
-    const item = { ...modalData, amount, option, checked: true };
-    dispatch(cartActions.addCartItem(item));
-    setAmount(1);
-    setModalIsOpen(false);
-  };
 
   return (
     <>
@@ -208,26 +177,17 @@ const Order = () => {
                         <p className="tracking-wide">{item.mbiCost}원</p>
                       </div>
                     </div>
-                    {/* {modalOpen && (
-                      <OrderModal
-                        open={modalOpen}
-                        close={closeModal}
-                        modalOpen={modalOpen}
-                        setModalOpen={setModalOpen}
-                        item={item}
-                      />
-                    )} */}
                   </div>
                 ))}
               </div>
-              <Modal
+              {/* <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
                 style={customStyles}
               >
                 <section>
                   <div
-                    className="p-8 pt-4 border border-[#1B3C34]"
+                    className="p-4 border border-[#1B3C34]"
                     aria-modal="true"
                     role="dialog"
                     tabIndex="-1"
@@ -251,7 +211,7 @@ const Order = () => {
                         />
                       </svg>
                     </button>
-                    <div className="mt-6 space-y-6">
+                    <div className="mt-6 space-y-3">
                       <div>
                         <img
                           src={modalData.img}
@@ -268,7 +228,7 @@ const Order = () => {
                           {modalData.mbiCost * amount} 원
                         </span>
                       </div>
-                      <div className="flex flex-col  items-center">
+                      <div className="flex flex-col items-center">
                         <div className="flex items-center gap-1">
                           <button
                             type="button"
@@ -278,12 +238,6 @@ const Order = () => {
                             -
                           </button>
                           {amount}
-                          {/* <input
-                            type="number"
-                            id="Quantity"
-                            value="1"
-                            className="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                          /> */}
                           <button
                             type="button"
                             className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
@@ -293,15 +247,14 @@ const Order = () => {
                           </button>
                         </div>
                         <ul className="grid grid-cols-3 gap-x-3 my-2">
-                          {/* <ul className="grid grid-cols-3 gap-x-3 m-1 max-w-md mx-auto"> */}
                           <li className="relative">
                             <input
                               className="sr-only peer"
                               type="radio"
-                              value="tall"
+                              value="Tall"
                               name="size"
                               id="tall"
-                              checked={option === "tall"}
+                              checked={option === "Tall"}
                               onChange={handleOptionChange}
                             />
                             <label
@@ -315,10 +268,10 @@ const Order = () => {
                             <input
                               className="sr-only peer"
                               type="radio"
-                              value="grande"
+                              value="Grande"
                               name="size"
                               id="grande"
-                              checked={option === "grande"}
+                              checked={option === "Grande"}
                               onChange={handleOptionChange}
                             />
                             <label
@@ -332,10 +285,10 @@ const Order = () => {
                             <input
                               className="sr-only peer"
                               type="radio"
-                              value="venti"
+                              value="Venti"
                               name="size"
                               id="venti"
-                              checked={option === "venti"}
+                              checked={option === "Venti"}
                               onChange={handleOptionChange}
                             />
                             <label
@@ -364,7 +317,8 @@ const Order = () => {
                     </div>
                   </div>
                 </section>
-              </Modal>
+              </Modal> */}
+              <OrderModal amount={amount} setAmount={setAmount} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} modalData={modalData} />
             </div>
           </main>
         </div>

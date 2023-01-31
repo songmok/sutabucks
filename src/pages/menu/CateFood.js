@@ -8,7 +8,7 @@ import request from "../../api/request";
 import MenuList from "./MenuList";
 import NoResult from "./NoResult";
 
-const Menu = () => {
+const CateFood = () => {
   // const [data, setData] = useState([]);
   const [word, setWord] = useState("");
   const [searchData, setSearchData] = useState([]);
@@ -16,6 +16,7 @@ const Menu = () => {
 
   const fetchData = async () => {
     const params = {
+      parentSeq: 2,
       menuName: word,
     };
     await instance
@@ -87,16 +88,10 @@ const Menu = () => {
                 aria-label="Users Nav"
                 className="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <Link
-                  to="/"
-                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-                >
+                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   콜드 브루
                 </Link>
-                <Link
-                  to="/"
-                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-                >
+                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   브루드 커피
                 </Link>
               </nav>
@@ -123,16 +118,10 @@ const Menu = () => {
                 aria-label="Account Nav"
                 className="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <Link
-                  to="/"
-                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-                >
+                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   브레드
                 </Link>
-                <Link
-                  to="/"
-                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-                >
+                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   케이크
                 </Link>
               </nav>
@@ -140,13 +129,13 @@ const Menu = () => {
           </nav>
         </div>
         <main className="lg:col-span-4 ml-2">
-          <div className="flex flex-wrap justify-end items-center lg:mb-7">
-            <form className="w-full lg:w-[35%]">
+          <div className="flex flex-wrap justify-between items-center lg:mb-7">
+            <h2 className="font-bold text-3xl lg:text-4xl text-[#1B3C34] mb-3 lg:mb-0">
+              Menu
+            </h2>
+            {/* <form className="w-full lg:w-[35%]">
               <div className="relative">
-                <button
-                  className="absolute inset-y-0 right-5 flex items-center pl-3 cursor-pointer"
-                  onClick={handleOnClick}
-                >
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5 text-[#1B3C34] dark:text-gray-400"
@@ -160,22 +149,23 @@ const Menu = () => {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                </button>
+                </div>
                 <input
                   type="search"
-                  // id="simple-search"
-                  className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg block w-full pl-5 p-2.5"
-                  placeholder="Search Menu"
+                  id="simple-search"
+                  className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                  placeholder="Search"
                   required
-                  value={word}
+                  // value={word}
                   onChange={(e) => {
                     setWord(e.target.value);
                   }}
                   onKeyPressName={handleOnKeyPress}
                 />
+                <input type="button" value="검색" onClick={handleOnClick} />
               </div>
-            </form>
-            {/* <form
+            </form> */}
+            <form
               className="flex w-full lg:w-[35%] rounded"
               style={{ border: "1px solid #1B3C34" }}
             >
@@ -204,7 +194,7 @@ const Menu = () => {
                   <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
                 </svg>
               </button>
-            </form> */}
+            </form>
           </div>
           <div className="coffee mb-10">
             {status ? (
@@ -221,4 +211,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default CateFood;
