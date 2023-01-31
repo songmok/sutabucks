@@ -25,7 +25,7 @@ import PwFind from "pages/member/PwFind";
 import IdResult from "pages/member/IdResult";
 import PwResult from "pages/member/PwResult";
 import MyPage from "pages/member/MyPage";
-// import MemberCard from "pages/member/MemberCard";
+import MemberCard from "pages/member/MemberCard";
 // 메뉴 및 상품
 import Cart from "pages/cart/Cart";
 import Order from "pages/cart/Order";
@@ -59,9 +59,6 @@ function App() {
     <Router>
       <Reset />
       <Header />
-      {/* <Route path="/qrcode">
-        <Header type={"none"} />
-      </Route> */}
       <Routes>
         <Route path="/" element={<Home />} />
         {/* 새소식 */}
@@ -84,7 +81,7 @@ function App() {
         <Route path="/idresult" element={<IdResult />} />
         <Route path="/pwfind" element={<PwFind />} />
         <Route path="/pwresult" element={<PwResult />} />
-        {/* <Route path="/membercard" element={<MemberCard />} /> */}
+        <Route path="/membercard" element={<MemberCard />} />
         {/* 메뉴 및 상품 */}
         <Route path="/menu" element={<Menu />} />
         <Route path="/menudetail/:seq" element={<Menudetail />} />

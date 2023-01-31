@@ -30,4 +30,68 @@ em {
   position: relative;
   width: 75vw;
   margin: 0 auto;
+}@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a {
+  color: #000;
+  text-decoration: none;
+}
+ul,
+li {
+  list-style: none;
+}
+html {
+}
+img {
+  border: 0;
+  vertical-align: middle;
+}
+body {
+  font-family: "Montserrat", "nbg", sans-serif !important;
+}
+em {
+  font-style: normal;
+}
+.wrap {
+  position: relative;
+  width: 75vw;
+  margin: 0 auto;
+}@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a {
+  color: #000;
+  text-decoration: none;
+}
+ul,
+li {
+  list-style: none;
+}
+html {
+}
+img {
+  border: 0;
+  vertical-align: middle;
+}
+body {
+  font-family: "Montserrat", "nbg", sans-serif !important;
+}
+em {
+  font-style: normal;
+}
+.wrap {
+  position: relative;
+  width: 75vw;
+  margin: 0 auto;
 }
