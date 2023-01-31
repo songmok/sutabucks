@@ -1,23 +1,101 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import LoginDiv from "../../style/memberCss/loginCSS";
-import { Err, Div } from "../../style/memberCss/basicCSS";
+// import { bgCover } from "../../style/memberCss/loginCSS";
+import { Err } from "../../style/memberCss/basicCSS";
+import axios from "../../api/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAccount } from "../../reducer/loggedState";
 
 const Login = () => {
-  
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    getValues,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  // const [validText, setValidText] = useState("");
+  // const [isValid, setIsValid] = useState({
+  //   isEmail: false,
+  // });
+
+  const onSubmit = (data, user) => {
+    console.log("데이터", data);
+    // const exp = /\S+@\S+\.\S+/;
+    // if (!exp.test(email)) {
+    //   setValidText("이메일을 확인해주세요");
+    //   setIsValid({ ...isValid, isEmail: false });
+    // } else {
+    //   setValidText("");
+    //   setIsValid({ ...isValid, isEmail: true });
+    // }
+
+    const body = {
+      miId: data.email,
+      miPwd: data.pw,
+    };
+
+    axios
+      .post("member/login", body)
+      .then((res) => {
+        console.log("뭐있냐", res.data);
+        console.log("넌?", res.data.loginAccount);
+        dispatch(loginAccount(res.data.loginAccount));
+        alert(`${user.nickname}님 환영합니다.`);
+        // 나중에 홈으로 변경
+        navigate("/mypage");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // axios
+    //   .post("member/myinfo")
+    //   .then((res) => {
+    //     console.log("설마?", res.data);
+    //     console.log("넌?", res.data.loginAccount);
+    //     dispatch(loginAccount(res.data.loginAccount));
+    //     alert(`${user.nickname}님 환영합니다.`);
+    //     // 나중에 홈으로 변경
+    //     navigate("/mypage");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+
+  // 아이디 저장체크시
+  // const [email, setEmail] = useState("");
+  // const [isRemember, setIsRemember] = useState(false);
+  // const [cookies, setCookie, removeCookie] = useCookies(["rememberEmail"]);
+  // useEffect(() => {
+  //   if (cookies.rememberEmail !== undefined) {
+  //     setEmail(cookies.rememberEmail);
+  //     setIsRemember(true);
+  //   }
+  // }, []);
+
+  // const handleOnChange = (e) => {
+  //   setIsRemember(e.target.check);
+  //   if (e.target.check) {
+  //     setCookie("rememberEmail", email, { maxAge: 2000 });
+  //   } else {
+  //     removeCookie("rememberEmail");
+  //   }
+  // };
+
+  // const handleEmailOnChange = (e) => {
+  //   setEmail(e.target.value);
+  // };
 
   return (
     <>
       {/* 배경이미지 삽입 */}
+
       <div className="text-center text-4xl font-semibold my-8">로그인</div>
       {/*  text-white 배경 삽입 후 추가 */}
       <LoginDiv>
@@ -26,6 +104,8 @@ const Login = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
+            // value={email}
+            // onChange={(e) => handleEmailOnChange(e)}
             type="email"
             placeholder="아이디(이메일)를 입력해 주세요."
             {...register("email", {
@@ -59,11 +139,18 @@ const Login = () => {
           {errors.pw && <Err>{errors.pw.message}</Err>}
           <div>
             <label>
-              <input type="checkbox" className="accent-green-700" />
+              <input
+                type="checkbox"
+                // onChange={handleOnChange}
+                // checked={isRemember}
+                className="accent-green-700"
+              />
             </label>
             <span className="ml-2 mt-3">아이디 저장</span>
           </div>
-          <button type="submit">로그인</button>
+          <button type="submit" disabled={isSubmitting}>
+            로그인
+          </button>
           <div className="flex items-center justify-around m-5">
             <Link to="/signup">회원가입</Link>|
             <Link to="/idfind">아이디 찾기</Link>|

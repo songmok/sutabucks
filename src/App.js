@@ -33,12 +33,14 @@ import Checkout from "pages/cart/Checkout";
 import Menu from "pages/menu/Menu";
 import Menudetail from "pages/menu/Menudetail";
 import Maps from "pages/maps/Maps";
+
 function App() {
   const [event, setEvent] = useState([]);
   const [eventDetail, setEventDetail] = useState([]);
   const [notice, setNotice] = useState([]);
   const [noticeDetail, setNoticeDetail] = useState([]);
   const [list, setList] = useState([]);
+
   const fetchData = async () => {
     const rsList = await instance.get(requests.fetchList);
     setList(rsList);
@@ -59,6 +61,7 @@ function App() {
     <Router>
       <Reset />
       <Header />
+
       <Routes>
         <Route path="/" element={<Home />} />
         {/* 새소식 */}
@@ -94,4 +97,6 @@ function App() {
     </Router>
   );
 }
+
 export default App;
+

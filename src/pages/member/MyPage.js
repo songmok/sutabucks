@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import SignUpDiv from "../../style/memberCss/signUpCSS";
-import { Err, Div } from "../../style/memberCss/basicCSS";
+import { Div, Err } from "../../style/memberCss/basicCSS";
 import { useForm } from "react-hook-form";
-import CloseModal from "./CloseModal";
+import CloseModal from "././modals/CloseModal";
+import CardModal from "././modals/CardModal";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAccount, logoutAccount } from "../../reducer/loggedState";
+import axios from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -12,47 +20,53 @@ const MyPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
-
-  const [id, setId] = useState("aaa@aaa.net");
-  const modifyFn = () => {
-    alert("정보수정이 완료되었습니다.");
+  const onSubmit = async (data) => {
+    console.log(data);
   };
+
+  const [id, setId] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
   const closeAccount = () => {
     setIsOpen(true);
   };
-
-  const customStyles = {
-    overlay: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.4)",
-    },
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "35%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "#F3F3F3",
-    },
+  const [isCard, setIsCard] = useState(false);
+  const closeCard = () => {
+    setIsCard(true);
   };
+
+  const btStyle = {
+    position: "absolute",
+    top: "24.5%",
+    right: "34%",
+    border: "2px solid #006633",
+    padding: "10px",
+    backgroundColor: "#fff",
+    color: "#006633",
+    fontWeight: "bold",
+    borderRadius: "10px",
+  };
+
   return (
     <>
       <div className="text-center text-3xl mb-8 mt-14 ">
         개인정보 확인 및 수정
       </div>
+      <button style={btStyle} onClick={closeCard}>
+        멤버십 카드
+      </button>
+      <CardModal isopen={isCard} setIsOpen={setIsCard} />
       <SignUpDiv>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label>아이디</label>
-            <input type="email" required maxLength={20} value={id} disabled />
+            <label>{user.email}</label>
+            <input
+              type="email"
+              required
+              maxLength={20}
+              value={user.email}
+              disabled
+            />
           </div>
           <div className="relative items-start ">
             <label>이름</label>
@@ -135,6 +149,7 @@ const MyPage = () => {
             <label>비밀번호</label>
             <input
               type="password"
+              autoComplete="on"
               {...register("pw", {
                 required: "비밀번호를 입력해주세요.",
                 minLength: {
@@ -157,6 +172,7 @@ const MyPage = () => {
             <label>비밀번호 확인</label>
             <input
               type="password"
+              autoComplete="on"
               {...register("pwConfirm", {
                 required: "비밀번호를 확인해주세요!",
                 validate: {
