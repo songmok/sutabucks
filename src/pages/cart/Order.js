@@ -4,7 +4,11 @@ import { Link, useParams } from "react-router-dom";
 import instance from "../../api/axios";
 import request from "../../api/request";
 import OrderModal from "./OrderModal";
-// import OrderHeader from "components/pagesHeader/OrderHeader";
+import PagesTitle from "components/common/pagesHeader/PagesTitle";
+import PagesLink from "components/common/pagesHeader/PagesLink";
+import instance from "api/axios";
+import requests from "api/request";
+
 
 const Order = () => {
   const { storeNo } = useParams();
@@ -20,13 +24,17 @@ const Order = () => {
   const [amount, setAmount] = useState(1);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const [menuSeq, setMenuSeq] = useState("");
+
+  const [modalData, setModalData] = useState([]);
+
 
   const getPosts = async () => {
     const params = {
       storeSeq: storeNo,
     };
-    const posts = await instance.get(request.fetchStoreMenu, {
+    const posts = await instance.get(requests.fetchStoreMenu, {
       params,
     });
     setStore(posts.data.list.store);
@@ -216,8 +224,12 @@ const Order = () => {
                 setAmount={setAmount}
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
+
                 storeNo={storeNo}
                 menuSeq={menuSeq}
+
+                modalData={modalData}
+
               />
             </div>
           </main>
