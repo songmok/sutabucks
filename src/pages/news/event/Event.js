@@ -1,12 +1,20 @@
 import React from "react";
-import EventHeader from "components/pagesHeader/EventHeader";
-import EventList from "components/news/event/EventList";
+
+import PagesTitle from "components/common/pagesHeader/PagesTitle";
+import PagesLink from "components/common/pagesHeader/PagesLink";
+import EventListLayout from "components/news/event/eventList/EventListLayout";
 
 const Event = ({ event }) => {
   return (
     <>
-      <EventHeader />
-      <EventList event={event} />
+      <PagesTitle title={"이벤트"} />
+      <PagesLink
+        first={"새소식"}
+        firstLink={"news"}
+        second={"이벤트"}
+        secondLink={"event"}
+      />
+      <EventListLayout event={event} />
     </>
   );
 };

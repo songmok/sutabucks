@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // api
 import instance from "./api/axios";
 import requests from "./api/request";
-// conponent
-import Header from "./components/header/Header";
+// conponent common
+import Header from "components/common/header/Header";
 // pages
 import Home from "pages/home/Home";
 import NotFound from "./pages/NotFound";
@@ -35,29 +35,39 @@ import Menudetail from "pages/menu/Menudetail";
 import Maps from "pages/maps/Maps";
 import Payment from "pages/cart/Payment";
 
+import SignUpSelect from "pages/member/SignUpSelect";
+import MyStorePage from "pages/mystore/MyStorePage";
+import MyStoreMenu from "pages/mystore/MyStoreMenu";
+import BzSignUp from "pages/member/bzmember/BzSignUp";
+
 function App() {
   const [event, setEvent] = useState([]);
-  const [eventDetail, setEventDetail] = useState([]);
   const [notice, setNotice] = useState([]);
-  const [noticeDetail, setNoticeDetail] = useState([]);
   const [list, setList] = useState([]);
-
+  const [myStoreInfo, setMyStoreInfo] = useState([]);
+  const [myStoreMenu, setMyStoreMenu] = useState([]);
+  // ?ediSeq=1
   const fetchData = async () => {
     const rsList = await instance.get(requests.fetchList);
     setList(rsList);
-    const ev = await instance.get(requests.fetchEvent);
-    setEvent(ev.data.event);
-    const evDetail = await instance.get(requests.fetchEventDetail);
-    setEventDetail(evDetail);
+    //새소식
+    const event = await instance.get(requests.fetchEvent);
+    setEvent(event.data.event);
     const notice = await instance.get(requests.fetchNotice);
-    setNotice(notice.data.event); //수정
-    setNoticeDetail(notice.data.detail); //수정
+    setNotice(notice.data.notice);
+    // 가게정보
+    const myStoreInfo = await instance.get(requests.fetchMyStoreInfo);
+    setMyStoreInfo(myStoreInfo.list);
+    const myStoreMenu = await instance.get(requests.fetchMyStoreMenu);
+    setMyStoreMenu(myStoreMenu.list.menus);
   };
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(event);
-  console.log(eventDetail);
+  // console.log(event);
+  // console.log(myStoreInfo);
+  // console.log(notice);
+  // console.log(myStoreMenu);
   return (
     <Router>
       <Reset />
@@ -68,17 +78,21 @@ function App() {
         {/* 새소식 */}
         <Route path="/news" element={<News />} />
         <Route path="/event" element={<Event event={event} />} />
-        <Route
-          path="/eventdetail/:seq"
-          element={<EventDetail eventDetail={eventDetail} />}
-        />
-        <Route path="/notice" element={<Notice />} />
-        <Route
-          path="/noticedetail/:seq"
-          element={<NoticeDetail noticeDetail={noticeDetail} />}
-        />
+        <Route path="/eventdetail/:seq" element={<EventDetail />} />
+        <Route path="/notice" element={<Notice notice={notice} />} />
+        <Route path="/noticedetail/:seq" element={<NoticeDetail />} />
         {/* 유저 정보 */}
+        <Route
+          path="/mystore"
+          element={<MyStorePage myStoreInfo={myStoreInfo} />}
+        />
+        <Route
+          path="/mystore/mystoremenu"
+          element={<MyStoreMenu myStoreMenu={myStoreMenu} />}
+        />
+        <Route path="/singupselect" element={<SignUpSelect />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/bzsignup" element={<BzSignUp />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/idfind" element={<IdFind />} />

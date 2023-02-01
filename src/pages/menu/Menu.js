@@ -1,9 +1,17 @@
+<<<<<<< HEAD
+=======
+// import axios from "axios";
+
+>>>>>>> af55ec15cf5e21c23155ca2c5cffde7e74b20ff6
 import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import instance from "../../api/axios";
 import request from "../../api/request";
 import MenuList from "./MenuList";
 import NoResult from "./NoResult";
+
+import PagesTitle from "components/common/pagesHeader/PagesTitle";
+import PagesLink from "components/common/pagesHeader/PagesLink";
 
 const Menu = () => {
   // const [data, setData] = useState([]);
@@ -51,14 +59,14 @@ const Menu = () => {
   };
   return (
     <section className="container mx-auto">
+      <PagesTitle title={"메뉴보기"} />
+      <PagesLink first={"메뉴보기"} firstLink={"menu"} />
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1">
           <nav aria-label="Main Nav" className="flex flex-col space-y-1">
-            <button
-              // to="/menu"
-              className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-              onClick={clearList}
-            >
+
+            <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+
               전체 메뉴
             </button>
             <details className="group [&_summary::-webkit-details-marker]:hidden">

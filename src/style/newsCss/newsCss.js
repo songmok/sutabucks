@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import { themecolor } from "utils/color";
 
 const NewsCss = styled.section`
   position: relative;
@@ -15,12 +16,12 @@ const NewsCss = styled.section`
       position: absolute;
       top: 60%;
       font-size: 30px;
-      border: 1px solid #046241;
+      border: 1px solid ${themecolor};
       padding: 10px 20px;
       border-radius: 30px;
       transition: background 1s;
       &:hover {
-        background-color: #046241;
+        background-color: ${themecolor};
         color: #fff;
       }
     }
