@@ -1,8 +1,5 @@
-// import axios from "axios";
-import MenuHeader from "components/pagesHeader/MenuHeader";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
 import instance from "../../api/axios";
 import request from "../../api/request";
 import MenuList from "./MenuList";
@@ -14,7 +11,7 @@ const Menu = () => {
   const [searchData, setSearchData] = useState([]);
   const [status, setStatus] = useState(true);
 
-  const getData = async () => {
+  const fetchData = async () => {
     const params = {
       menuName: word,
     };
@@ -34,33 +31,34 @@ const Menu = () => {
     // setStatus(resultSearchData.data.status);
   };
   useEffect(() => {
-    getData();
+    fetchData();
   }, []);
 
+  console.log(word);
   console.log(searchData);
-  console.log(status);
+  // console.log(status);
 
-  // const handleOnClick = () => {
-  //   getData();
-  // };
+  const handleOnClick = () => {
+    fetchData();
+  };
   const handleOnKeyPress = (e) => {
     if (e.key === "Enter") {
-      setWord(e.target.value);
-      navigator('/?q=${keyword}')
+      handleOnClick(); // Enter 입력이 되면 클릭 이벤트 실행
     }
   };
-  // console.log(searchData);
-  // const clearList = () => {
-  //   setWord("").then(getData());
-  // };
-
+  const clearList = () => {
+    setWord("").then(handleOnClick());
+  };
   return (
     <section className="container mx-auto">
-      <MenuHeader />
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1">
           <nav aria-label="Main Nav" className="flex flex-col space-y-1">
-            <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+            <button
+              // to="/menu"
+              className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+              onClick={clearList}
+            >
               전체 메뉴
             </button>
             <details className="group [&_summary::-webkit-details-marker]:hidden">
@@ -85,18 +83,12 @@ const Menu = () => {
                 aria-label="Users Nav"
                 className="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <Link
-                  to="/"
-                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-                >
+                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   콜드 브루
-                </Link>
-                <Link
-                  to="/"
-                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-                >
+                </button>
+                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   브루드 커피
-                </Link>
+                </button>
               </nav>
             </details>
             <details className="group [&_summary::-webkit-details-marker]:hidden">
@@ -121,18 +113,12 @@ const Menu = () => {
                 aria-label="Account Nav"
                 className="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <Link
-                  to="/"
-                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-                >
+                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   브레드
-                </Link>
-                <Link
-                  to="/"
-                  className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-                >
+                </button>
+                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   케이크
-                </Link>
+                </button>
               </nav>
             </details>
           </nav>
@@ -142,49 +128,18 @@ const Menu = () => {
             <h2 className="font-bold text-3xl lg:text-4xl text-[#1B3C34] mb-3 lg:mb-0">
               Menu
             </h2>
-            <form className="w-full lg:w-[35%]">
-              <div className="relative">
-                <input
-                  type="text"
-                  // id="simple-search"
-                  className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg block w-full pl-5 p-2.5"
-                  placeholder="Search Menu"
-                  // required
-                  // value={word}
-                  // onChange={(e) => {
-                  //   setWord(e.target.value);
-                  // }}
-                  onKeyPress={handleOnKeyPress}
-                />
-                <button
-                  className="absolute inset-y-0 right-3 flex items-center pl-3 cursor-pointer"
-                  // onClick={handleOnClick}
-                >
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5 text-[#1B3C34] dark:text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            </form>
-            {/* <form
+            <form
               className="flex w-full lg:w-[35%] rounded"
               style={{ border: "1px solid #1B3C34" }}
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
             >
               <input
-                type="text"
+                type="search"
                 className="px-5 py-2 w-4/5"
                 placeholder="Search Menu"
-                required
+                // required
                 value={word}
                 onChange={(e) => {
                   setWord(e.target.value);
@@ -205,7 +160,7 @@ const Menu = () => {
                   <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
                 </svg>
               </button>
-            </form> */}
+            </form>
           </div>
           <div className="coffee mb-10">
             {status ? (

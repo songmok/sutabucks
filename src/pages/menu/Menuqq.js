@@ -1,25 +1,27 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
-import instance from "../../api/axios";
-import request from "../../api/request";
+import { useNavigate, useParams } from "react-router-dom";
 import MenuList from "./MenuList";
 import NoResult from "./NoResult";
 
 const Menu = () => {
   // const [data, setData] = useState([]);
+  const { search } = useParams();
+  console.log(search);
+  const navigate = useNavigate();
   const [word, setWord] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [status, setStatus] = useState(true);
 
   const fetchData = async () => {
-    const params = {
-      menuName: word,
-    };
-    await instance
-      .get(request.fetchMenuSearch, {
-        params,
-      })
+    await axios
+      .get(
+        search === "all"
+          ? `http://haeji.mawani.kro.kr:9999/menu/search?menuName=`
+          : `http://haeji.mawani.kro.kr:9999/menu/search?menuName=${search}`
+      )
       .then((res) => {
+        console.log(res.data);
         setSearchData(res.data.list);
         setStatus(res.data.status);
       })
@@ -34,21 +36,21 @@ const Menu = () => {
     fetchData();
   }, []);
 
-  // console.log(searchData);
+  console.log(word);
+  console.log(searchData);
   // console.log(status);
 
   const handleOnClick = () => {
-    fetchData();
+    navigate(`/menu/${word}`);
   };
   const handleOnKeyPress = (e) => {
     if (e.key === "Enter") {
       handleOnClick(); // Enter 입력이 되면 클릭 이벤트 실행
     }
   };
-  // console.log(searchData);
-  const clearList = () => {
-    setWord("").then(fetchData());
-  };
+  // const clearList = () => {
+  //   setWord("").then(fetchData());
+  // };
   return (
     <section className="container mx-auto">
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
@@ -57,7 +59,6 @@ const Menu = () => {
             <button
               // to="/menu"
               className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-              onClick={clearList}
             >
               전체 메뉴
             </button>
@@ -128,10 +129,12 @@ const Menu = () => {
             <h2 className="font-bold text-3xl lg:text-4xl text-[#1B3C34] mb-3 lg:mb-0">
               Menu
             </h2>
-
-            {/* <form
+            <form
               className="flex w-full lg:w-[35%] rounded"
               style={{ border: "1px solid #1B3C34" }}
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
             >
               <input
                 type="search"
@@ -142,10 +145,9 @@ const Menu = () => {
                 onChange={(e) => {
                   setWord(e.target.value);
                 }}
-                // onKeyPressName={handleOnKeyPress}
+                onKeyPress={handleOnKeyPress}
               />
               <button
-                type="button"
                 className="flex w-1/1 items-center justify-center px-4"
                 onClick={handleOnClick}
               >
@@ -158,7 +160,7 @@ const Menu = () => {
                   <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
                 </svg>
               </button>
-            </form> */}
+            </form>
           </div>
           <div className="coffee mb-10">
             {status ? (

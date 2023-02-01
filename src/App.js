@@ -33,6 +33,7 @@ import Checkout from "pages/cart/Checkout";
 import Menu from "pages/menu/Menu";
 import Menudetail from "pages/menu/Menudetail";
 import Maps from "pages/maps/Maps";
+import Payment from "pages/cart/Payment";
 
 function App() {
   const [event, setEvent] = useState([]);
@@ -87,11 +88,13 @@ function App() {
         <Route path="/membercard" element={<MemberCard />} />
         {/* 메뉴 및 상품 */}
         <Route path="/menu" element={<Menu />} />
+        {/* <Route path="/menu/:search" element={<Menu />} /> */}
         <Route path="/menudetail/:seq" element={<Menudetail />} />
         <Route path="/maps" element={<Maps />} />
         <Route path="/order" element={<Order />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
