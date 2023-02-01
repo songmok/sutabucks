@@ -5,6 +5,7 @@ const requests = {
   fetchMenuSearch: "menu/search",
   fetchCateSearch: "cate/searchmenu",
   fetchMenuDetail: "menu/list/detail",
+  fetchStoreMenu: "store/cart/menu/list",
   //새소식
   fetchEvent: "admin/eventlist",
   fetchEventDetail: "admin/eventdetail",

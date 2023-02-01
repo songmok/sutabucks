@@ -5,7 +5,7 @@ import PagesLink from "components/common/pagesHeader/PagesLink";
 const Maps = () => {
   return (
     <>
-      <PagesTitle title={"매장찾기"} />
+     <PagesTitle title={"매장찾기"} />
       <PagesLink first={"매장찾기"} firstLink={"maps"} />
       {/* <iframe
         id="inlineFrameExample"

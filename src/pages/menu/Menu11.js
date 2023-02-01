@@ -1,14 +1,11 @@
-// import axios from "axios";
-import MenuHeader from "components/pagesHeader/MenuHeader";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
 import instance from "../../api/axios";
 import request from "../../api/request";
 import MenuList from "./MenuList";
 import NoResult from "./NoResult";
 
-const CateFood = () => {
+const Menu = () => {
   // const [data, setData] = useState([]);
   const [word, setWord] = useState("");
   const [searchData, setSearchData] = useState([]);
@@ -16,7 +13,6 @@ const CateFood = () => {
 
   const fetchData = async () => {
     const params = {
-      parentSeq: 2,
       menuName: word,
     };
     await instance
@@ -55,17 +51,16 @@ const CateFood = () => {
   };
   return (
     <section className="container mx-auto">
-      <MenuHeader />
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1">
           <nav aria-label="Main Nav" className="flex flex-col space-y-1">
-            <Link
+            <button
               // to="/menu"
               className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
               onClick={clearList}
             >
               전체 메뉴
-            </Link>
+            </button>
             <details className="group [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center px-4 py-2 text-gray-500 rounded-lg cursor-pointer hover:bg-[#1B3C34] hover:text-white">
                 <span className="text-sm font-medium"> 음료 </span>
@@ -88,12 +83,12 @@ const CateFood = () => {
                 aria-label="Users Nav"
                 className="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   콜드 브루
-                </Link>
-                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                </button>
+                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   브루드 커피
-                </Link>
+                </button>
               </nav>
             </details>
             <details className="group [&_summary::-webkit-details-marker]:hidden">
@@ -118,12 +113,12 @@ const CateFood = () => {
                 aria-label="Account Nav"
                 className="flex flex-col mt-2 ml-8 space-y-1"
               >
-                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   브레드
-                </Link>
-                <Link className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
+                </button>
+                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
                   케이크
-                </Link>
+                </button>
               </nav>
             </details>
           </nav>
@@ -133,39 +128,8 @@ const CateFood = () => {
             <h2 className="font-bold text-3xl lg:text-4xl text-[#1B3C34] mb-3 lg:mb-0">
               Menu
             </h2>
-            {/* <form className="w-full lg:w-[35%]">
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5 text-[#1B3C34] dark:text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <input
-                  type="search"
-                  id="simple-search"
-                  className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                  placeholder="Search"
-                  required
-                  // value={word}
-                  onChange={(e) => {
-                    setWord(e.target.value);
-                  }}
-                  onKeyPressName={handleOnKeyPress}
-                />
-                <input type="button" value="검색" onClick={handleOnClick} />
-              </div>
-            </form> */}
-            <form
+
+            {/* <form
               className="flex w-full lg:w-[35%] rounded"
               style={{ border: "1px solid #1B3C34" }}
             >
@@ -178,7 +142,7 @@ const CateFood = () => {
                 onChange={(e) => {
                   setWord(e.target.value);
                 }}
-                onKeyPressName={handleOnKeyPress}
+                // onKeyPressName={handleOnKeyPress}
               />
               <button
                 type="button"
@@ -194,7 +158,7 @@ const CateFood = () => {
                   <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
                 </svg>
               </button>
-            </form>
+            </form> */}
           </div>
           <div className="coffee mb-10">
             {status ? (
@@ -211,4 +175,4 @@ const CateFood = () => {
   );
 };
 
-export default CateFood;
+export default Menu;
