@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
-import instance from "../../api/axios";
-import request from "../../api/request";
+import axios from "axios";
 import OrderModal from "./OrderModal";
-import OrderHeader from "components/pagesHeader/OrderHeader";
+import PagesTitle from "components/common/pagesHeader/PagesTitle";
+import PagesLink from "components/common/pagesHeader/PagesLink";
+
 
 const Order = () => {
   const [data, setData] = useState([]);
@@ -59,7 +59,8 @@ const Order = () => {
 
   return (
     <>
-      <OrderHeader />
+      <PagesTitle title={"주문메뉴"} />
+      <PagesLink first={"주문메뉴"} firstLink={"order"} />
       <div className="container mx-auto">
         <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
           <div className="lg:col-span-1">
@@ -102,13 +103,13 @@ const Order = () => {
                   </div>
                 ))}
               </div>
-              {/* <OrderModal
+              <OrderModal
                 amount={amount}
                 setAmount={setAmount}
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
-                modalData={modalData}
-              /> */}
+                modalData={modalData}        
+              />
             </div>
           </main>
         </div>

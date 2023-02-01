@@ -1,11 +1,13 @@
 import React from "react";
-import NewsHeader from "components/pagesHeader/NewsHeader";
 import NewsItem from "components/news/NewsItem";
+import PagesTitle from "components/common/pagesHeader/PagesTitle";
+import PagesLink from "components/common/pagesHeader/PagesLink";
 
 const News = () => {
   return (
     <>
-      <NewsHeader />
+      <PagesTitle title={"새소식"} />
+      <PagesLink first={"새소식"} firstLink={"news"} />
       <NewsItem />
     </>
   );
