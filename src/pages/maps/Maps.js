@@ -1,10 +1,12 @@
 import React from "react";
-import MapsHeader from "components/pagesHeader/MapsHeader";
+import PagesTitle from "components/common/pagesHeader/PagesTitle";
+import PagesLink from "components/common/pagesHeader/PagesLink";
 
 const Maps = () => {
   return (
     <>
-      <MapsHeader />
+      <PagesTitle title={"매장찾기"} />
+      <PagesLink first={"매장찾기"} firstLink={"maps"} />
       {/* <iframe
         id="inlineFrameExample"
         title="Inline Frame Example"

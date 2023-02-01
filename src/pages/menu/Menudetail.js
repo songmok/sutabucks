@@ -3,7 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import MenudetailCss from "../../style/menuCss/MenudetailCss";
 import instance from "../../api/axios";
 import request from "../../api/request";
-import MenuDetailHeader from "components/pagesHeader/MenuDetailHeader";
+import PagesTitle from "components/common/pagesHeader/PagesTitle";
+import PagesLink from "components/common/pagesHeader/PagesLink";
 
 const Menudetail = () => {
   // URI 처리 및 데이터 연동
@@ -50,7 +51,15 @@ const Menudetail = () => {
 
   return (
     <MenudetailCss>
-      <MenuDetailHeader />
+      <PagesTitle title={"메뉴보기"} />
+      <PagesLink
+        first={"메뉴보기"}
+        firstLink={"menu"}
+        second={"카테고리"}
+        secondLink={"menu"}
+        third={detail.menuName}
+        thirdLink={"DD"}
+      />
       <section className="container mx-auto my-10">
         <div className="relative block rounded-lg shadow-lg bg-white">
           <Link
