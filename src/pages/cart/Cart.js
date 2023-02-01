@@ -183,27 +183,6 @@ const Carttest = () => {
             <h1 className="font-semibold text-2xl text-[#1B3C34]">
               Order Summary
             </h1>
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <input
-                  className="mr-3  appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
-                  type="radio"
-                  name="choice"
-                  value="pickup"
-                  checked
-                />
-                <span>매장픽업</span>
-              </div>
-              <div className="flex items-center">
-                <input
-                  className="mr-3  appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
-                  type="radio"
-                  name="choice"
-                  value="delivery"
-                />
-                <span>배달</span>
-              </div>
-            </div>
             <div className="border-t space-y-3">
               <div className="flex font-semibold justify-between items-center text-sm uppercase">
                 <span>총 주문 금액</span>

@@ -14,7 +14,7 @@ const Menu = () => {
   const [searchData, setSearchData] = useState([]);
   const [status, setStatus] = useState(true);
 
-  const fetchData = async () => {
+  const getData = async () => {
     const params = {
       menuName: word,
     };
@@ -34,37 +34,35 @@ const Menu = () => {
     // setStatus(resultSearchData.data.status);
   };
   useEffect(() => {
-    fetchData();
+    getData();
   }, []);
 
-  // console.log(searchData);
-  // console.log(status);
+  console.log(searchData);
+  console.log(status);
 
-  const handleOnClick = () => {
-    fetchData();
-  };
+  // const handleOnClick = () => {
+  //   getData();
+  // };
   const handleOnKeyPress = (e) => {
     if (e.key === "Enter") {
-      handleOnClick(); // Enter 입력이 되면 클릭 이벤트 실행
+      setWord(e.target.value);
+      navigator('/?q=${keyword}')
     }
   };
   // console.log(searchData);
-  const clearList = () => {
-    setWord("").then(fetchData());
-  };
+  // const clearList = () => {
+  //   setWord("").then(getData());
+  // };
+
   return (
     <section className="container mx-auto">
       <MenuHeader />
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1">
           <nav aria-label="Main Nav" className="flex flex-col space-y-1">
-            <Link
-              // to="/menu"
-              className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
-              onClick={clearList}
-            >
+            <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
               전체 메뉴
-            </Link>
+            </button>
             <details className="group [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center px-4 py-2 text-gray-500 rounded-lg cursor-pointer hover:bg-[#1B3C34] hover:text-white">
                 <span className="text-sm font-medium"> 음료 </span>
@@ -140,12 +138,27 @@ const Menu = () => {
           </nav>
         </div>
         <main className="lg:col-span-4 ml-2">
-          <div className="flex flex-wrap justify-end items-center lg:mb-7">
+          <div className="flex flex-wrap justify-between items-center lg:mb-7">
+            <h2 className="font-bold text-3xl lg:text-4xl text-[#1B3C34] mb-3 lg:mb-0">
+              Menu
+            </h2>
             <form className="w-full lg:w-[35%]">
               <div className="relative">
+                <input
+                  type="text"
+                  // id="simple-search"
+                  className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg block w-full pl-5 p-2.5"
+                  placeholder="Search Menu"
+                  // required
+                  // value={word}
+                  // onChange={(e) => {
+                  //   setWord(e.target.value);
+                  // }}
+                  onKeyPress={handleOnKeyPress}
+                />
                 <button
-                  className="absolute inset-y-0 right-5 flex items-center pl-3 cursor-pointer"
-                  onClick={handleOnClick}
+                  className="absolute inset-y-0 right-3 flex items-center pl-3 cursor-pointer"
+                  // onClick={handleOnClick}
                 >
                   <svg
                     aria-hidden="true"
@@ -161,18 +174,6 @@ const Menu = () => {
                     ></path>
                   </svg>
                 </button>
-                <input
-                  type="search"
-                  // id="simple-search"
-                  className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg block w-full pl-5 p-2.5"
-                  placeholder="Search Menu"
-                  required
-                  value={word}
-                  onChange={(e) => {
-                    setWord(e.target.value);
-                  }}
-                  onKeyPressName={handleOnKeyPress}
-                />
               </div>
             </form>
             {/* <form
@@ -180,7 +181,7 @@ const Menu = () => {
               style={{ border: "1px solid #1B3C34" }}
             >
               <input
-                type="search"
+                type="text"
                 className="px-5 py-2 w-4/5"
                 placeholder="Search Menu"
                 required
@@ -188,7 +189,7 @@ const Menu = () => {
                 onChange={(e) => {
                   setWord(e.target.value);
                 }}
-                onKeyPressName={handleOnKeyPress}
+                onKeyPress={handleOnKeyPress}
               />
               <button
                 type="button"

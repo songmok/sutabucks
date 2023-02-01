@@ -37,17 +37,6 @@ const Menudetail = () => {
     setIsOpen(false);
   };
 
-  // const customStyles = {
-  //   content: {
-  //     top: "50%",
-  //     left: "50%",
-  //     right: "auto",
-  //     bottom: "auto",
-  //     marginRight: "-50%",
-  //     transform: "translate(-50%, -50%)",
-  //   },
-  // };
-
   return (
     <MenudetailCss>
       <MenuDetailHeader />
@@ -75,9 +64,8 @@ const Menudetail = () => {
           <div className="flex flex-wrap items-center p-5">
             <div className="relative block w-full lg:flex grow-0 shrink-0 basis-auto lg:w-6/12 xl:w-4/12">
               <img
-                // src="https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745467.jpg"
-                src="http://haeji.mawani.kro.kr:9999/image/menu/hot_americano"
-                alt="test"
+                src={detail.menuUri}
+                alt="menu"
                 className="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg"
               />
               <button
@@ -112,30 +100,13 @@ const Menudetail = () => {
                     </svg>
                   </button>
                   <img
-                    src="http://haeji.mawani.kro.kr:9999/image/menu/hot_americano"
-                    alt="test"
+                    src={detail.menuQrUri}
+                    alt="qr"
                     className="absolute w-1/2 h-1/2 top-1/4 left-1/4 z-10"
                   />
                   <div className="absolute w-full h-full bg-white opacity-50"></div>
                 </div>
               )}
-              {/* <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                contentLabel="Example Modal"
-                style={customStyles}
-              >
-                <h2>Hello</h2>
-                <button onClick={closeModal}>close</button>
-                <div>I am a modal</div>
-                <form>
-                  <input />
-                  <button>tab navigation</button>
-                  <button>stays</button>
-                  <button>inside</button>
-                  <button>the modal</button>
-                </form>
-              </Modal> */}
             </div>
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-6/12 xl:w-8/12">
               <div className="px-6 py-12 md:px-12">
@@ -154,41 +125,8 @@ const Menudetail = () => {
                     </div>
                   </summary>
                 </details>
-                <div className="mt-4">
-                  <div className="detail-title flex justify-between py-5">
-                    <span>제품 영양 정보</span>
-                    <span>Tall(톨) / 355ml (12 fl oz)</span>
-                  </div>
-                  <div className="flex gap-5">
-                    <div className="detail-left flex-1 p-1">
-                      <div className="flex justify-between py-3 my-2">
-                        <span>1회 제공량 (kcal)</span>
-                        <span>265</span>
-                      </div>
-                      <div className="flex justify-between py-3 my-2">
-                        <span>1회 제공량 (kcal)</span>
-                        <span>265</span>
-                      </div>
-                      <div className="flex justify-between py-3 my-2">
-                        <span>1회 제공량 (kcal)</span>
-                        <span>265</span>
-                      </div>
-                    </div>
-                    <div className="flex-1 p-1">
-                      <div className="flex justify-between py-3 my-2">
-                        <span>1회 제공량 (kcal)</span>
-                        <span>265</span>
-                      </div>
-                      <div className="flex justify-between py-3 my-2">
-                        <span>1회 제공량 (kcal)</span>
-                        <span>265</span>
-                      </div>
-                      <div className="flex justify-between py-3 my-2">
-                        <span>1회 제공량 (kcal)</span>
-                        <span>265</span>
-                      </div>
-                    </div>
-                  </div>
+                <div className="hidden sm:block">
+                  <img src={detail.menuNutritionUri} alt="Nutrition" className="w-full" />
                 </div>
               </div>
             </div>
