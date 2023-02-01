@@ -1,7 +1,7 @@
-import axios from "../../api/axios";
+import axios from "../../../api/axios";
 import React, { useState } from "react";
-import { FindDiv, Bt } from "../../style/memberCss/findCSS";
-import PwFindModal from "./modals/PwFindModal";
+import { FindDiv, Bt } from "../../../style/memberCss/findCSS";
+import PwFindModal from "../modals/PwFindModal";
 
 const PwFind = () => {
   const [email, setEmail] = useState("");

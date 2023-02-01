@@ -42,6 +42,9 @@ const Login = () => {
       .post("member/login", body)
       .then((res) => {
         alert(`${user.miNickname}님 환영합니다.`);
+        console.log("회원정보", res.data);
+        dispatch(loginAccount(res.data));
+        console.log(loginAccount);
         // 나중에 홈으로 변경
         navigate("/mypage");
       })

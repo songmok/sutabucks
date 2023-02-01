@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "../../api/axios";
 // 다음 주소
-import Post from "pages/member/Post";
+import Post from "utils/PostCode";
 // css
 import SignUpDiv from "../../style/memberCss/signUpCSS";
 import { Err, Div } from "../../style/memberCss/basicCSS";
@@ -18,7 +18,12 @@ const SignUp = () => {
     handleSubmit,
     getValues,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    mode: "onSubmit",
+    defaultValues: {
+      gender: "male",
+    },
+  });
 
   const onSubmit = async (data) => {
     console.log("데이터", data);
@@ -146,6 +151,8 @@ const SignUp = () => {
                     type="radio"
                     name="gender"
                     className="accent-green-800 shadow-none"
+                    value="male"
+                    {...register("gender")}
                   />
                   남자
                 </label>
@@ -154,6 +161,8 @@ const SignUp = () => {
                     type="radio"
                     name="gender"
                     className="accent-green-800"
+                    value="female"
+                    {...register("gender")}
                   />
                   여자
                 </label>
@@ -195,6 +204,10 @@ const SignUp = () => {
                 {...register("tel", {
                   required: "휴대폰 번호를 입력해주세요.",
                   maxLength: 11,
+                  pattern: {
+                    value: /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g,
+                    message: "010123456789 형식으로 작성해주세요.",
+                  },
                 })}
               />
               {errors.tel && <Err>{errors.tel.message}</Err>}

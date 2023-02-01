@@ -28,7 +28,12 @@ const MemberCard = () => {
       </h1>
       <div className="flex justify-center gap-16 pt-14">
         <div className="">
-          <img src={cardImg} alt="" className="w-96 border-2 border-black " />
+          <img
+            src={cardImg}
+            alt=""
+            className="w-96 "
+            style={{ border: "1px solid black ", borderRadius: "4px" }}
+          />
         </div>
         <div className="flex flex-col justify-center">
           <span className="pb-6 text-lg">

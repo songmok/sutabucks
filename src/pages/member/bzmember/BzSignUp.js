@@ -5,9 +5,8 @@ import FindImg from "asset/images/icon_find_sally.png";
 import { Link, useNavigate } from "react-router-dom";
 // 리엑트 훅 폼 라이브러리 사용
 import { useForm } from "react-hook-form";
-import Post from "pages/member/Post";
+import Post from "utils/PostCode";
 import axios from "api/axios";
-import { useHistory } from "react-router-dom";
 import { loginAccount, logoutAccount } from "reducer/bzLoggedState";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,7 +22,12 @@ const BzSignUp = () => {
     handleSubmit,
     getValues,
     formState: { errors, isSubmitting },
-  } = useForm({ defaultValues: user });
+  } = useForm({
+    mode: "onSubmit",
+    defaultValues: {
+      gender: "male",
+    },
+  });
 
   const onSubmit = async (data) => {
     // console.log("데이터", data);
@@ -47,7 +51,7 @@ const BzSignUp = () => {
           alert("수타벅스의 점주가 되신 것을 환영합니다.");
           navigate("/login");
         } else {
-          alert("회원등록에 실패하였습니다. /n 다시 시도해주세요.");
+          alert("점주등록에 실패하였습니다. /n 다시 시도해주세요.");
         }
       })
       .catch((err) => {
@@ -152,6 +156,8 @@ const BzSignUp = () => {
                     type="radio"
                     name="gender"
                     className="accent-green-800 shadow-none"
+                    value="male"
+                    {...register("gender")}
                   />
                   남자
                 </label>
@@ -160,6 +166,8 @@ const BzSignUp = () => {
                     type="radio"
                     name="gender"
                     className="accent-green-800"
+                    value="female"
+                    {...register("gender")}
                   />
                   여자
                 </label>

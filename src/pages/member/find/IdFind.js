@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "../../api/axios";
-import { FindDiv, Bt } from "../../style/memberCss/findCSS";
-import IdFindModal from "./modals/IdFindModal";
+import axios from "../../../api/axios";
+import { FindDiv, Bt } from "../../../style/memberCss/findCSS";
+import IdFindModal from "../modals/IdFindModal";
 
 const IdFind = () => {
   const [name, setName] = useState("");
@@ -11,24 +11,23 @@ const IdFind = () => {
   const idFind = async () => {
     setIsOpen(true);
 
+    // await axios
+    //   .post("member/phoneNum", body)
+    //   .then((res) => {
+    //     if (res.data.status) {
+    //       console.log("뭐지", res.data);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("오류", err);
+    //     setIsOpen(false);
+    //     alert("정보를 재입력해주세요.");
+    //   });
+
     const body = {
       miName: name,
       miPhoneNum: tel,
     };
-
-    await axios
-      .post("member/phoneNum", body)
-      .then((res) => {
-        if (res.data.status) {
-          console.log("뭐지", res.data);
-        }
-      })
-      .catch((err) => {
-        console.log("오류", err);
-        setIsOpen(false);
-        alert("정보를 재입력해주세요.");
-      });
-
     await axios
       .post("member/findId/phone", body)
       .then((res) => {
