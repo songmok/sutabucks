@@ -1,19 +1,20 @@
 import axios from "../../api/axios";
 import React, { useState } from "react";
 import { FindDiv, Bt } from "../../style/memberCss/findCSS";
-import FindModal from "././modals/FindModal";
-import { useNavigate } from "react-router-dom";
+import PwFindModal from "./modals/PwFindModal";
 
 const PwFind = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
   const idCheck = () => {
+    const body = {
+      mild: email,
+    };
     axios
-      .get("member/findpwd/checkid", { mild: email })
+      .get("member/findpwd/checkid", body)
       .then((res) => {
         console.log(res.data);
         alert("아이디가 존재합니다.");
@@ -26,9 +27,9 @@ const PwFind = () => {
         email.focus();
       });
   };
+
   const pwFind = () => {
     setIsOpen(true);
-
     axios
       .post("member/findpwd/phone", { miName: name, miPhoneNum: tel })
       .then((res) => {
@@ -83,7 +84,7 @@ const PwFind = () => {
       </FindDiv>
       <div className="flex justify-center">
         <Bt onClick={pwFind}>비밀번호 찾기</Bt>
-        <FindModal isopen={isOpen} setIsOpen={setIsOpen} />
+        <PwFindModal isopen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </>
   );

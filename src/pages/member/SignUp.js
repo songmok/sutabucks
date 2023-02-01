@@ -1,32 +1,27 @@
 import React, { useState } from "react";
-import SignUpDiv from "../../style/memberCss/signUpCSS";
-import { Err, Div } from "../../style/memberCss/basicCSS";
-import FindImg from "asset/images/icon_find_sally.png";
 import { Link, useNavigate } from "react-router-dom";
 // 리엑트 훅 폼 라이브러리 사용
 import { useForm } from "react-hook-form";
-import Post from "pages/member/Post";
 import axios from "../../api/axios";
-import { useHistory } from "react-router-dom";
-import { loginAccount, logoutAccount } from "../../reducer/loggedState";
-import { useDispatch, useSelector } from "react-redux";
+// 다음 주소
+import Post from "pages/member/Post";
+// css
+import SignUpDiv from "../../style/memberCss/signUpCSS";
+import { Err, Div } from "../../style/memberCss/basicCSS";
+import FindImg from "asset/images/icon_find_sally.png";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user);
-
-  // react-hook0-form 적용
+  // react-hook-form 적용
   const {
     register,
     handleSubmit,
     getValues,
     formState: { errors, isSubmitting },
-  } = useForm({ defaultValues: user });
+  } = useForm();
 
   const onSubmit = async (data) => {
-    // console.log("데이터", data);
+    console.log("데이터", data);
     const body = {
       miId: data.email,
       miPwd: data.pw,
@@ -40,7 +35,7 @@ const SignUp = () => {
     await axios
       .post("member/join", body)
       .then((res) => {
-        console.log(res.data.message);
+        console.log(res.data.loginAccount);
         if (res.data.status) {
           alert("수타벅스의 회원이 되신 것을 환영합니다.");
           navigate("/login");
@@ -50,7 +45,7 @@ const SignUp = () => {
         }
       })
       .catch((err) => {
-        console.log(err.res);
+        console.log(err);
       });
   };
 

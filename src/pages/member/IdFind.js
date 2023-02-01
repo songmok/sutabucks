@@ -1,25 +1,43 @@
 import React, { useState } from "react";
 import axios from "../../api/axios";
-import { Link, useNavigate } from "react-router-dom";
 import { FindDiv, Bt } from "../../style/memberCss/findCSS";
-import FindModal from "././modals/FindModal";
+import IdFindModal from "./modals/IdFindModal";
 
 const IdFind = () => {
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
-  const idFind = () => {
+  const idFind = async () => {
     setIsOpen(true);
 
-    axios
-      .post("member/findId/phone", { miName: name, miPhoneNum: tel })
+    const body = {
+      miName: name,
+      miPhoneNum: tel,
+    };
+
+    await axios
+      .post("member/phoneNum", body)
       .then((res) => {
-        console.log(res.data);
+        if (res.data.status) {
+          console.log("뭐지", res.data);
+        }
       })
       .catch((err) => {
-        console.log(err);
+        console.log("오류", err);
+        setIsOpen(false);
+        alert("정보를 재입력해주세요.");
+      });
+
+    await axios
+      .post("member/findId/phone", body)
+      .then((res) => {
+        if (res.data.status) {
+          console.log("뭐지", res.data);
+        }
+      })
+      .catch((err) => {
+        console.log("오류", err);
         setIsOpen(false);
         alert("정보를 재입력해주세요.");
       });
@@ -54,7 +72,7 @@ const IdFind = () => {
         <Bt onClick={idFind}>아이디 찾기</Bt>
       </div>
       {}
-      <FindModal isopen={isOpen} setIsOpen={setIsOpen} />
+      <IdFindModal isopen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

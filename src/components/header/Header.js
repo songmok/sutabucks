@@ -18,7 +18,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", updateScroll);
     };
-      // className={scrollPosition > 110 ? "original_header" : "change_header"}
+    // className={scrollPosition > 110 ? "original_header" : "change_header"}
   }, []);
   return (
     <div>
@@ -40,4 +40,3 @@ const Header = () => {
 };
 
 export default Header;
- 

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactModal from "react-modal";
 import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
 
-const FindModal = ({ isopen, setIsOpen }) => {
+const IdFindModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
 
   const clickSubmit = () => {
@@ -11,14 +11,13 @@ const FindModal = ({ isopen, setIsOpen }) => {
       .get("/member/finddid")
       .then((res) => {
         console.log(res.data);
+        alert("인증번호가 확인되었습니다.");
+        navigate("/IdResult");
       })
       .catch((err) => {
         console.log(err);
         alert("인증번호 인증에 실패하였습니다.");
       });
-
-    alert("인증번호가 확인되었습니다.");
-    navigate("/IdResult");
   };
 
   const customStyles = {
@@ -97,4 +96,4 @@ const FindModal = ({ isopen, setIsOpen }) => {
   );
 };
 
-export default FindModal;
+export default IdFindModal;
