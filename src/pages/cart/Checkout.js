@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { cartActions } from "reducer/cartSlice";
 import CheckouttCss from "style/cartCss/CheckoutCss";
-import cardImg from "asset/images/card.png";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -49,6 +48,42 @@ const Checkout = () => {
               </Link>
             </div>
             <div className="flex flex-col justify-center space-y-6 w-full">
+              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
+                <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
+                  주문메뉴
+                </span>
+                <div className="flex flex-col itmes-center w-full">
+                  {cartItemData.map((item) => (
+                    <div
+                      key={item.mbiSeq}
+                      className="flex items-center hover:bg-gray-100 mx-5 py-7"
+                      style={{ borderBottom: "1px solid #cccccc" }}
+                    >
+                      <div className="flex w-4/6 items-center">
+                        <div className="flex flex-col justify-center ml-4 flex-grow">
+                          <span className="font-bold">
+                            {item.mbiName} - {item.option}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="w-1/6 flex justify-center">
+                        <span className="mx-4">{item.amount}</span>
+                      </div>
+                      <div className="w-1/6 flex justify-center">
+                        <span className="font-semibold">
+                          {item.mbiCost * item.amount}원
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="flex justify-end items-center mx-5 py-7">
+                    <span className="w-1/6 text-center">Total</span>
+                    <span className="w-1/6 text-center font-semibold text-xl">
+                      {totalPrice}원
+                    </span>
+                  </div>
+                </div>
+              </div>
               <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   주문매장
@@ -113,7 +148,7 @@ const Checkout = () => {
                   </table>
                 </div>
               </div>
-              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
+              {/* <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   할인 및 포인트
                 </span>
@@ -170,50 +205,14 @@ const Checkout = () => {
                     </tr>
                   </table>
                 </div>
-              </div>
-              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
-                <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
-                  주문메뉴
-                </span>
-                <div className="flex flex-col itmes-center w-full">
-                  {cartItemData.map((item) => (
-                    <div
-                      key={item.mbiSeq}
-                      className="flex items-center hover:bg-gray-100 mx-5 py-7"
-                      style={{ borderBottom: "1px solid #cccccc" }}
-                    >
-                      <div className="flex w-4/6 items-center">
-                        <div className="flex flex-col justify-center ml-4 flex-grow">
-                          <span className="font-bold">
-                            {item.mbiName} - {item.option}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="w-1/6 flex justify-center">
-                        <span className="mx-4">{item.amount}</span>
-                      </div>
-                      <div className="w-1/6 flex justify-center">
-                        <span className="font-semibold">
-                          {item.mbiCost * item.amount}원
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                  <div className="flex justify-end items-center mx-5 py-7">
-                    <span className="w-1/6 text-center">Total</span>
-                    <span className="w-1/6 text-center font-semibold text-xl">
-                      {totalPrice}원
-                    </span>
-                  </div>
-                </div>
-              </div>
+              </div> */}
               <div className="flex justify-between items-center bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
-                  최종 결제 금액
+                  총 결제 금액
                 </span>
                 <span className="text-2xl mr-24">원</span>
               </div>
-              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
+              {/* <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   결제
                 </span>
@@ -259,6 +258,46 @@ const Checkout = () => {
                           value="payment"
                         />
                         <span>일반 결제</span>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div> */}
+              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
+                <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
+                  결제 수단 선택
+                </span>
+                <div className="flex flex-col itmes-center w-full">
+                  <table className="mx-5">
+                    <tr className="flex flex-col gap-5 py-7">
+                      <td className="flex mx-10 justify-between">
+                        <div className="flex justify-between w-2/5">
+                          <div className="flex items-center gap-2">
+                            <input
+                              className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                              type="radio"
+                              name="payment"
+                              value="membership"
+                              checked
+                            />
+                            <span className="text-xl">멤버십 결제</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <input
+                              className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                              type="radio"
+                              name="payment"
+                              value="normal"
+                            />
+                            <span className="text-xl">일반 결제</span>
+                          </div>
+                        </div>
+                        <Link
+                          to="/payment"
+                          className="flex justify-center w-[13%] px-5 py-3 text-sm text-gray-100 bg-[#1B3C34] rounded"
+                        >
+                          <span className="text-xl">결제하기</span>
+                        </Link>
                       </td>
                     </tr>
                   </table>
