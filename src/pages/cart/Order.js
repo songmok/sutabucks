@@ -4,21 +4,22 @@ import axios from "axios";
 import OrderModal from "./OrderModal";
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
-
+import instance from "api/axios";
+import requests from "api/request";
 
 const Order = () => {
   const [data, setData] = useState([]);
   const [store, setStore] = useState([]);
-  // const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState(1);
 
-  // const [modalIsOpen, setModalIsOpen] = useState(false);
-  // const [modalData, setModalData] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalData, setModalData] = useState([]);
 
   const getPosts = async () => {
     const params = {
       storeSeq: 2,
     };
-    const posts = await instance.get(request.fetchStoreMenu, {
+    const posts = await instance.get(requests.fetchStoreMenu, {
       params,
     });
     setStore(posts.data.list.store);
@@ -108,7 +109,7 @@ const Order = () => {
                 setAmount={setAmount}
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
-                modalData={modalData}        
+                modalData={modalData}
               />
             </div>
           </main>

@@ -199,6 +199,9 @@ const headerCss = styled.header`
           border: 1px solid #999;
           > a {
             font-size: 1.5em;
+            width: 100%;
+            height: 100%;
+            display: block;
             > span {
               position: absolute;
               left: 50%;

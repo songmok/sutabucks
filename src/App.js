@@ -38,6 +38,7 @@ import SignUpSelect from "pages/member/SignUpSelect";
 import MyStorePage from "pages/mystore/MyStorePage";
 import MyStoreMenu from "pages/mystore/MyStoreMenu";
 import BzSignUp from "pages/member/bzmember/BzSignUp";
+import Footer from "components/common/footer/Footer";
 
 function App() {
   const [event, setEvent] = useState([]);
@@ -108,6 +109,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

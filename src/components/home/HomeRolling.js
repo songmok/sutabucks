@@ -46,9 +46,9 @@ const HomeRolling = () => {
     },
   ];
   return (
-    <div className="rollingbanner wrap">
-      <div className="title">속보</div>
+    <div className="rollingbanner">
       <div className="wrap">
+        <h3 className="title">새소식</h3>
         <Swiper
           direction={"vertical"}
           cssMode={true}

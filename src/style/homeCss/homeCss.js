@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import img from "asset/images/banner.jpg";
+import SignUp from "pages/member/SignUp";
 import { logincolor, signupcolor, themecolor } from "utils/color";
 const homeCss = styled.section`
   position: relative;
@@ -54,35 +55,28 @@ const homeCss = styled.section`
   /* 배너 컨테이너 */
   .rollingbanner {
     position: relative;
-    width: 380px;
-    height: 32px;
+    width: 100%;
+    height: 50px;
     font-size: 0.875rem;
     letter-spacing: -1px;
-    padding: 7px 15px;
-    box-sizing: border-box;
-    background-color: #f0f0f0;
-    border-radius: 16px;
-  }
-  /* 타이틀 */
-  .rollingbanner > .title {
-    font-weight: bold;
-    float: left;
-    padding-right: 10px;
-  }
-  /* 롤링 배너 */
-  .rollingbanner > .wrap {
-    position: relative;
-    width: auto;
-    height: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-    .swiper {
-      height: 100% !important;
-    }
-  }
-  .cate {
-    > a {
-      > img {
+    background-color: black;
+    .wrap {
+      width: 420px;
+      height: 100%;
+      padding: 17px;
+      border: 1px solid #999;
+      border-radius: 2px;
+      .title {
+        font-weight: bold;
+        color: #fff;
+        float: left;
+        padding-right: 10px;
+      }
+      .swiper {
+        height: 100% !important;
+        a {
+          color: #fff;
+        }
       }
     }
   }
@@ -95,6 +89,8 @@ const homeCss = styled.section`
         align-items: center;
         justify-content: center;
         img {
+          border-radius: 10px;
+          border: 1px solid black;
           width: 80%;
         }
       }
@@ -128,17 +124,15 @@ const homeCss = styled.section`
         bottom: 48px;
         > a {
           display: block;
-          border: 1px solid ${themecolor};
+          border: 1px solid black;
           padding: 10px 50px;
           border-radius: 30px;
-          transition: background 1s;
           margin-bottom: 25px;
           &:last-child {
             margin: 0;
           }
           > span {
             color: #fff;
-            display: block;
           }
         }
         .login {

@@ -1,5 +1,3 @@
-import React from "react";
-
 export const logincolor = "#880303";
 export const signupcolor = "#809605";
 export const themecolor = "#046241";
