@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 // import axios from "axios";
-import instance from "../../api/axios";
-import request from "../../api/request";
+import instance from "api/axios";
+import requests from "api/request";
 import OrderModal from "./OrderModal";
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
-import instance from "api/axios";
-import requests from "api/request";
-
 
 const Order = () => {
   const { storeNo } = useParams();
@@ -28,7 +25,6 @@ const Order = () => {
   const [menuSeq, setMenuSeq] = useState("");
 
   const [modalData, setModalData] = useState([]);
-
 
   const getPosts = async () => {
     const params = {
@@ -224,12 +220,9 @@ const Order = () => {
                 setAmount={setAmount}
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
-
                 storeNo={storeNo}
                 menuSeq={menuSeq}
-
                 modalData={modalData}
-
               />
             </div>
           </main>
