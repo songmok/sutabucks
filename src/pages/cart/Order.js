@@ -1,103 +1,122 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+// import axios from "axios";
+import instance from "../../api/axios";
+import request from "../../api/request";
 import OrderModal from "./OrderModal";
-import PagesTitle from "components/common/pagesHeader/PagesTitle";
-import PagesLink from "components/common/pagesHeader/PagesLink";
-
+// import OrderHeader from "components/pagesHeader/OrderHeader";
 
 const Order = () => {
+  const { storeNo } = useParams();
+
+  // const [option, setOption] = useState("전체 메뉴");
+
+  // const handleOptionChange = (changeEvent) => {
+  //   setOption(changeEvent.target.value);
+  // };
+
   const [data, setData] = useState([]);
+  const [store, setStore] = useState([]);
   const [amount, setAmount] = useState(1);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalData, setModalData] = useState([]);
+  const [menuSeq, setMenuSeq] = useState("");
 
   const getPosts = async () => {
-    const posts = await axios.get("/test.json");
-    setData(posts.data.list);
+    const params = {
+      storeSeq: storeNo,
+    };
+    const posts = await instance.get(request.fetchStoreMenu, {
+      params,
+    });
+    setStore(posts.data.list.store);
+    setData(posts.data.list.menu);
   };
 
   useEffect(() => {
     getPosts();
   }, []);
 
+  // console.log(data);
+  // console.log(store);
+  console.log(menuSeq);
+
   const [bt, setBt] = useState("all");
 
   const allMenu = data.map((item) => (
     <div
-      key={item.mbiSeq}
+      key={item.menuNo}
       className="block group cursor-pointer"
       onClick={() => {
-        setModalData(item);
+        setMenuSeq(item.menuNo);
         setModalIsOpen(true);
       }}
     >
       <img
-        src={item.img}
+        src={item.menuImageUri}
         alt="coffee"
         className="w-full transform hover:scale-95 transition duration-300"
       />
       <div className="relative pt-3 bg-white">
         <h3 className="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
-          {item.mbiName}
+          {item.menuName}
         </h3>
         <div className="mt-1.5 flex items-center justify-between text-gray-900">
-          <p className="tracking-wide">{item.mbiCost}원</p>
+          <p className="tracking-wide">{item.menuCost}원</p>
         </div>
       </div>
     </div>
   ));
 
   const drinkMenu = data
-    .filter((item) => item.mbiPcSeq < 3)
+    .filter((item) => item.menuCategoryNo < 5)
     .map((item) => (
       <div
-        key={item.mbiSeq}
+        key={item.menuNo}
         className="block group cursor-pointer"
         onClick={() => {
-          setModalData(item);
+          setMenuSeq(item.menuNo);
           setModalIsOpen(true);
         }}
       >
         <img
-          src={item.img}
+          src={item.menuImageUri}
           alt="coffee"
           className="w-full transform hover:scale-95 transition duration-300"
         />
         <div className="relative pt-3 bg-white">
           <h3 className="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
-            {item.mbiName}
+            {item.menuName}
           </h3>
           <div className="mt-1.5 flex items-center justify-between text-gray-900">
-            <p className="tracking-wide">{item.mbiCost}원</p>
+            <p className="tracking-wide">{item.menuCost}원</p>
           </div>
         </div>
       </div>
     ));
 
   const foodMenu = data
-    .filter((item) => item.mbiPcSeq > 2)
+    .filter((item) => item.menuCategoryNo > 4)
     .map((item) => (
       <div
-        key={item.mbiSeq}
+        key={item.menuNo}
         className="block group cursor-pointer"
         onClick={() => {
-          setModalData(item);
+          setMenuSeq(item.menuNo);
           setModalIsOpen(true);
         }}
       >
         <img
-          src={item.img}
+          src={item.menuImageUri}
           alt="coffee"
           className="w-full transform hover:scale-95 transition duration-300"
         />
         <div className="relative pt-3 bg-white">
           <h3 className="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
-            {item.mbiName}
+            {item.menuName}
           </h3>
           <div className="mt-1.5 flex items-center justify-between text-gray-900">
-            <p className="tracking-wide">{item.mbiCost}원</p>
+            <p className="tracking-wide">{item.menuCost}원</p>
           </div>
         </div>
       </div>
@@ -116,85 +135,89 @@ const Order = () => {
     }
   };
 
-  console.log(bt);
-
   return (
     <>
-      <PagesTitle title={"주문메뉴"} />
-      <PagesLink first={"주문메뉴"} firstLink={"order"} />
+      {/* <OrderHeader /> */}
       <div className="container mx-auto">
         <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
           <div className="lg:col-span-1">
-            <div className="flex flex-col space-y-1">
-              <button
-                value="all"
-                className="flex items-center px-4 py-2 rounded-lg cursor-pointer bg-[#1B3C34] text-white"
-                onClick={(e) => {
-                  setBt(e.target.value);
-                }}
-              >
-                <span className="text-sm font-medium"> 전체 </span>
-              </button>
-              <button
-                value="drink"
-                className="flex items-center px-4 py-2 rounded-lg cursor-pointer bg-[#1B3C34] text-white"
-                onClick={(e) => {
-                  setBt(e.target.value);
-                }}
-              >
-                <span className="text-sm font-medium"> 음료 </span>
-              </button>
-              <button
-                value="food"
-                className="flex items-center px-4 py-2 rounded-lg cursor-pointer bg-[#1B3C34] text-white"
-                onClick={(e) => {
-                  setBt(e.target.value);
-                }}
-              >
-                <span className="text-sm font-medium"> 음식 </span>
-              </button>
-            </div>
+            <ul className="flex flex-col gap-2">
+              <li>
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="menu"
+                  id="all"
+                  checked={bt === "all"}
+                  value="all"
+                  onClick={(e) => {
+                    setBt(e.target.value);
+                  }}
+                />
+                <label
+                  className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-200 peer-checked:bg-[#006633] peer-checked:text-white"
+                  htmlFor="all"
+                >
+                  전체 메뉴
+                </label>
+              </li>
+              <li>
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="menu"
+                  id="drink"
+                  checked={bt === "drink"}
+                  value="drink"
+                  onClick={(e) => {
+                    setBt(e.target.value);
+                  }}
+                />
+                <label
+                  className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-200 peer-checked:bg-[#006633] peer-checked:text-white"
+                  htmlFor="drink"
+                >
+                  음료
+                </label>
+              </li>
+              <li>
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="menu"
+                  id="food"
+                  checked={bt === "food"}
+                  value="food"
+                  onClick={(e) => {
+                    setBt(e.target.value);
+                  }}
+                />
+                <label
+                  className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-200 peer-checked:bg-[#006633] peer-checked:text-white"
+                  htmlFor="food"
+                >
+                  음식
+                </label>
+              </li>
+            </ul>
           </div>
           <main className="lg:col-span-4 ml-2">
-            <div className="flex flex-wrap justify-end items-center my-5 lg:mb-7">
-              <form className="w-full lg:w-[35%]">
-                <div className="relative">
-                  <input
-                    type="search"
-                    // id="simple-search"
-                    className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg block w-full pl-5 p-2.5"
-                    placeholder="Search Menu"
-                    required
-                  />
-                  <button className="absolute inset-y-0 right-3 flex items-center pl-3 cursor-pointer">
-                    <svg
-                      aria-hidden="true"
-                      className="w-5 h-5 text-[#1B3C34] dark:text-gray-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
-              </form>
+            <div className="flex flex-wrap items-center mb-5 lg:mb-10">
+              <span className="text-2xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
+                {store.branchName}
+              </span>
             </div>
             <div className="coffee mb-10">
               <div className="mt-5 grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
                 {list()}
-                {/* {allMenu} */}
               </div>
               <OrderModal
                 amount={amount}
                 setAmount={setAmount}
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
-                modalData={modalData}
+                storeNo={storeNo}
+                menuSeq={menuSeq}
               />
             </div>
           </main>

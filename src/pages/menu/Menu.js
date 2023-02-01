@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-// import axios from "axios";
-
->>>>>>> af55ec15cf5e21c23155ca2c5cffde7e74b20ff6
 import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import instance from "../../api/axios";
@@ -12,19 +7,27 @@ import NoResult from "./NoResult";
 
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
+import { useParams } from "react-router-dom";
 
 const Menu = () => {
+  const { cate } = useParams();
   // const [data, setData] = useState([]);
   const [word, setWord] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [status, setStatus] = useState(true);
+  const [option, setOption] = useState("Tall");
+
+  const handleOptionChange = (changeEvent) => {
+    setOption(changeEvent.target.value);
+  };
 
   const fetchData = async () => {
     const params = {
+      parentSeq: cate,
       menuName: word,
     };
     await instance
-      .get(request.fetchMenuSearch, {
+      .get(request.fetchCateSearch, {
         params,
       })
       .then((res) => {
@@ -42,100 +45,118 @@ const Menu = () => {
     fetchData();
   }, []);
 
+  const cateData = async () => {
+    const params = {
+      parentSeq: cate,
+    };
+    await instance
+      .get(request.fetchCateSeq, {
+        params,
+      })
+      .then((res) => {
+        setSearchData(res.data.list);
+        setStatus(res.data.status);
+      })
+  };
+  useEffect(() => {
+    cateData();
+  }, []);
+
   console.log(word);
-  console.log(searchData);
+  // console.log(searchData);
   // console.log(status);
 
-  const handleOnClick = () => {
-    fetchData();
-  };
-  const handleOnKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleOnClick(); // Enter 입력이 되면 클릭 이벤트 실행
-    }
-  };
-  const clearList = () => {
-    setWord("").then(handleOnClick());
-  };
+  // const handleOnClick = () => {
+  //   fetchData();
+  // };
+  // const handleOnKeyPress = (e) => {
+  //   if (e.key === "Enter") {
+  //     handleOnClick(); // Enter 입력이 되면 클릭 이벤트 실행
+  //   }
+  // };
+  // const clearList = () => {
+  //   setWord("").then(fetchData());
+  // };
+
   return (
     <section className="container mx-auto">
       <PagesTitle title={"메뉴보기"} />
       <PagesLink first={"메뉴보기"} firstLink={"menu"} />
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1">
-          <nav aria-label="Main Nav" className="flex flex-col space-y-1">
-
-            <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
-
-              전체 메뉴
+          {/* <div aria-label="Main Nav" className="flex flex-col space-y-1">
+            <button
+              className="px-4 py-2 text-start text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+            >
+              <span className="text-sm font-medium">전체 메뉴</span>
             </button>
-            <details className="group [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex items-center px-4 py-2 text-gray-500 rounded-lg cursor-pointer hover:bg-[#1B3C34] hover:text-white">
-                <span className="text-sm font-medium"> 음료 </span>
-                <span className="ml-auto transition duration-300 shrink-0 group-open:-rotate-180">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </summary>
-              <nav
-                aria-label="Users Nav"
-                className="flex flex-col mt-2 ml-8 space-y-1"
+            <button
+              className="px-4 py-2 text-start text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+            >
+              <span className="text-sm font-medium">에스프레소</span>
+            </button>
+            <button
+              className="px-4 py-2 text-start text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white"
+            >
+              <span className="text-sm font-medium">프라푸치노</span>
+            </button>
+          </div> */}
+          <ul className="flex flex-col gap-2">
+            <li>
+              <input
+                className="sr-only peer"
+                type="radio"
+                value="Tall"
+                name="size"
+                id="tall"
+                checked={option === "Tall"}
+                onChange={handleOptionChange}
+              />
+              <label
+                className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-200 peer-checked:bg-[#1B3C34] peer-checked:text-white"
+                htmlFor="tall"
               >
-                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
-                  콜드 브루
-                </button>
-                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
-                  브루드 커피
-                </button>
-              </nav>
-            </details>
-            <details className="group [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex items-center px-4 py-2 text-gray-500 rounded-lg cursor-pointer hover:bg-[#1B3C34] hover:text-white">
-                <span className="text-sm font-medium"> 푸드 </span>
-                <span className="ml-auto transition duration-300 shrink-0 group-open:-rotate-180">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </summary>
-              <nav
-                aria-label="Account Nav"
-                className="flex flex-col mt-2 ml-8 space-y-1"
+                전체보기
+              </label>
+            </li>
+            <li>
+              <input
+                className="sr-only peer"
+                type="radio"
+                value="Grande"
+                name="size"
+                id="grande"
+                checked={option === "Grande"}
+                onChange={handleOptionChange}
+              />
+              <label
+                className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-200 peer-checked:bg-[#1B3C34] peer-checked:text-white"
+                htmlFor="grande"
               >
-                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
-                  브레드
-                </button>
-                <button className="block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-[#1B3C34] hover:text-white">
-                  케이크
-                </button>
-              </nav>
-            </details>
-          </nav>
+                Grande
+              </label>
+            </li>
+            <li>
+              <input
+                className="sr-only peer"
+                type="radio"
+                value="Venti"
+                name="size"
+                id="venti"
+                checked={option === "Venti"}
+                onChange={handleOptionChange}
+              />
+              <label
+                className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-200 peer-checked:bg-[#1B3C34] peer-checked:text-white"
+                htmlFor="venti"
+              >
+                Venti
+              </label>
+            </li>
+          </ul>
         </div>
         <main className="lg:col-span-4 ml-2">
-          <div className="flex flex-wrap justify-between items-center lg:mb-7">
-            <h2 className="font-bold text-3xl lg:text-4xl text-[#1B3C34] mb-3 lg:mb-0">
-              Menu
-            </h2>
+          {/* <div className="flex flex-wrap justify-between items-center lg:mb-7">
             <form
               className="flex w-full lg:w-[35%] rounded"
               style={{ border: "1px solid #1B3C34" }}
@@ -169,10 +190,10 @@ const Menu = () => {
                 </svg>
               </button>
             </form>
-          </div>
+          </div> */}
           <div className="coffee mb-10">
             {status ? (
-              <div className="mt-5 grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
+              <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-10">
                 <MenuList searchData={searchData} />
               </div>
             ) : (

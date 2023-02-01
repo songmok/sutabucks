@@ -101,11 +101,12 @@ function App() {
         <Route path="/pwresult" element={<PwResult />} />
         <Route path="/membercard" element={<MemberCard />} />
         {/* 메뉴 및 상품 */}
-        <Route path="/menu" element={<Menu />} />
-        {/* <Route path="/menu/:search" element={<Menu />} /> */}
+        {/* <Route path="/menu" element={<Menu />} /> */}
+        <Route path="/menu/:cate" element={<Menu />} />
         <Route path="/menudetail/:seq" element={<Menudetail />} />
         <Route path="/maps" element={<Maps />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/order/:storeNo" element={<Order />} />
+        {/* <Route path="/order" element={<Order />} /> */}
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/payment" element={<Payment />} />

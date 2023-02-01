@@ -1,43 +1,18 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { cartActions } from "reducer/cartSlice";
-import instance from "../../api/axios";
-import request from "../../api/request";
 
 const OrderModal = ({
   amount,
   setAmount,
   modalIsOpen,
   setModalIsOpen,
-  storeNo,
-  menuSeq,
+  modalData,
 }) => {
   // const [modalIsOpen, setModalIsOpen] = useState(false);
   const [option, setOption] = useState("Tall");
-  const [modalData, setModalData] = useState([]);
-  // const [option, setOption] = useState([]);
-
-  const getModal = async () => {
-    const params = {
-      storeSeq: storeNo,
-      menuSeq: menuSeq,
-    };
-    const modalPosts = await instance.get(request.fetchStoreMenuDetail, {
-      params,
-    });
-    // console.log(modalPosts.data.MenuDetail.option);
-    setModalData(modalPosts.data.MenuDetail.detail);
-    // setOption(modalPosts.data.MenuDetail.options[0].option);
-  };
-
-  useEffect(() => {
-    getModal();
-  }, [menuSeq]);
-
-  console.log(modalData);
-  console.log(option);
+  // const [modalData, setModalData] = useState([]);
 
   const handleOptionChange = (changeEvent) => {
     setOption(changeEvent.target.value);
@@ -48,38 +23,13 @@ const OrderModal = ({
   const decrease = () => {
     amount > 1 && setAmount(parseInt(amount) - 1);
   };
-  // const dispatch = useDispatch();
-
-  // const pushCart = () => {
-  //   const item = { ...modalData, amount, option, checked: true };
-  //   dispatch(cartActions.addCartItem(item));
-  //   setAmount(1);
-  //   setModalIsOpen(false);
-  // };
+  const dispatch = useDispatch();
 
   const pushCart = () => {
-    const body = {
-      "miSeq" : 26,
-  
-      "shoppingBasketVo":{
-          "sbSmcSeq":2,
-          "sbNumber":1
-      },
-      "shoppingBasketOption":[
-          {
-              "sboNumber":"1",
-              "sboMoiSeq":"1"
-          }
-      ]
-  };
-    axios
-      .put("http://192.168.0.190:9999/cart/add", body)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const item = { ...modalData, amount, option, checked: true };
+    dispatch(cartActions.addCartItem(item));
+    setAmount(1);
+    setModalIsOpen(false);
   };
 
   const customStyles = {
@@ -123,13 +73,13 @@ const OrderModal = ({
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth="1.5"
+              stroke-width="1.5"
               stroke="currentColor"
               className="w-7 h-7"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                stroke-linecap="round"
+                stroke-linejoin="round"
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
@@ -137,18 +87,18 @@ const OrderModal = ({
           <div className="mt-6 space-y-3">
             <div>
               <img
-                src={modalData.menuUri}
+                src={modalData.img}
                 alt="coffee"
                 className="w-56 mx-auto mt-16 mb-8"
               />
               <span className="block font-bold text-3xl text-center">
-                {modalData.menuName}
+                {modalData.mbiName}
               </span>
               <span className="block text-gray-600 text-sm px-5 mt-2">
-                {modalData.menuExplain}
+                {modalData.mbiExplain}
               </span>
               <span className="block text-custom-yellow mt-5 font-bold text-3xl text-center">
-                {modalData.menuCost * amount} 원
+                {modalData.mbiCost * amount} 원
               </span>
             </div>
             <div className="flex flex-col items-center">
@@ -177,23 +127,6 @@ const OrderModal = ({
               </div>
               <ul className="grid grid-cols-3 gap-x-3 my-2">
                 {/* <ul className="grid grid-cols-3 gap-x-3 m-1 max-w-md mx-auto"> */}
-                {/* {option.map((item) => (
-                  <li className="relative" key={item.optionName}>
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      name="size"
-                      value={item.optionName}
-                      onChange={handleOptionChange}
-                    />
-                    <label
-                      className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 checked:ring-[#CCAA86] checked:ring-2 checked:border-transparent"
-                      htmlFor={item.optionName}
-                    >
-                      {item.optionName}
-                    </label>
-                  </li>
-                ))} */}
                 <li className="relative">
                   <input
                     className="sr-only peer"
