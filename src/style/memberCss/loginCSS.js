@@ -1,9 +1,22 @@
 import styled from "@emotion/styled";
+import bgImg from "asset/images/bg.jpg";
+
+const BgSection = styled.section`
+  width: 100%;
+  height: 600px;
+  padding-top: 40px;
+  background-image: url(${bgImg});
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
 const LoginDiv = styled.div`
   width: 100%;
   max-width: 570px;
   max-height: 500px;
   margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.5);
   p {
     color: #006633;
     font-weight: 500;
@@ -44,7 +57,7 @@ const LoginDiv = styled.div`
       background-color: #006633;
       color: #fff;
       margin-top: 15px;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       font-size: 23px;
       &:hover {
         text-decoration: underline;
@@ -56,10 +69,5 @@ const LoginDiv = styled.div`
   }
 `;
 
-// const bgCover = styled.div`
-//   // background-image: url("asset/images/bg.jpg");
-//   background-color: red;
-// `;
-
-// export { bgCover };
+export { BgSection };
 export default LoginDiv;

@@ -20,10 +20,10 @@ import EventDetail from "pages/news/event/EventDetail";
 // 유저정보
 import Login from "pages/member/Login";
 import SignUp from "pages/member/SignUp";
-import IdFind from "pages/member/IdFind";
-import PwFind from "pages/member/PwFind";
-import IdResult from "pages/member/IdResult";
-import PwResult from "pages/member/PwResult";
+import IdFind from "pages/member/find/IdFind";
+import PwFind from "pages/member/find/PwFind";
+import IdResult from "pages/member/find/IdResult";
+import PwResult from "pages/member/find/PwResult";
 import MyPage from "pages/member/MyPage";
 import MemberCard from "pages/member/MemberCard";
 // 메뉴 및 상품

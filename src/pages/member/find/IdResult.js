@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FindDiv, Bt } from "../../style/memberCss/findCSS";
+import { FindDiv, Bt } from "../../../style/memberCss/findCSS";
 import FindImg from "asset/images/icon_find_sally.png";
 
 const IdResult = () => {
-  
   return (
     <>
       <div className="text-center text-4xl my-8 ">아이디 찾기</div>

@@ -5,26 +5,30 @@ import { useForm } from "react-hook-form";
 import CloseModal from "././modals/CloseModal";
 import CardModal from "././modals/CardModal";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAccount, logoutAccount } from "../../reducer/loggedState";
+import { loginAccount } from "../../reducer/loggedState";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  console.log(user);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: `${user.miId}`,
+      gender: "male",
+    },
+  });
 
   const onSubmit = async (data) => {
     console.log(data);
   };
-
-  const [id, setId] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
   const closeAccount = () => {
@@ -59,17 +63,11 @@ const MyPage = () => {
       <SignUpDiv>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label>{user.email}</label>
-            <input
-              type="email"
-              required
-              maxLength={20}
-              value={user.email}
-              disabled
-            />
+            <label>아이디</label>
+            <input type="email" required disabled {...register("email")} />
           </div>
           <div className="relative items-start ">
-            <label>이름</label>
+            <label>{user.name}</label>
             <input
               type="text"
               className="w-72"
@@ -84,6 +82,8 @@ const MyPage = () => {
                   type="radio"
                   name="gender"
                   className="accent-green-800 shadow-none"
+                  value="male"
+                  {...register("gender")}
                 />
                 남자
               </label>
@@ -92,6 +92,8 @@ const MyPage = () => {
                   type="radio"
                   name="gender"
                   className="accent-green-800"
+                  value="female"
+                  {...register("gender")}
                 />
                 여자
               </label>
