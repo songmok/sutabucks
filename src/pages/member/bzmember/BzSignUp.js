@@ -1,14 +1,20 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "api/axios";
-import { useForm } from "react-hook-form";
 import SignUpDiv from "style/memberCss/signUpCSS";
 import { Err, Div } from "style/memberCss/basicCSS";
 import FindImg from "asset/images/icon_find_sally.png";
+import { Link, useNavigate } from "react-router-dom";
+// 리엑트 훅 폼 라이브러리 사용
+import { useForm } from "react-hook-form";
 import Post from "utils/PostCode";
+import axios from "api/axios";
+import { loginAccount, logoutAccount } from "reducer/bzLoggedState";
+import { useDispatch, useSelector } from "react-redux";
 
 const BzSignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
 
   // react-hook0-form 적용
   const {
@@ -40,6 +46,7 @@ const BzSignUp = () => {
     await axios
       .post("member/store/join", body)
       .then((res) => {
+        console.log(res.data.message);
         if (res.data.status) {
           alert("수타벅스의 점주가 되신 것을 환영합니다.");
           navigate("/login");
@@ -237,6 +244,7 @@ const BzSignUp = () => {
               />
             </div>
           </div>
+          {/* 성공하면 /login 위에 함수에서 구현 */}
           <button type="submit" disabled={isSubmitting}>
             회원가입
           </button>

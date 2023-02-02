@@ -8,7 +8,6 @@ const HeaderRt = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const logOutFn = () => {
-    console.log(sessionStorage())
     navigate("/login");
   };
 
