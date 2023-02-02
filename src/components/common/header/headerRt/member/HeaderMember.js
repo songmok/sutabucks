@@ -1,9 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { logoutAccount } from "reducer/loggedState";
 
 const HeaderMember = ({ user }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const logOutFn = () => {
+    dispatch(logoutAccount());
     navigate("/login");
   };
   return (
