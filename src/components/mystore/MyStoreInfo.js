@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import cardImg from "asset/images/card.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import requests from "api/request";
+import instance from "api/axios";
 const MyStoreInfo = () => {
-  const myStoreInfo = [
-    {
-      storeNo: 1,
-      branch: "동성로점",
-      addressBasic: "중구",
-      addressDetail: "13길",
-      openTime: "08:00:00",
-      closeTime: "22:00:00",
-      closeDays: "연중무휴",
-      minOrderPrice: 5000,
-      agent: "홍길동",
-      businessAddress: "test",
-      phoneNo: "010-1234-9876",
-      minDeliveryTime: "15",
-      maxDeliveryTime: "100",
-    },
-  ];
+  // const myStoreInfo = [
+  //   {
+  //     storeNo: 1,
+  //     branch: "동성로점",
+  //     addressBasic: "중구",
+  //     addressDetail: "13길",
+  //     openTime: "08:00:00",
+  //     closeTime: "22:00:00",
+  //     closeDays: "연중무휴",
+  //     minOrderPrice: 5000,
+  //     agent: "홍길동",
+  //     businessAddress: "test",
+  //     phoneNo: "010-1234-9876",
+  //     minDeliveryTime: "15",
+  //     maxDeliveryTime: "100",
+  //   },
+  // ];
+  const [myStoreInfo, setMyStoreInfo] = useState([]);
+  const { seq } = useParams();
+
+  const fetchData = async () => {
+    const params = {
+      storeNo: seq,
+    };
+    const resultDetail = await instance.get(requests.fetchMyStoreInfo, {
+      params,
+    });
+    setMyStoreInfo(resultDetail.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       <div className="wrap">

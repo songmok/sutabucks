@@ -4,7 +4,6 @@ import App from "./App";
 import "./asset/Fonts/font.css";
 import "./index.css";
 import ReactModal from "react-modal";
-
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";

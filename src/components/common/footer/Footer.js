@@ -5,34 +5,17 @@ import FooterMenu from "./footerDetail/FooterMenu";
 import FooterInfo from "./footerDetail/FooterInfo";
 
 const Footer = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const updateScroll = () => {
-    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
-  };
-  useEffect(() => {
-    document.getElementById("root")?.scrollTo(1080, 0);
-  }, []);
-  useEffect(() => {
-    window.addEventListener("scroll", updateScroll);
-    return () => {
-      window.removeEventListener("scroll", updateScroll);
-    };
-    // className={scrollPosition > 110 ? "original_header" : "change_header"}
-  }, []);
-
   return (
     <>
       <FooterCss>
-        <footer
-          className={scrollPosition !== 0 && "show-footer"}
-          id={scrollPosition === 0 && "none"}
-        >
+        {/* 클릭시 푸터올라오기 */}
+        <div className="wrap">
           <FooterMenu />
           <div className="f-logo">
-            <img src={flogo} alt="f-logo" />
+            <img src={flogo} alt="f-alogo" />
           </div>
           <FooterInfo />
-        </footer>
+        </div>
       </FooterCss>
     </>
   );

@@ -6,9 +6,12 @@ import requests from "api/request";
 import OrderModal from "./OrderModal";
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
+import { useSelector } from "react-redux";
 
 const Order = () => {
   const { storeNo } = useParams();
+  const userData = useSelector((state) => state.user);
+  console.log(userData);
 
   // const [option, setOption] = useState("전체 메뉴");
 
@@ -18,7 +21,6 @@ const Order = () => {
 
   const [data, setData] = useState([]);
   const [store, setStore] = useState([]);
-  const [amount, setAmount] = useState(1);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -144,7 +146,7 @@ const Order = () => {
       {/* <OrderHeader /> */}
       <div className="container mx-auto">
         <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 mr-2">
             <ul className="flex flex-col gap-2">
               <li>
                 <input
@@ -216,10 +218,9 @@ const Order = () => {
                 {list()}
               </div>
               <OrderModal
-                amount={amount}
-                setAmount={setAmount}
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
+                miSeq={userData.miSeq}
                 storeNo={storeNo}
                 menuSeq={menuSeq}
                 modalData={modalData}

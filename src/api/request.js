@@ -5,6 +5,7 @@ const requests = {
   fetchMenuSearch: "menu/search",
   fetchCateSearch: "cate/searchmenu",
   fetchCateSeq: "cate/detail",
+  fetchChildCate: "cate/detail/menu",
   fetchMenuDetail: "menu/list/detail",
   fetchStoreMenu: "store/cart/menu/list",
   fetchStoreMenuDetail: "store/cart/menu/list/detail",
@@ -14,7 +15,7 @@ const requests = {
   fetchNotice: "admin/noticelist",
   fetchNoticeDetail: "admin/noticedetail",
   //가게정보
-  fetchMyStoreInfo: "store/mystore",
+  fetchMyStoreInfo: "store/search",
   fetchMyStoreMenu: "store/menu/list",
 };
 export default requests;

@@ -1,25 +1,18 @@
 import styled from "@emotion/styled";
-import { logincolor, themecolor } from "utils/color";
-import { footersize } from "utils/font";
-const FooterCss = styled.div`
-  #none {
-    display: none;
+import { footercolor } from "utils/color";
+import { minsize } from "utils/font";
+const FooterCss = styled.footer`
+  width: 100%;
+  border: 1px solid ${footercolor};
+  a,
+  span,
+  p {
+    color: ${footercolor};
+    font-size: ${minsize};
   }
-  .show-footer {
-    width: 100%;
-    background-color: #111;
-    position: relative;
-    top: 100%;
-    left: 0;
-    z-index: 99999;
+  .wrap {
     display: grid;
     grid-template-columns: repeat(1fr);
-    a,
-    span,
-    p {
-      color: #ccc;
-      font-size: ${footersize};
-    }
     .fnb {
       display: flex;
       justify-content: space-around;
@@ -28,11 +21,11 @@ const FooterCss = styled.div`
       .f-list {
         position: relative;
         &:first-of-type > a {
-          color: #09f550;
+          color: #07af3a;
         }
         > a {
           &:hover {
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid ${footercolor};
           }
         }
       }

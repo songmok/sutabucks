@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 const SubMenuNews = ({ news }) => {
-  console.log(news);
   return (
     <>
       <ul className="depth2-sub">
