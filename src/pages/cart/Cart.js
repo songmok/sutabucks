@@ -1,26 +1,65 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { cartActions } from "reducer/cartSlice";
 
 const Carttest = () => {
+  const [totalPrice, setTotalPrice] = useState("");
+  const [cartList, setCartList] = useState([]);
+
   const dispatch = useDispatch();
 
-  const cartData = useSelector((state) => state.cart);
+  const userData = useSelector((state) => state.user);
+  // console.log(userData.miSeq);
+  const miSeq = userData.miSeq;
 
-  const cartItemData = cartData.items;
+  const getPosts = async () => {
+    const posts = await axios.get(
+      `http://192.168.0.190:9999/cart/list?miSeq=${miSeq}&status=1`
+    );
+    // console.log(posts.data);
+    const items = posts.data.memberBasket;
+    setCartList(items);
+    setTotalPrice(posts.data.totalPrice);
+  };
 
-  const checkedItem = cartItemData.filter((item) => item.checked);
+  useEffect(() => {
+    getPosts();
+  }, []);
 
-  console.log(checkedItem);
+  // console.log(cartList);
 
-  const itemNumber = checkedItem.length;
+  const cartItems = cartList.map((item) => {
+    return {
+      id: item.id,
+      mbiName: item["storeMenuConnect"]["menu"].mbiName,
+      moiName: item["shoppingBasketOption"][0]["menuOption"].moiName,
+      sbNumber: item.sbNumber,
+      sbBasketPrice: item.sbBasketPrice,
+      mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
+      sbOrderNumber: item.sbOrderNumber,
+      sbSmcSeq: item["storeMenuConnect"].smcSeq,
+    };
+  });
 
-  const totalPrice = checkedItem.reduce(
-    (acc, cur) => acc + cur.mbiCost * cur.amount,
-    0
-  );
-  // console.log(totalPrice);
+  console.log(cartItems);
+
+  // const deleteCart = () => {
+  // const body = {
+  //   miSeq: miSeq,
+  //   sbSmcSeq: item.sbSmcSeq,
+  //   sbOrderNumber: item.sbOrderNumber,
+  // };
+  //   axios
+  //     .delete("http://192.168.0.190:9999/cart/delete", body)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <>
@@ -31,9 +70,9 @@ const Carttest = () => {
               <h1 className="font-semibold text-2xl text-[#1B3C34]">
                 장바구니
               </h1>
-              <h2 className="font-semibold text-2xl">{itemNumber} Items</h2>
+              {/* <h2 className="font-semibold text-2xl">{itemNumber} Items</h2> */}
             </div>
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <button
                 className="text-sm"
                 onClick={() => {
@@ -42,17 +81,17 @@ const Carttest = () => {
               >
                 선택삭제
               </button>
-            </div>
+            </div> */}
             <div className="flex justify-center -mx-8 px-6 mt-10 mb-5">
               <div className="flex w-3/6 items-center">
-                <input
+                {/* <input
                   className="mr-3 checkbox appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
                   type="checkbox"
-                  checked={cartData.allChecked}
+                  // checked={cartData.allChecked}
                   onChange={() => {
                     dispatch(cartActions.allClick());
                   }}
-                />
+                /> */}
                 <h3 className="font-semibold text-gray-600 text-xs uppercase">
                   상품명
                 </h3>
@@ -67,13 +106,13 @@ const Carttest = () => {
                 주문금액
               </h3>
             </div>
-            {cartItemData.map((item) => (
+            {cartItems.map((item) => (
               <div
-                key={item.mbiSeq}
+                key={item.id}
                 className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"
               >
                 <div className="flex w-3/6 items-center">
-                  <input
+                  {/* <input
                     className="mr-3 checkbox appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
                     type="checkbox"
                     id={item.mbiSeq}
@@ -81,27 +120,15 @@ const Carttest = () => {
                       dispatch(cartActions.handleClick(item));
                     }}
                     checked={item.checked}
-                  />
-                  <div className="w-20">
-                    <img
-                      src={item.img}
-                      alt="coffee"
-                      className="object-cover w-24 h-24 rounded"
-                    />
-                  </div>
+                  /> */}
                   <div className="flex flex-col justify-center ml-4 flex-grow">
                     <span className="font-bold text-sm">
-                      {item.mbiName} - {item.option}
+                      {item.mbiName} - {item.moiName}
                     </span>
                   </div>
                 </div>
                 <div className="w-1/6 flex justify-center">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      dispatch(cartActions.removeAmount(item));
-                    }}
-                  >
+                  <button>
                     <svg
                       className="fill-current text-gray-600 w-3"
                       viewBox="0 0 448 512"
@@ -109,19 +136,8 @@ const Carttest = () => {
                       <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                     </svg>
                   </button>
-                  {/* <input
-                    className="mx-3 border text-center w-8"
-                    type="text"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                  /> */}
-                  <span className="mx-4">{item.amount}</span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      dispatch(cartActions.addAmount(item));
-                    }}
-                  >
+                  <span className="mx-4">{item.sbNumber}</span>
+                  <button>
                     <svg
                       className="fill-current text-gray-600 w-3"
                       viewBox="0 0 448 512"
@@ -135,7 +151,21 @@ const Carttest = () => {
                     className="text-gray-600 transition hover:text-red-600"
                     onClick={() => {
                       if (window.confirm("정말 삭제하시겠습니까?")) {
-                        dispatch(cartActions.removeCartItem(item));
+                        const body = {
+                          miSeq: miSeq,
+                          sbSmcSeq: item.sbSmcSeq,
+                          sbOrderNumber: item.sbOrderNumber,
+                        };
+                        axios
+                          .delete("http://192.168.0.190:9999/cart/delete", body)
+                          .then((res) => {
+                            console.log(res);
+                            console.log(body);
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                            console.log(body);
+                          });
                       }
                     }}
                   >
@@ -144,13 +174,13 @@ const Carttest = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
                       className="w-5 h-5"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                       />
                     </svg>
@@ -158,7 +188,7 @@ const Carttest = () => {
                 </div>
                 <div className="w-1/6 flex justify-center">
                   <span className="font-semibold text-sm">
-                    {item.mbiCost * item.amount}원
+                    {item.sbBasketPrice}원
                   </span>
                 </div>
               </div>

@@ -5,6 +5,7 @@ const requests = {
   fetchMenuSearch: "menu/search",
   fetchCateSearch: "cate/searchmenu",
   fetchCateSeq: "cate/detail",
+  fetchChildCate: "cate/detail/menu",
   fetchMenuDetail: "menu/list/detail",
   fetchStoreMenu: "store/cart/menu/list",
   fetchStoreMenuDetail: "store/cart/menu/list/detail",
