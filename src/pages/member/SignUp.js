@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "api/axios";
 // 리엑트 훅 폼 라이브러리 사용
 import { useForm } from "react-hook-form";
-import axios from "../../api/axios";
 // 다음 주소
 import Post from "utils/PostCode";
 // css
-import SignUpDiv from "../../style/memberCss/signUpCSS";
-import { Err, Div } from "../../style/memberCss/basicCSS";
+import SignUpDiv from "style/memberCss/signUpCSS";
+import { Err, Div } from "style/memberCss/basicCSS";
 import FindImg from "asset/images/icon_find_sally.png";
 
 const SignUp = () => {
@@ -40,7 +40,6 @@ const SignUp = () => {
     await axios
       .post("member/join", body)
       .then((res) => {
-        console.log(res.data.loginAccount);
         if (res.data.status) {
           alert("수타벅스의 회원이 되신 것을 환영합니다.");
           navigate("/login");
@@ -235,7 +234,6 @@ const SignUp = () => {
               />
             </div>
           </div>
-          {/* 성공하면 /login 위에 함수에서 구현 */}
           <button type="submit" disabled={isSubmitting}>
             회원가입
           </button>
