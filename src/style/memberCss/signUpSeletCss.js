@@ -5,6 +5,7 @@ const SignUpSelectCss = styled.div`
   position: relative;
   .select {
     padding-top: 80px;
+    padding-bottom: 80px;
     display: flex;
     justify-content: space-around;
     align-items: center;

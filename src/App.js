@@ -13,9 +13,9 @@ import Home from "pages/home/Home";
 import NotFound from "./pages/NotFound";
 // 새소식
 import News from "pages/news/News";
-import Notice from "pages/news/notice/Notice";
+import NoticeList from "pages/news/notice/NoticeList";
 import NoticeDetail from "pages/news/notice/NoticeDetail";
-import Event from "pages/news/event/Event";
+import EventList from "pages/news/event/EventList";
 import EventDetail from "pages/news/event/EventDetail";
 // 유저정보
 import Login from "pages/member/Login";
@@ -42,55 +42,41 @@ import BzSignUp from "pages/member/bzmember/BzSignUp";
 import Footer from "components/common/footer/Footer";
 
 function App() {
-  const [event, setEvent] = useState([]);
-  const [notice, setNotice] = useState([]);
+  const [eventList, setEventList] = useState([]);
+  const [noticeList, setNoticeList] = useState([]);
   const [list, setList] = useState([]);
-  const [myStoreInfo, setMyStoreInfo] = useState([]);
-  const [myStoreMenu, setMyStoreMenu] = useState([]);
+
   // ?ediSeq=1
   const fetchData = async () => {
     const rsList = await instance.get(requests.fetchList);
     setList(rsList);
     //새소식
     const event = await instance.get(requests.fetchEvent);
-    setEvent(event.data.event);
+    setEventList(event.data.event);
     const notice = await instance.get(requests.fetchNotice);
-    setNotice(notice.data.notice);
-    // 가게정보
-    const myStoreInfo = await instance.get(requests.fetchMyStoreInfo);
-    setMyStoreInfo(myStoreInfo.list);
-    const myStoreMenu = await instance.get(requests.fetchMyStoreMenu);
-    setMyStoreMenu(myStoreMenu.list.menus);
+    setNoticeList(notice.data.notice);
   };
   useEffect(() => {
     fetchData();
   }, []);
-  // console.log(event);
-  // console.log(myStoreInfo);
-  // console.log(notice);
-  // console.log(myStoreMenu);
   return (
     <Router>
       <Reset />
       <Header />
-
       <Routes>
         <Route path="/" element={<Home />} />
         {/* 새소식 */}
         <Route path="/news" element={<News />} />
-        <Route path="/event" element={<Event event={event} />} />
+        <Route path="/event" element={<EventList eventList={eventList} />} />
         <Route path="/eventdetail/:seq" element={<EventDetail />} />
-        <Route path="/notice" element={<Notice notice={notice} />} />
+        <Route
+          path="/notice"
+          element={<NoticeList noticeList={noticeList} />}
+        />
         <Route path="/noticedetail/:seq" element={<NoticeDetail />} />
         {/* 유저 정보 */}
-        <Route
-          path="/mystore"
-          element={<MyStorePage myStoreInfo={myStoreInfo} />}
-        />
-        <Route
-          path="/mystore/mystoremenu"
-          element={<MyStoreMenu myStoreMenu={myStoreMenu} />}
-        />
+        <Route path="/mystore/:seq" element={<MyStorePage />} />
+        <Route path="/mystore/mystoremenu" element={<MyStoreMenu />} />
         <Route path="/singupselect" element={<SignUpSelect />} />
         <Route path="/login" element={<Login />} />
         <Route path="/bzsignup" element={<BzSignUp />} />

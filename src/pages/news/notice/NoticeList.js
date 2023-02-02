@@ -4,7 +4,7 @@ import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
 import NoticeListLayout from "components/news/notice/noticeList/NoticeListLayout";
 
-const Notice = () => {
+const NoticeList = ({ noticeList }) => {
   return (
     <>
       <PagesTitle title={"공지사항"} />
@@ -14,9 +14,9 @@ const Notice = () => {
         second={"공지사항"}
         secondLink={"notice"}
       />
-      <NoticeListLayout />
+      <NoticeListLayout noticeList={noticeList} />
     </>
   );
 };
 
-export default Notice;
+export default NoticeList;
