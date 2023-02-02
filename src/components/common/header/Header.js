@@ -21,7 +21,7 @@ const Header = () => {
     // className={scrollPosition > 110 ? "original_header" : "change_header"}
   }, []);
   return (
-    <div>
+    <>
       <HeaderCss>
         <div
           className={
@@ -35,7 +35,7 @@ const Header = () => {
           <HeaderRt />
         </div>
       </HeaderCss>
-    </div>
+    </>
   );
 };
 
