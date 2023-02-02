@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import img from "asset/images/banner.jpg";
 import SignUp from "pages/member/SignUp";
 import { logincolor, signupcolor, themecolor } from "utils/color";
+import { midllesize } from "utils/font";
 const homeCss = styled.section`
   position: relative;
   .event {
@@ -101,7 +102,7 @@ const homeCss = styled.section`
           color: #fff;
         }
         h3 {
-          font-size: 42px;
+          font-size: 2.625rem;
           font-weight: bold;
           margin-bottom: 60px;
           position: relative;
@@ -112,7 +113,7 @@ const homeCss = styled.section`
             padding-bottom: 30px;
             b {
               font-weight: bold;
-              font-size: 20px;
+              font-size: ${midllesize};
             }
           }
         }

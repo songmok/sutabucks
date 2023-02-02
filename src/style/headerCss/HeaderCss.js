@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { ordercolor, themeheadercolor } from "utils/color";
+import { bigsize, defaltsize, headertitle, minsize } from "utils/font";
 
 const headerCss = styled.header`
   position: relative;
@@ -33,7 +34,7 @@ const headerCss = styled.header`
       text-align: center;
       .title {
         align-self: center;
-        font-size: 4.06rem;
+        font-size: ${headertitle};
         display: block;
         padding-top: 30px;
         padding-bottom: 45px;
@@ -128,7 +129,7 @@ const headerCss = styled.header`
                       align-items: center;
                       justify-content: left;
                       > a {
-                        font-size: 12px;
+                        font-size: ${minsize};
                         color: rgba(255, 255, 255, 0.6);
                         font-weight: bol;
                       }
@@ -157,7 +158,7 @@ const headerCss = styled.header`
               display: block;
             }
             > span {
-              font-size: 1em;
+              font-size: ${defaltsize};
             }
           }
         }
@@ -181,7 +182,7 @@ const headerCss = styled.header`
             }
             > a {
               display: block;
-              font-size: 1em;
+              font-size: ${defaltsize};
             }
           }
         }
@@ -198,7 +199,7 @@ const headerCss = styled.header`
           background-color: ${ordercolor};
           border: 1px solid #999;
           > a {
-            font-size: 1.5em;
+            font-size: ${bigsize};
             width: 100%;
             height: 100%;
             display: block;

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { footercolor, logincolor, themecolor } from "utils/color";
-import { footersize } from "utils/font";
+import { footercolor } from "utils/color";
+import { minsize } from "utils/font";
 const FooterCss = styled.footer`
   width: 100%;
   border: 1px solid ${footercolor};
@@ -8,7 +8,7 @@ const FooterCss = styled.footer`
   span,
   p {
     color: ${footercolor};
-    font-size: ${footersize};
+    font-size: ${minsize};
   }
   .wrap {
     display: grid;
