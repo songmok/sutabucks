@@ -8,7 +8,6 @@ import NoResult from "./NoResult";
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
 
 const Menu = () => {
   const { cate } = useParams();
@@ -21,39 +20,28 @@ const Menu = () => {
   const [menuBt, setMenuBt] = useState([]);
 
   const fetchData = async () => {
-    if (bt === "all") {
-      await axios
-        .get(
-          `http://haeji.mawani.kro.kr:9999/cate/searchmenu?parentSeq=${cate}&menuName=`
-        )
-        .then((res) => {
-          setSearchData(res.data.list);
-          setStatus(res.data.status);
-        })
-        .catch((err) => {
-          console.log(err);
-          setStatus(err.response.data.status);
-        });
-    } else {
-      await axios
-        .get(`http://haeji.mawani.kro.kr:9999/cate/detail/menu?childSeq=${bt}`)
-        .then((res) => {
-          console.log(res.data.list);
-          setSearchData(res.data.list);
-          setStatus(res.data.status);
-        })
-        .catch((err) => {
-          console.log(err);
-          setStatus(err.response.data.status);
-        });
-    }
+    const params = {
+      parentSeq: cate,
+      menuName: word,
+    };
+    await instance
+      .get(request.fetchCateSearch, {
+        params,
+      })
+      .then((res) => {
+        setSearchData(res.data.list);
+        setStatus(res.data.status);
+      })
+      .catch((err) => {
+        console.log(err);
+        setStatus(err.response.data.status);
+      });
+    // setSearchData(resultSearchData.data.list);
+    // setStatus(resultSearchData.data.status);
   };
   useEffect(() => {
     fetchData();
-  }, [bt]);
-
-  console.log(bt);
-  console.log(searchData);
+  }, []);
 
   const cateData = async () => {
     const params = {
@@ -71,7 +59,7 @@ const Menu = () => {
     cateData();
   }, []);
 
-  const itemList = searchData.map((item) => (
+  const allMenu = searchData.map((item) => (
     <Link
       to={`/menudetail/${item.menuNo}`}
       key={item.menuNo}
@@ -93,6 +81,52 @@ const Menu = () => {
       </div>
     </Link>
   ));
+
+  console.log(bt);
+
+  const subMenu = searchData
+    .filter((item) => item.menuCategorySeq === parseInt(bt))
+    .map((item) => (
+      <Link
+        to={`/menudetail/${item.menuNo}`}
+        key={item.menuNo}
+        className="block group cursor-pointer"
+      >
+        <img
+          // src="./coffee.jpg"
+          src={item.menuUri}
+          alt="coffee"
+          className="w-full transform hover:scale-95 transition duration-300"
+        />
+        <div className="relative pt-3 bg-white">
+          <h3 className="text-sm text-gray-700 group-hover:underline group-hover:underline-offset-4">
+            {item.menuName}
+          </h3>
+          <div className="mt-1.5 flex items-center justify-between text-gray-900">
+            <p className="tracking-wide">{item.menuCost}원</p>
+          </div>
+        </div>
+      </Link>
+    ));
+
+  console.log(searchData);
+  console.log(menuBt);
+
+  console.log(searchData);
+  console.log(status);
+
+  // const handleOnClick = () => {
+  //   fetchData();
+  // };
+  // const handleOnKeyPress = (e) => {
+  //   if (e.key === "Enter") {
+  //     handleOnClick(); // Enter 입력이 되면 클릭 이벤트 실행
+  //   }
+  // };
+  // const clearList = () => {
+  //   setWord("").then(fetchData());
+  // };
+
   return (
     <section className="container mx-auto">
       <PagesTitle title={"메뉴보기"} />
@@ -126,7 +160,7 @@ const Menu = () => {
                   type="radio"
                   name="menu"
                   id={item.pcName}
-                  checked={parseInt(bt) === item.pcSeq}
+                  checked={bt == item.pcSeq}
                   value={item.pcSeq}
                   onClick={(e) => {
                     setBt(e.target.value);
@@ -143,10 +177,52 @@ const Menu = () => {
           </ul>
         </div>
         <main className="lg:col-span-4 ml-2">
+          <div className="flex flex-wrap justify-between items-center lg:mb-7">
+            {/* <form
+              className="flex w-full lg:w-[35%] rounded"
+              style={{ border: "1px solid #1B3C34" }}
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <input
+                type="search"
+                className="px-5 py-2 w-4/5"
+                placeholder="Search Menu"
+                // required
+                value={word}
+                onChange={(e) => {
+                  setWord(e.target.value);
+                }}
+                onKeyPress={handleOnKeyPress}
+              />
+              <button
+                type="button"
+                className="flex w-1/1 items-center justify-center px-4"
+                onClick={handleOnClick}
+              >
+                <svg
+                  className="w-6 h-6 text-gray-600"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                </svg>
+              </button>
+            </form> */}
+          </div>
           <div className="coffee mb-10">
             <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
-              {itemList}
+              {bt === "all" ? allMenu : subMenu}
             </div>
+            {/* {status ? (
+              <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-10">
+                <MenuList searchData={searchData} />
+              </div>
+            ) : (
+              <NoResult />
+            )} */}
           </div>
         </main>
       </div>

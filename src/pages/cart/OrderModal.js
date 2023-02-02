@@ -7,17 +7,20 @@ import instance from "../../api/axios";
 import request from "../../api/request";
 
 const OrderModal = ({
-  amount,
-  setAmount,
+  // amount,
+  // setAmount,
   modalIsOpen,
   setModalIsOpen,
   storeNo,
   menuSeq,
+  miSeq,
 }) => {
   // const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [option, setOption] = useState("Tall");
+  const [option, setOption] = useState(1);
   const [modalData, setModalData] = useState([]);
-  // const [option, setOption] = useState([]);
+  const [amount, setAmount] = useState(1);
+
+  const [storeSeq, setStoreSeq] = useState([]);
 
   const getModal = async () => {
     const params = {
@@ -27,7 +30,8 @@ const OrderModal = ({
     const modalPosts = await instance.get(request.fetchStoreMenuDetail, {
       params,
     });
-    // console.log(modalPosts.data.MenuDetail.option);
+    console.log(modalPosts.data.MenuDetail);
+    setStoreSeq(modalPosts.data.MenuDetail.sbSmcSeq);
     setModalData(modalPosts.data.MenuDetail.detail);
     // setOption(modalPosts.data.MenuDetail.options[0].option);
   };
@@ -36,7 +40,7 @@ const OrderModal = ({
     getModal();
   }, [menuSeq]);
 
-  console.log(modalData);
+  // console.log(storeSeq);
   console.log(option);
 
   const handleOptionChange = (changeEvent) => {
@@ -59,23 +63,24 @@ const OrderModal = ({
 
   const pushCart = () => {
     const body = {
-      "miSeq" : 26,
-  
-      "shoppingBasketVo":{
-          "sbSmcSeq":2,
-          "sbNumber":1
+      miSeq: miSeq,
+      sbSmcSeq: storeSeq,
+      shoppingBasketVo: {
+        sbSmcSeq: menuSeq,
+        sbNumber: amount,
       },
-      "shoppingBasketOption":[
-          {
-              "sboNumber":"1",
-              "sboMoiSeq":"1"
-          }
-      ]
-  };
+      shoppingBasketOption: [
+        {
+          sboNumber: 1,
+          sboMoiSeq: option,
+        },
+      ],
+    };
     axios
       .put("http://192.168.0.190:9999/cart/add", body)
       .then((res) => {
         console.log(res);
+        console.log(body);
       })
       .catch((err) => {
         console.log(err);
@@ -175,7 +180,7 @@ const OrderModal = ({
                   +
                 </button>
               </div>
-              <ul className="grid grid-cols-3 gap-x-3 my-2">
+              <ul className="flex w-[65%] justify-center items-stretch gap-2 my-2">
                 {/* <ul className="grid grid-cols-3 gap-x-3 m-1 max-w-md mx-auto"> */}
                 {/* {option.map((item) => (
                   <li className="relative" key={item.optionName}>
@@ -194,55 +199,55 @@ const OrderModal = ({
                     </label>
                   </li>
                 ))} */}
-                <li className="relative">
+                <li className="relative grow">
                   <input
                     className="sr-only peer"
                     type="radio"
-                    value="Tall"
+                    value="1"
                     name="size"
-                    id="tall"
-                    checked={option === "Tall"}
+                    id="1"
+                    checked={parseInt(option) === 1}
                     onChange={handleOptionChange}
                   />
                   <label
-                    className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#CCAA86] peer-checked:ring-2 peer-checked:border-transparent"
-                    htmlFor="tall"
+                    className="flex h-full items-center justify-center text-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#CCAA86] peer-checked:ring-2 peer-checked:border-transparent"
+                    htmlFor="1"
                   >
                     Tall
                   </label>
                 </li>
-                <li className="relative">
+                <li className="relative grow">
                   <input
                     className="sr-only peer"
                     type="radio"
-                    value="Grande"
+                    value="2"
                     name="size"
-                    id="grande"
-                    checked={option === "Grande"}
+                    id="2"
+                    checked={parseInt(option) === 2}
                     onChange={handleOptionChange}
                   />
                   <label
-                    className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#B05B10] peer-checked:ring-2 peer-checked:border-transparent"
-                    htmlFor="grande"
+                    className="flex h-full items-center justify-center text-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#B05B10] peer-checked:ring-2 peer-checked:border-transparent"
+                    htmlFor="2"
                   >
-                    Grande
+                    Grande<br />+ 500
                   </label>
                 </li>
-                <li className="relative">
+                <li className="relative grow">
                   <input
                     className="sr-only peer"
                     type="radio"
-                    value="Venti"
+                    value="3"
                     name="size"
-                    id="venti"
-                    checked={option === "Venti"}
+                    id="3"
+                    checked={parseInt(option) === 3}
                     onChange={handleOptionChange}
                   />
                   <label
-                    className="flex justify-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#480405] peer-checked:ring-2 peer-checked:border-transparent"
-                    htmlFor="venti"
+                    className="flex h-full items-center justify-center text-center px-2 py-3 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#480405] peer-checked:ring-2 peer-checked:border-transparent"
+                    htmlFor="3"
                   >
-                    Venti
+                    Venti<br />+ 1000
                   </label>
                 </li>
               </ul>
