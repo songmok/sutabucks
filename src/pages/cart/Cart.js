@@ -8,11 +8,11 @@ const Carttest = () => {
   const [totalPrice, setTotalPrice] = useState("");
   const [cartList, setCartList] = useState([]);
 
-  const dispatch = useDispatch();
+  // const userData = useSelector((state) => state.user);
+  // const miSeq = userData.miSeq;
 
-  const userData = useSelector((state) => state.user);
-  // console.log(userData.miSeq);
-  const miSeq = userData.miSeq;
+  // console.log(miSeq);
+  const miSeq = 70;
 
   const getPosts = async () => {
     const posts = await axios.get(
@@ -23,12 +23,6 @@ const Carttest = () => {
     setCartList(items);
     setTotalPrice(posts.data.totalPrice);
   };
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
-  // console.log(cartList);
 
   const cartItems = cartList.map((item) => {
     return {
@@ -42,6 +36,12 @@ const Carttest = () => {
       sbSmcSeq: item["storeMenuConnect"].smcSeq,
     };
   });
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  // console.log(cartList);
 
   console.log(cartItems);
 
@@ -128,7 +128,28 @@ const Carttest = () => {
                   </div>
                 </div>
                 <div className="w-1/6 flex justify-center">
-                  <button>
+                  <button
+                    onClick={() => {
+                      if (item.sbNumber > 1) {
+                        const body = {
+                          miSeq: miSeq,
+                          sbSmcSeq: item.sbSmcSeq,
+                          sbNumber: --item.sbNumber,
+                          sbOrderNumber: item.sbOrderNumber,
+                        };
+                        axios
+                          .patch("http://192.168.0.190:9999/cart/update", body)
+                          .then((res) => {
+                            console.log(res);
+                            console.log(body);
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                            console.log(body);
+                          });
+                      }
+                    }}
+                  >
                     <svg
                       className="fill-current text-gray-600 w-3"
                       viewBox="0 0 448 512"
@@ -137,7 +158,26 @@ const Carttest = () => {
                     </svg>
                   </button>
                   <span className="mx-4">{item.sbNumber}</span>
-                  <button>
+                  <button
+                    onClick={() => {
+                      const body = {
+                        miSeq: miSeq,
+                        sbSmcSeq: item.sbSmcSeq,
+                        sbNumber: ++item.sbNumber,
+                        sbOrderNumber: item.sbOrderNumber,
+                      };
+                      axios
+                        .patch("http://192.168.0.190:9999/cart/update", body)
+                        .then((res) => {
+                          console.log(res);
+                          console.log(body);
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                          console.log(body);
+                        });
+                    }}
+                  >
                     <svg
                       className="fill-current text-gray-600 w-3"
                       viewBox="0 0 448 512"
