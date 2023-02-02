@@ -1,29 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactModal from "react-modal";
 
 import FindImg from "asset/images/icon_find_sally.png";
 import { useNavigate } from "react-router-dom";
-// import axios from "../../api/axios";
+import { useSelector } from "react-redux";
+import axios from "api/axios";
 
 const CardModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+
+  const num = user.miSeq;
+
   const clickSubmit = () => {
     navigate("/membercard");
-    
-    // 회원번호 생성시 사용!
 
-    // const body = {
-    //   memberNo: user.miSeq,
-    //   cardName: user.name,
-    // };
-    // axios
-    //   .put("card/new", body)
-    //   .then((res) => {
-    //     console.log(res);
-    //     navigate("/membercard");
-    //     alert("멤버십 카드가 생성되었습니다.");
-    //   })
-    //   .catch((err) => console.log(err));
+    const body = {
+      cardName: user.miNickname,
+    };
+
+    console.log(body);
+    axios
+      .put("card/new?memberNo=" + num, body)
+      .then((res) => {
+        console.log(res);
+        navigate("/membercard");
+        alert("멤버십 카드가 생성되었습니다.");
+      })
+      .catch((err) => console.log(err));
   };
 
   const customStyles = {

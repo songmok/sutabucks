@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import LoginDiv, { BgSection } from "../../style/memberCss/loginCSS";
@@ -11,7 +11,7 @@ import { loginAccount } from "../../reducer/loggedState";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const userNickname = useSelector((state) => state.user.miNickname);
   // const [validText, setValidText] = useState("");
   // const [isValid, setIsValid] = useState({
   //   isEmail: false,
@@ -21,10 +21,16 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: "a1@aaa.net",
+      pw:"aaaa1111"
+    },
+  });
 
-  const onSubmit = (data, user) => {
-    console.log("데이터", data);
+  const onSubmit = (data) => {
+    // console.log("데이터", data);
+
     // const exp = /\S+@\S+\.\S+/;
     // if (!exp.test(email)) {
     //   setValidText("이메일을 확인해주세요");
@@ -41,30 +47,16 @@ const Login = () => {
     axios
       .post("member/login", body)
       .then((res) => {
-        alert(`${user.miNickname}님 환영합니다.`);
-        console.log("회원정보", res.data);
+        alert(`${userNickname} 님 환영합니다.`);
+        // console.log("회원정보", res.data);
         dispatch(loginAccount(res.data));
-        console.log(loginAccount);
+        // console.log(loginAccount);
         // 나중에 홈으로 변경
         navigate("/mypage");
       })
       .catch((err) => {
         console.log(err);
       });
-
-    // axios
-    //   .post("member/myinfo")
-    //   .then((res) => {
-    //     console.log("설마?", res.data);
-    //     console.log("넌?", res.data.loginAccount);
-    //     dispatch(loginAccount(res.data.loginAccount));
-    //     alert(`${user.nickname}님 환영합니다.`);
-    //     // 나중에 홈으로 변경
-    //     navigate("/mypage");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   // 아이디 저장체크시

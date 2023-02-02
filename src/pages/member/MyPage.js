@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import SignUpDiv from "../../style/memberCss/signUpCSS";
-import { Div, Err } from "../../style/memberCss/basicCSS";
+import { Err } from "../../style/memberCss/basicCSS";
 import { useForm } from "react-hook-form";
 import CloseModal from "././modals/CloseModal";
 import CardModal from "././modals/CardModal";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAccount } from "../../reducer/loggedState";
-import axios from "../../api/axios";
+import axios from "api/axios";
 import { useNavigate } from "react-router-dom";
+import { loginAccount } from "reducer/loggedState";
 
 const MyPage = () => {
+  console.log("렌더링...");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(user);
+
   const navigate = useNavigate();
   const {
     register,
@@ -22,12 +23,38 @@ const MyPage = () => {
   } = useForm({
     defaultValues: {
       email: `${user.miId}`,
+      name: `${user.miName}`,
       gender: "male",
+      nickName: `${user.miNickname}`,
+      birth: `${user.miBirth}`,
+      tel: `${user.miPhoneNum}`,
+      address: `${user.miAddress}`,
+      detailAddress: `${user.miDetailAddress}`,
+      pw: `${user.miPwd}`,
+      pwConfirm: `${user.miPwd}`,
     },
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log("데이터", data);
+    const body = {
+      miId: data.email,
+      miPwd: data.pw,
+      miName: data.name,
+      miPhoneNum: data.tel,
+      miAdress: data.address,
+      miDetailAdress: data.detailAddress,
+    };
+    axios
+      .patch("member/edit?miSeq=" + user.miSeq, body)
+      .then((res) => {
+        console.log(res);
+        alert("회원정보가 수정되었습니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("회원정보 수정에 실패하였습니다. 다시 시도해주세요.");
+      });
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +103,7 @@ const MyPage = () => {
                 maxLength: 10,
               })}
             />
-            <span className="absolute top-16 right-16 ">
+            <span className="absolute top-11 right-16 ">
               <label className="pr-5">
                 <input
                   type="radio"
@@ -117,11 +144,11 @@ const MyPage = () => {
               type="date"
               placeholder="생년월일을 입력하세요."
               className="mr-56"
-              {...register("year", {
+              {...register("birth", {
                 required: "생년월일을 입력해주세요.",
               })}
             />
-            {errors.year && <Err>{errors.year.message}</Err>}
+            {errors.birth && <Err>{errors.birth.message}</Err>}
             <span className="mt-3">
               생일 무료 음료 쿠폰은 1년에 1번만 발행되므로, 변경 후에도 해당
               <br />
@@ -141,29 +168,28 @@ const MyPage = () => {
           </div>
           <div>
             <label>배송 주소</label>
-            <input type="text" />
+            <input type="text" {...register("address")} />
           </div>
           <div>
             <label>상세 주소</label>
-            <input type="text" />
+            <input type="text" {...register("detailAddress")} />
           </div>
           <div>
-            <label>비밀번호</label>
+            <label>새 비밀번호</label>
             <input
               type="password"
               autoComplete="on"
               {...register("pw", {
-                required: "비밀번호를 입력해주세요.",
                 minLength: {
-                  value: 6,
-                  message: "최소 6자 이상의 비밀번호를 입력해주세요.",
+                  value: 8,
+                  message: "최소 8자 이상의 비밀번호를 입력해주세요.",
                 },
                 maxLength: {
                   value: 16,
                   message: "최소 16자 이하의 비밀번호를 입력해주세요.",
                 },
                 pattern: {
-                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
                   message: "영문, 숫자를 혼용하여 입력해주세요.",
                 },
               })}
@@ -171,12 +197,11 @@ const MyPage = () => {
             {errors.pw && <Err>{errors.pw.message}</Err>}
           </div>
           <div>
-            <label>비밀번호 확인</label>
+            <label>새 비밀번호 확인</label>
             <input
               type="password"
               autoComplete="on"
               {...register("pwConfirm", {
-                required: "비밀번호를 확인해주세요!",
                 validate: {
                   matchesPreviousPassword: (value) => {
                     const { pw } = getValues();
