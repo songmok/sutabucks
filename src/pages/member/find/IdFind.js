@@ -9,27 +9,26 @@ const IdFind = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const idFind = async () => {
-    setIsOpen(true);
-
-    // await axios
-    //   .post("member/phoneNum", body)
-    //   .then((res) => {
-    //     if (res.data.status) {
-    //       console.log("뭐지", res.data);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log("오류", err);
-    //     setIsOpen(false);
-    //     alert("정보를 재입력해주세요.");
-    //   });
-
     const body = {
       miName: name,
       miPhoneNum: tel,
     };
+    console.log(body);
+    // 405 err 시 api 주소 정확히 확인 요청.
     await axios
-      .post("member/findId/phone", body)
+      .post("member/findid/phone", body)
+      .then((res) => {
+        console.log("뭐지", res.data);
+        setIsOpen(true);
+      })
+      .catch((err) => {
+        console.log("오류", err);
+        setIsOpen(false);
+        alert("정보를 재입력해주세요.");
+      });
+      
+    await axios
+      .post("member/phoneNum", body)
       .then((res) => {
         if (res.data.status) {
           console.log("뭐지", res.data);

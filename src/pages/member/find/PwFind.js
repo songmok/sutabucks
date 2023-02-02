@@ -10,11 +10,8 @@ const PwFind = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const idCheck = () => {
-    const body = {
-      mild: email,
-    };
     axios
-      .get("member/findpwd/checkid", body)
+      .get("member/findpwd/checkid?miId=" + email)
       .then((res) => {
         console.log(res.data);
         alert("아이디가 존재합니다.");
@@ -29,16 +26,16 @@ const PwFind = () => {
   };
 
   const pwFind = () => {
-    setIsOpen(true);
     axios
       .post("member/findpwd/phone", { miName: name, miPhoneNum: tel })
       .then((res) => {
         console.log(res.data);
+        alert(res.data.message);
       })
       .catch((err) => {
         console.log(err);
-        // setIsOpen(false);
-        // alert("정보를 재입력해주세요.");
+        setIsOpen(false);
+        alert("정보를 재입력해주세요.");
       });
   };
 

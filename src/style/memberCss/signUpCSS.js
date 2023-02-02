@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 const SignUpDiv = styled.div`
   width: 100%;
   max-width: 570px;
-  max-height: 500px;
+  /* max-height: 500px; */
   margin: 0 auto;
   div {
     padding: 20px;

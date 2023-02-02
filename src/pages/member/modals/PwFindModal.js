@@ -2,17 +2,18 @@ import React from "react";
 import ReactModal from "react-modal";
 import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
+import Timer from "./Timer";
 
 const PwFindModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
 
   const clickSubmit = () => {
     axios
-      .get("/member/finddid")
+      .get("/member/findpwd")
       .then((res) => {
         console.log(res.data);
         alert("인증번호가 확인되었습니다.");
-        navigate("/IdResult");
+        navigate("/PwResult");
       })
       .catch((err) => {
         console.log(err);
@@ -34,7 +35,7 @@ const PwFindModal = ({ isopen, setIsOpen }) => {
       left: "50%",
       right: "auto",
       bottom: "auto",
-      width: "29%%",
+      width: "420px",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#fff",
     },
@@ -45,7 +46,7 @@ const PwFindModal = ({ isopen, setIsOpen }) => {
       <section>
         <div className="p-8 pt-4 border border-[#1B3C34]" aria-modal="true">
           <button
-            className="absolute block top-7 right-7 text-gray-600"
+            className="absolute block top-6 right-6 text-gray-600"
             onClick={() => setIsOpen(false)}
           >
             <svg
@@ -63,24 +64,20 @@ const PwFindModal = ({ isopen, setIsOpen }) => {
               />
             </svg>
           </button>
-          <div className="mt-6 space-y-6 ">
-            {/* <div>
-              <img
-                src={FindImg}
-                alt="coffee"
-                className="w-56 mx-auto mt-16 mb-8"
-              />
-            </div> */}
-            <span>회원정보에 등록한 휴대폰으로 인증</span>
-            <form className=" flex flex-col flex- space-y-4 text-cente r">
+          <div className="mt-6 space-y-6">
+            <p className=" font-semibold text-center">
+              회원정보에 등록한 휴대폰으로 인증
+            </p>
+            <form className=" flex flex-col space-y-3 pt-5">
               <label className="justify-items-start">인증번호 입력</label>
               <input type="text" className=" border border-black pt-4" />
+              <Timer setIsOpen={setIsOpen} />
               <button
                 onClick={() => clickSubmit()}
                 className="block w-full px-5 py-3 text-sm text-gray-100
                 bg-[#1B3C34] rounded"
               >
-                아이디 찾기
+                비밀번호 찾기
               </button>
               <button
                 className="inline-block text-sm text-gray-500 underline transition underline-offset-4 hover:text-gray-600"

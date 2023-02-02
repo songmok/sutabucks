@@ -1,7 +1,8 @@
 import React from "react";
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
-const NoticeDetail = ({ noticeDetail }) => {
+import NoticeDetailLayout from "components/news/notice/noticeDetail/NoticeDetailLayout";
+const NoticeDetail = () => {
   return (
     <>
       <PagesTitle title={"공지사항"} />
@@ -11,6 +12,7 @@ const NoticeDetail = ({ noticeDetail }) => {
         second={"공지사항"}
         secondLink={"notice"}
       />
+      <NoticeDetailLayout />
     </>
   );
 };

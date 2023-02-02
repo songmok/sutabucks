@@ -15,7 +15,7 @@ const requests = {
   fetchNotice: "admin/noticelist",
   fetchNoticeDetail: "admin/noticedetail",
   //가게정보
-  fetchMyStoreInfo: "store/mystore",
+  fetchMyStoreInfo: "store/search",
   fetchMyStoreMenu: "store/menu/list",
 };
 export default requests;

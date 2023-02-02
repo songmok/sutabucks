@@ -1,10 +1,9 @@
 import React from "react";
-
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
 import EventListLayout from "components/news/event/eventList/EventListLayout";
 
-const Event = ({ event }) => {
+const EventList = ({ eventList }) => {
   return (
     <>
       <PagesTitle title={"이벤트"} />
@@ -14,9 +13,9 @@ const Event = ({ event }) => {
         second={"이벤트"}
         secondLink={"event"}
       />
-      <EventListLayout event={event} />
+      <EventListLayout eventList={eventList} />
     </>
   );
 };
 
-export default Event;
+export default EventList;

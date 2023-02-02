@@ -1,17 +1,14 @@
 import styled from "@emotion/styled";
-import { logincolor, themecolor } from "utils/color";
-import { footersize } from "utils/font";
+import { footercolor } from "utils/color";
+import { minsize } from "utils/font";
 const FooterCss = styled.footer`
-  position: fixed;
-  bottom: 0px;
-
   width: 100%;
-  background-color: #111;
+  border: 1px solid ${footercolor};
   a,
   span,
   p {
-    color: #ccc;
-    font-size: ${footersize};
+    color: ${footercolor};
+    font-size: ${minsize};
   }
   .wrap {
     display: grid;
@@ -24,11 +21,11 @@ const FooterCss = styled.footer`
       .f-list {
         position: relative;
         &:first-of-type > a {
-          color: #09f550;
+          color: #07af3a;
         }
         > a {
           &:hover {
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid ${footercolor};
           }
         }
       }

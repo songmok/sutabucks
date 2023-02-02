@@ -2,11 +2,27 @@ import React, { useState } from "react";
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import FindImg from "asset/images/icon_find_sally.png";
+import axios from "api/axios";
+import { useSelector } from "react-redux";
 
 const CloseModal = ({ isopen, setIsOpen }) => {
+  const miSeq = useSelector((state) => state.user.miSeq);
   const navigate = useNavigate();
+
   const clickSubmit = () => {
     alert("정말로 탈퇴하시겠습니까?");
+    const body = { miSeq: miSeq };
+    console.log("body", body);
+    axios
+      .patch("member/edit", body)
+      .then((res) => {
+        console.log(res);
+        alert("탈퇴되었습니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("회원 탈퇴에 실패하였습니다. 다시 시도해주세요.");
+      });
   };
 
   const customStyles = {

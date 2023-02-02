@@ -6,6 +6,7 @@ import { persistReducer } from "redux-persist";
 
 import cartSlice from "./cartSlice";
 import loggedState from "./loggedState";
+
 const reducers = combineReducers({
   cart: cartSlice.reducer,
   user: loggedState.reducer,

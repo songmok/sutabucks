@@ -56,7 +56,6 @@ const HomeRolling = () => {
             delay: 2500,
             disableOnInteraction: false,
           }}
-          // touchRatio="0"
           modules={[Autoplay]}
           loop="true"
           className="mySwiper"

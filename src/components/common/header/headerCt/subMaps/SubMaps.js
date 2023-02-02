@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 const SubMaps = ({ subMaps, count, setCount }) => {
-  // console.log(sub);
   return (
     <>
       {count === 3 ? (
@@ -27,6 +26,4 @@ const SubMaps = ({ subMaps, count, setCount }) => {
     </>
   );
 };
-
 export default SubMaps;
-// <SubMaps />
