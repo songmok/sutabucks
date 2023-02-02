@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import cardImg from "asset/images/card.png";
 import CardQrModal from "./modals/CardQrModal";
+import axios from "api/axios";
+import { useSelector } from "react-redux";
 
 const MemberCard = () => {
+  const miSeq = useSelector((state) => state.user.miSeq);
   const btStyle = {
     // position: "absolute",
     // top: "24.5%",
@@ -16,8 +19,18 @@ const MemberCard = () => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
-  const closeAccount = () => {
+  const chargeCard = () => {
     setIsOpen(true);
+    axios.get("card/detail?memberNo=" + miSeq);
+  };
+  const closeCard = () => {
+    axios
+      .delete("card/delete?memberNo=" + miSeq)
+      .then((res) => {
+        console.log(res);
+        alert("멤버십 카드가 삭제되었습니다.");
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <>
@@ -39,8 +52,11 @@ const MemberCard = () => {
           <span className="pb-6 text-lg">
             카드명: 닉네임 <br /> 카드잔액 : 10000원
           </span>
-          <button style={btStyle} onClick={closeAccount}>
+          <button style={btStyle} onClick={chargeCard}>
             충전하기
+          </button>
+          <button style={btStyle} onClick={closeCard}>
+            카드삭제
           </button>
           <CardQrModal isopen={isOpen} setIsOpen={setIsOpen} />
         </div>

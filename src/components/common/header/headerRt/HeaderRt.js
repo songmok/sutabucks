@@ -1,14 +1,16 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import cartImg from "asset/images/cart.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAccount } from "reducer/loggedState";
 const HeaderRt = () => {
   const cartAmount = useSelector((state) => state.cart);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const logOutFn = () => {
-    console.log(sessionStorage())
+    dispatch(logoutAccount());
     navigate("/login");
   };
 

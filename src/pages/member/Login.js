@@ -23,7 +23,8 @@ const Login = () => {
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      email: "aaa@aaa.net",
+      email: "a1@aaa.net",
+      pw:"aaaa1111"
     },
   });
 

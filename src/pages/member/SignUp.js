@@ -150,7 +150,7 @@ const SignUp = () => {
                     type="radio"
                     name="gender"
                     className="accent-green-800 shadow-none"
-                    value="male"
+                    value="남"
                     {...register("gender")}
                   />
                   남자
@@ -160,7 +160,7 @@ const SignUp = () => {
                     type="radio"
                     name="gender"
                     className="accent-green-800"
-                    value="female"
+                    value="여"
                     {...register("gender")}
                   />
                   여자

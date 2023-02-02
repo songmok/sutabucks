@@ -7,8 +7,10 @@ import CardModal from "././modals/CardModal";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "api/axios";
 import { useNavigate } from "react-router-dom";
+import { loginAccount } from "reducer/loggedState";
 
 const MyPage = () => {
+  console.log("렌더링...");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
@@ -28,6 +30,8 @@ const MyPage = () => {
       tel: `${user.miPhoneNum}`,
       address: `${user.miAddress}`,
       detailAddress: `${user.miDetailAddress}`,
+      pw: `${user.miPwd}`,
+      pwConfirm: `${user.miPwd}`,
     },
   });
 
@@ -40,11 +44,9 @@ const MyPage = () => {
       miPhoneNum: data.tel,
       miAdress: data.address,
       miDetailAdress: data.detailAddress,
-      miSeq: user.miSeq,
     };
-    console.log("터치마바디", body);
     axios
-      .patch("member/edit", body)
+      .patch("member/edit?miSeq=" + user.miSeq, body)
       .then((res) => {
         console.log(res);
         alert("회원정보가 수정되었습니다.");
@@ -58,7 +60,6 @@ const MyPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const closeAccount = () => {
     setIsOpen(true);
-    
   };
   const [isCard, setIsCard] = useState(false);
   const closeCard = () => {
@@ -97,7 +98,6 @@ const MyPage = () => {
             <input
               type="text"
               className="w-72"
-              disabled
               {...register("name", {
                 required: "이름을 입력해주세요.",
                 maxLength: 10,

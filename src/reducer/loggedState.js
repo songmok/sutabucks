@@ -30,7 +30,7 @@ const loggedState = createSlice({
       state.miSeq = action.payload.data.miSeq;
       state.miState = action.payload.data.miState;
     },
-    logoutAccount: (state) => {
+    logoutAccount: (state, action) => {
       state.miId = "";
       state.miName = "";
       state.miNickname = "";
