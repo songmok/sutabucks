@@ -32,7 +32,7 @@ const loggedState = createSlice({
       state.miSeq = action.payload.data.miSeq;
       state.miStatus = action.payload.data.miStatus;
       state.miGroup = action.payload.data.miGroup;
-      state.memberId = action.payload.data.memberId;
+      state.memberId = action.payload.memberId;
     },
     logoutAccount: (state, action) => {
       state.miId = "";

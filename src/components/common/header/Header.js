@@ -32,6 +32,9 @@ const Header = () => {
           </Link>
           <HeaderCt />
           <HeaderRt />
+          <button className="text-lg absolute ">
+            <Link to="/teammember">멤버소개</Link>
+          </button>
         </div>
       </HeaderCss>
     </>

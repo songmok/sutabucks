@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactModal from "react-modal";
-import axios from "../../../api/axios";
-import { useNavigate } from "react-router-dom";
 
-const CardQrModal = ({ isopen, setIsOpen }) => {
-  const navigate = useNavigate();
+const CardQrModal = ({ isopen, setIsOpen, detail }) => {
   const clickSubmit = () => {
     alert("충전이 완료되었습니다.");
   };
@@ -23,7 +20,7 @@ const CardQrModal = ({ isopen, setIsOpen }) => {
       left: "50%",
       right: "auto",
       bottom: "auto",
-      width: "35%",
+      width: "27%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#fff",
     },
@@ -52,18 +49,15 @@ const CardQrModal = ({ isopen, setIsOpen }) => {
               />
             </svg>
           </button>
-          <div className="mt-6 space-y-6 ">
-            {/* <div>
-              <img
-                src={FindImg}
-                alt="coffee"
-                className="w-56 mx-auto mt-16 mb-8"
-              />
-            </div> */}
+          <div className="mt-6 ">
             <span>충전을 위해 QR코드를 스캔해주세요.</span>
-            <form className=" flex flex-col flex- space-y-4 text-cente r">
-              {/* QR코드 */}
-              <img />
+            <form className=" flex flex-col flex- space-y-4 text-center">
+              {/* qr 이미지 작업 완료되면 풀기 */}
+              <img
+                src={detail.cardQRUri}
+                alt="card"
+                className="w-56 mx-auto mt-6 mb-6"
+              />
               <button
                 onClick={() => clickSubmit()}
                 className="block w-full px-5 py-3 text-sm text-gray-100
