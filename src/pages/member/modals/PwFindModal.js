@@ -10,6 +10,7 @@ const PwFindModal = ({ isopen, setIsOpen }) => {
 
   const clickSubmit = () => {
     setNum();
+    console.log(num);
     axios
       .get("/member/findpwd?authNum=" + num)
       .then((res) => {

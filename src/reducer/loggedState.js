@@ -11,7 +11,9 @@ const initialState = {
   miDetailAddress: "",
   miBusinessNum: "",
   miSeq: "",
-  miState: "",
+  miStatus: "",
+  miGroup: "",
+  memberId: "",
 };
 
 const loggedState = createSlice({
@@ -28,7 +30,9 @@ const loggedState = createSlice({
       state.miDetailAddress = action.payload.data.miDetailAddress;
       state.miBusinessNum = action.payload.data.miBusinessNum;
       state.miSeq = action.payload.data.miSeq;
-      state.miState = action.payload.data.miState;
+      state.miStatus = action.payload.data.miStatus;
+      state.miGroup = action.payload.data.miGroup;
+      state.memberId = action.payload.data.memberId;
     },
     logoutAccount: (state, action) => {
       state.miId = "";
@@ -40,7 +44,9 @@ const loggedState = createSlice({
       state.miDetailAddress = "";
       state.miBusinessNum = "";
       state.miSeq = "";
-      state.miState = "";
+      state.miStatus = "";
+      state.miGroup = "";
+      state.memberId = "";
     },
   },
 });

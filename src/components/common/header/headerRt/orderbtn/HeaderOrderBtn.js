@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 const HeaderOrderBtn = ({ user }) => {
   return (
     <>
-      {user.miBusinessNum === "" ? (
+      {user.miGroup === 2 ? (
         <div className="header-right-bottom">
           <div className="order">
             <Link to="/order">
-              <span>주문메뉴</span>
+              <span>My store</span>
             </Link>
           </div>
         </div>
@@ -15,7 +15,7 @@ const HeaderOrderBtn = ({ user }) => {
         <div className="header-right-bottom">
           <div className="order">
             <Link to="/order">
-              <span>My store</span>
+              <span>주문메뉴</span>
             </Link>
           </div>
         </div>

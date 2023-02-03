@@ -4,16 +4,15 @@ import { Err } from "../../style/memberCss/basicCSS";
 import { useForm } from "react-hook-form";
 import CloseModal from "././modals/CloseModal";
 import CardModal from "././modals/CardModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "api/axios";
 import { useNavigate } from "react-router-dom";
-import { loginAccount } from "reducer/loggedState";
+import { logoutAccount } from "reducer/loggedState";
 
 const MyPage = () => {
   console.log("렌더링...");
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -47,8 +46,7 @@ const MyPage = () => {
       .patch("member/edit?miSeq=" + user.miSeq, body)
       .then((res) => {
         alert("회원정보가 수정되었습니다.");
-        console.log(body);
-        // dispatch(loginAccount(body));
+        dispatch(logoutAccount());
         navigate("/login");
       })
       .catch((err) => {
@@ -83,10 +81,15 @@ const MyPage = () => {
       <div className="text-center text-3xl mb-8 mt-14 ">
         개인정보 확인 및 수정
       </div>
-      <button style={btStyle} onClick={closeCard}>
-        멤버십 카드
-      </button>
+      {user.miGroup === 2 ? (
+        ""
+      ) : (
+        <button style={btStyle} onClick={closeCard}>
+          멤버십 카드
+        </button>
+      )}
       <CardModal isopen={isCard} setIsOpen={setIsCard} />
+      {/* <CardModal isopen={isCard} setIsOpen={setIsCard} /> */}
       <SignUpDiv>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
@@ -218,8 +221,8 @@ const MyPage = () => {
           </div>
           <button type="submit">정보수정</button>
         </form>
-        {/* 회원탈퇴 모달창만들기 */}
         <button onClick={closeAccount}>회원 탈퇴</button>
+        {/* 회원탈퇴 모달창 */}
         <CloseModal isopen={isOpen} setIsOpen={setIsOpen} />
       </SignUpDiv>
     </>

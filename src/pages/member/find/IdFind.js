@@ -18,16 +18,12 @@ const IdFind = () => {
     await axios
       .post("member/findid/phone", body)
       .then((res) => {
-        console.log("뭐지", res.data);
         setIsOpen(true);
       })
       .catch((err) => {
-        console.log("오류", err);
         setIsOpen(false);
         alert("정보를 재입력해주세요.");
       });
-      
-
   };
 
   return (
@@ -55,7 +51,7 @@ const IdFind = () => {
           />
         </form>
       </FindDiv>
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-[191px]">
         <Bt onClick={idFind}>아이디 찾기</Bt>
       </div>
       {}
