@@ -7,10 +7,17 @@ const Payment = () => {
       <div className="py-16 px-4 md:px-6 2xl:px-0 flex justify-center items-center">
         <div className="flex flex-col justify-start items-start w-full space-y-9">
           <div className="flex flex-col justify-center space-y-6 w-full">
+            <div className="flex justify-between items-center bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
+              <span className="text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
+                총 결제 금액
+              </span>
+              <span className="text-2xl mr-24">원</span>
+            </div>
             <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
               <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                 결제
               </span>
+
               <div className="flex flex-col itmes-center w-full">
                 <table className="mx-5">
                   <tr className="flex flex-col justify-start py-7">

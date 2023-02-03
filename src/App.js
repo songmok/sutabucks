@@ -27,11 +27,11 @@ import PwResult from "pages/member/find/PwResult";
 import MyPage from "pages/member/MyPage";
 import MemberCard from "pages/member/MemberCard";
 // 메뉴 및 상품
-import Cart from "pages/cart/Cart";
-import Order from "pages/cart/Order";
+import Cart from "pages/cart/cart/Cart";
+import Order from "pages/cart/order/Order";
 import Checkout from "pages/cart/Checkout";
-import Menu from "pages/menu/Menu";
-import Menudetail from "pages/menu/Menudetail";
+import Menu from "pages/menu/menuList/Menu";
+import Menudetail from "pages/menu/menuDetail/Menudetail";
 import Maps from "pages/maps/Maps";
 import Payment from "pages/cart/Payment";
 
@@ -40,7 +40,7 @@ import MyStorePage from "pages/mystore/MyStorePage";
 import MyStoreMenu from "pages/mystore/MyStoreMenu";
 import BzSignUp from "pages/member/bzmember/BzSignUp";
 import Footer from "components/common/footer/Footer";
-import MenuFood from "pages/menu/MenuFood";
+
 import QrMob from "pages/qrPage/QrMob";
 
 function App() {
@@ -93,7 +93,6 @@ function App() {
         <Route path="/pwresult" element={<PwResult />} />
         <Route path="/membercard" element={<MemberCard />} />
         {/* 메뉴 및 상품 */}
-        <Route path="/menu/2" element={<MenuFood />} />
         {/* <Route path="/menu" element={<Menu />} /> */}
         <Route path="/menu/:cate" element={<Menu />} />
         <Route path="/menudetail/:seq" element={<Menudetail />} />
