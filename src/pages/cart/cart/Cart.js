@@ -9,6 +9,7 @@ import OrderSummary from "./OrderSummary";
 const Carttest = () => {
   const [totalPrice, setTotalPrice] = useState("");
   const [cartList, setCartList] = useState([]);
+  const [click, setClick] = useState(true);
 
   const userData = useSelector((state) => state.user);
   const miSeq = userData.miSeq;
@@ -47,7 +48,7 @@ const Carttest = () => {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [click]);
 
   console.log(cartItems);
 
@@ -87,7 +88,7 @@ const Carttest = () => {
               </h3>
             </div>
             {userItems.items.map((item) => (
-              <CartList miSeq={miSeq} item={item} />
+              <CartList miSeq={miSeq} item={item} click={click} setClick={setClick} />
             ))}
             <Link
               to="/order"

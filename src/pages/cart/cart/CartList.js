@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 
-const CartList = ({ item, miSeq }) => {
+const CartList = ({ item, miSeq, click, setClick }) => {
   const minus = () => {
     if (item.sbNumber > 1) {
       const body = {
@@ -20,6 +20,7 @@ const CartList = ({ item, miSeq }) => {
           console.log(err);
           console.log(body);
         });
+      setClick(!click);
     }
   };
   const plus = () => {
@@ -39,6 +40,7 @@ const CartList = ({ item, miSeq }) => {
         console.log(err);
         console.log(body);
       });
+    setClick(!click);
   };
   const removeItem = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -56,6 +58,7 @@ const CartList = ({ item, miSeq }) => {
         .catch((err) => {
           console.log(err);
         });
+      setClick(!click);
     }
   };
   return (
