@@ -3,7 +3,7 @@ import bgImg from "asset/images/bg.jpg";
 
 const BgSection = styled.section`
   width: 100%;
-  height: 600px;
+  height: 677px;
   padding-top: 40px;
   background-image: url(${bgImg});
   background-repeat: no-repeat;

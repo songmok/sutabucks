@@ -3,10 +3,12 @@ import ReactModal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import FindImg from "asset/images/icon_find_sally.png";
 import axios from "api/axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAccount } from "reducer/loggedState";
 
 const CloseModal = ({ isopen, setIsOpen }) => {
   const miSeq = useSelector((state) => state.user.miSeq);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const clickSubmit = () => {
@@ -17,6 +19,7 @@ const CloseModal = ({ isopen, setIsOpen }) => {
       .then((res) => {
         console.log(res);
         alert("탈퇴되었습니다.");
+        dispatch(logoutAccount());
         navigate("/login");
       })
       .catch((err) => {

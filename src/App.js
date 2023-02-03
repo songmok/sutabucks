@@ -43,6 +43,7 @@ import BzSignUp from "pages/member/bzmember/BzSignUp";
 import Footer from "components/common/footer/Footer";
 
 import QrMob from "pages/qrPage/QrMob";
+import TeamMember from "components/common/header/headerCt/TeamMember";
 
 function App() {
   const [eventList, setEventList] = useState([]);
@@ -71,6 +72,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home noticeList={noticeList} />} />
+        <Route path="/teammember" element={<TeamMember />} />
         {/* 새소식 */}
         <Route path="/news" element={<News />} />
         <Route path="/event" element={<EventList eventList={eventList} />} />

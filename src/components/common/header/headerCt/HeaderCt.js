@@ -3,6 +3,7 @@ import { useState } from "react";
 import MapsGnb from "./subMaps/MapsGnb";
 import MenuGnb from "./subMenu/MenuGnb";
 import NewsGnb from "./subNews/NewsGnb";
+import TeamMember from "./TeamMember";
 
 const HeaderCt = () => {
   const [count, setCount] = useState(0);
@@ -110,6 +111,7 @@ const HeaderCt = () => {
       sub: [{ submenu: [] }],
     },
   ];
+
   return (
     <>
       <div className="header-center">
@@ -119,6 +121,7 @@ const HeaderCt = () => {
             <NewsGnb news={news} count={count} setCount={setCount} />
             <MenuGnb menu={menu} count={count} setCount={setCount} />
             <MapsGnb maps={maps} count={count} setCount={setCount} />
+            {/* <TeamMember /> */}
           </ul>
         </nav>
       </div>

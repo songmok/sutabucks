@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const CardQrModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
-
   const clickSubmit = () => {
     alert("충전이 완료되었습니다.");
   };

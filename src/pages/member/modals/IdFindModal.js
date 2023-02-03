@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import ReactModal from "react-modal";
 import axios from "../../../api/axios";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Timer from "./Timer";
+import { loginAccount } from "reducer/loggedState";
 
 const IdFindModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
   const [num, setNum] = useState("");
+  const dispatch = useDispatch();
 
   const clickSubmit = () => {
     setNum();
+    console.log(num);
     axios
-      .get("/member/finddid?authNum=" + num)
+      .get("member/findid?authNum=" + num)
       .then((res) => {
         console.log(res.data);
         alert("인증번호가 확인되었습니다.");
+        dispatch(loginAccount(res.data));
         navigate("/IdResult");
       })
       .catch((err) => {

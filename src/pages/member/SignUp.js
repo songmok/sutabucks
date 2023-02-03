@@ -237,7 +237,7 @@ const SignUp = () => {
             회원가입
           </button>
         </form>
-        <Link to="/login" className="pb-8 ml-64">
+        <Link to="/login" className="ml-64">
           이미 가입하셨다면, 로그인해주세요!
         </Link>
       </SignUpDiv>

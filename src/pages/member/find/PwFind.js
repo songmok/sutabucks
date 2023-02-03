@@ -80,7 +80,7 @@ const PwFind = () => {
           />
         </form>
       </FindDiv>
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-[73px]">
         <Bt onClick={pwFind}>비밀번호 찾기</Bt>
         <PwFindModal isopen={isOpen} setIsOpen={setIsOpen} />
       </div>

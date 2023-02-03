@@ -1,45 +1,24 @@
 import React from "react";
+import axios from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import LoginDiv, { BgSection } from "../../style/memberCss/loginCSS";
-// import { bgCover } from "../../style/memberCss/loginCSS";
-import { Err } from "../../style/memberCss/basicCSS";
-import axios from "../../api/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAccount } from "../../reducer/loggedState";
+import LoginDiv, { BgSection } from "../../style/memberCss/loginCSS";
+import { Err } from "../../style/memberCss/basicCSS";
+import { Layout } from "utils/layout";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userNickname = useSelector((state) => state.user.miNickname);
-  // const [validText, setValidText] = useState("");
-  // const [isValid, setIsValid] = useState({
-  //   isEmail: false,
-  // });
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({
-    defaultValues: {
-      // email: "a1@aaa.net",
-      // pw: "aaaa1111",
-    },
-  });
+  } = useForm();
 
   const onSubmit = async (data) => {
-    // console.log("데이터", data);
-
-    // const exp = /\S+@\S+\.\S+/;
-    // if (!exp.test(email)) {
-    //   setValidText("이메일을 확인해주세요");
-    //   setIsValid({ ...isValid, isEmail: false });
-    // } else {
-    //   setValidText("");
-    //   setIsValid({ ...isValid, isEmail: true });
-    // }
-
     const body = {
       miId: data.email,
       miPwd: data.pw,
@@ -47,13 +26,11 @@ const Login = () => {
     await axios
       .post("member/login", body)
       .then((res) => {
-        // console.log("회원정보", res.data);
         if (res.data.status) {
+          console.log("유저정보", res.data);
           dispatch(loginAccount(res.data));
-          console.log(userNickname);
-          alert(`${userNickname} 님 환영합니다.`);
-          // 나중에 홈으로 변경
-          navigate("/mypage");
+          alert(`${res.data.data.miNickname} 님 환영합니다.`);
+          navigate("/");
         }
       })
       .catch((err) => {
@@ -61,30 +38,6 @@ const Login = () => {
         alert("존재하지 않는 회원정보 입니다.");
       });
   };
-
-  // 아이디 저장체크시
-  // const [email, setEmail] = useState("");
-  // const [isRemember, setIsRemember] = useState(false);
-  // const [cookies, setCookie, removeCookie] = useCookies(["rememberEmail"]);
-  // useEffect(() => {
-  //   if (cookies.rememberEmail !== undefined) {
-  //     setEmail(cookies.rememberEmail);
-  //     setIsRemember(true);
-  //   }
-  // }, []);
-
-  // const handleOnChange = (e) => {
-  //   setIsRemember(e.target.check);
-  //   if (e.target.check) {
-  //     setCookie("rememberEmail", email, { maxAge: 2000 });
-  //   } else {
-  //     removeCookie("rememberEmail");
-  //   }
-  // };
-
-  // const handleEmailOnChange = (e) => {
-  //   setEmail(e.target.value);
-  // };
 
   return (
     <>
@@ -96,8 +49,6 @@ const Login = () => {
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
-              // value={email}
-              // onChange={(e) => handleEmailOnChange(e)}
               type="email"
               placeholder="아이디(이메일)를 입력해 주세요."
               {...register("email", {
@@ -134,8 +85,7 @@ const Login = () => {
               <label>
                 <input
                   type="checkbox"
-                  // onChange={handleOnChange}
-                  // checked={isRemember}
+                  defaultChecked
                   className="accent-green-700"
                 />
               </label>

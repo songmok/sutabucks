@@ -10,24 +10,24 @@ const CardModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
-  const num = user.miSeq;
-
   const clickSubmit = () => {
-    navigate("/membercard");
-
     const body = {
       cardName: user.miNickname,
     };
 
     console.log(body);
     axios
-      .put("card/new?memberNo=" + num, body)
+      .put("card/new?memberNo=" + user.miSeq, body)
       .then((res) => {
         console.log(res);
         navigate("/membercard");
         alert("멤버십 카드가 생성되었습니다.");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert("멤버십 카드가 이미 존재합니다.");
+        navigate("/membercard");
+      });
   };
 
   const customStyles = {
