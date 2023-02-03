@@ -1,16 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const MenuList = ({ searchData }) => {
-  return searchData.map((item) => (
-    <Link
-      to={`/menudetail/${item.menuNo}`}
+const OrderItem = ({ item, setMenuSeq, setModalIsOpen }) => {
+  return (
+    <div
       key={item.menuNo}
       className="block group cursor-pointer"
+      onClick={() => {
+        setMenuSeq(item.menuNo);
+        setModalIsOpen(true);
+      }}
     >
       <img
-        // src="./coffee.jpg"
-        src={item.menuUri}
+        src={item.menuImageUri}
         alt="coffee"
         className="w-full transform hover:scale-95 transition duration-300"
       />
@@ -22,8 +23,8 @@ const MenuList = ({ searchData }) => {
           <p className="tracking-wide">{item.menuCost}원</p>
         </div>
       </div>
-    </Link>
-  ));
+    </div>
+  );
 };
 
-export default MenuList;
+export default OrderItem;

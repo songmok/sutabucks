@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import MenudetailCss from "../../style/menuCss/MenudetailCss";
-import instance from "../../api/axios";
-import request from "../../api/request";
+import MenudetailCss from "../../../style/menuCss/MenudetailCss";
+import instance from "../../../api/axios";
+import request from "../../../api/request";
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
+import Qr from "./Qr";
+import DetailTxt from "./DetailTxt";
+import { Tooltip } from "react-tooltip";
 
 const Menudetail = () => {
   // URI 처리 및 데이터 연동
@@ -80,6 +83,7 @@ const Menudetail = () => {
               <button
                 className="absolute bottom-3 right-3 h-12 w-12"
                 onClick={openModal}
+                id="props-basic"
               >
                 <div className="animate-bounce flex space-x-4">
                   <div className="rounded-full flex justify-center items-center bg-white drop-shadow h-12 w-12">
@@ -87,58 +91,14 @@ const Menudetail = () => {
                   </div>
                 </div>
               </button>
-              {modalIsOpen && (
-                <div
-                  className="absolute w-full h-full rounded"
-                  onClick={closeModal}
-                >
-                  <button className="absolute block top-5 right-5 z-10">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-7 h-7"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                  <img
-                    src={detail.menuQrUri}
-                    alt="qr"
-                    className="absolute w-1/2 h-1/2 top-1/4 left-1/4 z-10"
-                  />
-                  <div className="absolute w-full h-full bg-white opacity-50"></div>
-                </div>
-              )}
+              <Tooltip
+                anchorId="props-basic"
+                content="상세정보를 확인해보세요!"
+              />
+
+              {modalIsOpen && <Qr closeModal={closeModal} detail={detail} />}
             </div>
-            <div className="grow-0 shrink-0 basis-auto w-full lg:w-6/12 xl:w-8/12">
-              <div className="px-6 py-12 md:px-12">
-                <div className="flex justify-between mt-8">
-                  <div className="max-w-[35ch]">
-                    <h1 className="text-2xl font-bold">{detail.menuName}</h1>
-                  </div>
-                  <p className="text-2xl font-bold">{detail.menuCost}원</p>
-                </div>
-                <details className="group relative my-10">
-                  <summary className="block">
-                    <div>
-                      <div className="max-w-none leading-5">
-                        <p>{detail.menuExplain}</p>
-                      </div>
-                    </div>
-                  </summary>
-                </details>
-                <div className="hidden sm:block">
-                  <img src={detail.menuNutritionUri} alt="Nutrition" className="w-full" />
-                </div>
-              </div>
-            </div>
+            <DetailTxt detail={detail} />
           </div>
         </div>
       </section>

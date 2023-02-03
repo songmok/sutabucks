@@ -27,11 +27,11 @@ import PwResult from "pages/member/find/PwResult";
 import MyPage from "pages/member/MyPage";
 import MemberCard from "pages/member/MemberCard";
 // 메뉴 및 상품
-import Cart from "pages/cart/Cart";
-import Order from "pages/cart/Order";
+import Cart from "pages/cart/cart/Cart";
+import Order from "pages/cart/order/Order";
 import Checkout from "pages/cart/Checkout";
-import Menu from "pages/menu/Menu";
-import Menudetail from "pages/menu/Menudetail";
+import Menu from "pages/menu/menuList/Menu";
+import Menudetail from "pages/menu/menuDetail/Menudetail";
 import Maps from "pages/maps/Maps";
 import Payment from "pages/cart/Payment";
 
@@ -99,7 +99,7 @@ function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 }

@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { cartActions } from "reducer/cartSlice";
@@ -7,23 +8,54 @@ import CheckouttCss from "style/cartCss/CheckoutCss";
 const Checkout = () => {
   const dispatch = useDispatch();
 
-  const cartData = useSelector((state) => state.cart);
+  const userData = useSelector((state) => state.user);
+  const userItem = useSelector((state) => state.userItem.items[0]);
+  console.log(userData);
 
-  const cartItemData = cartData.items;
+  // const cartItemData = cartData.items;
 
-  const totalPrice = cartItemData.reduce(
-    (acc, cur) => acc + cur.mbiCost * cur.amount,
-    0
-  );
+  // const totalPrice = cartItemData.reduce(
+  //   (acc, cur) => acc + cur.mbiCost * cur.amount,
+  //   0
+  // );
+  const [totalPrice, setTotalPrice] = useState("");
+  const [cartList, setCartList] = useState([]);
+  const [request, setRequest] = useState("");
+  const [pick, setPick] = useState(1);
 
-  const coupons = ["없음", "쿠폰1", "쿠폰2", "쿠폰3"];
-  const [menu, setMenu] = useState(false);
-  const [coupon, setCoupon] = useState("없음");
+  const miSeq = 70;
 
-  const changeText = (e) => {
-    setMenu(false);
-    setCoupon(e.target.textContent);
+  const getPosts = async () => {
+    const posts = await axios.get(
+      `http://192.168.0.190:9999/cart/list?miSeq=${miSeq}&status=1`
+    );
+    // console.log(posts.data);
+    const items = posts.data.memberBasket;
+    setCartList(items);
+    setTotalPrice(posts.data.totalPrice);
   };
+
+  const cartItems = cartList.map((item) => {
+    return {
+      id: item.id,
+      sbiBranchName: item["storeMenuConnect"]["store"].sbiBranchName,
+      sbiAddressDetail: item["storeMenuConnect"]["store"].sbiAddressDetail,
+      mbiName: item["storeMenuConnect"]["menu"].mbiName,
+      moiName: item["shoppingBasketOption"][0]["menuOption"].moiName,
+      sbNumber: item.sbNumber,
+      optionIncludePrice: item.optionIncludePrice,
+      mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
+      sbOrderNumber: item.sbOrderNumber,
+      sbSmcSeq: item["storeMenuConnect"].smcSeq,
+    };
+  });
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  console.log(cartList);
+  // console.log(cartItems[0]);
 
   const textarea = useRef();
   const handleResizeHeight = () => {
@@ -31,6 +63,26 @@ const Checkout = () => {
     textarea.current.style.height = textarea.current.scrollHeight + "px";
   };
 
+  const pay = () => {
+    const body = {
+      miSeq: miSeq,
+      sbRequest: request,
+      sbReceive: pick,
+      sbPayment: 1,
+      couponUse: 0,
+      couponNumber: 0,
+    };
+    axios
+      .patch("localhost:9999/cart/order?status=1&change=5", body)
+      .then((res) => {
+        console.log(res);
+        console.log(body);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(body);
+      });
+  };
   return (
     <CheckouttCss>
       <section className="container mx-auto">
@@ -53,25 +105,25 @@ const Checkout = () => {
                   주문메뉴
                 </span>
                 <div className="flex flex-col itmes-center w-full">
-                  {cartItemData.map((item) => (
+                  {cartItems.map((item) => (
                     <div
-                      key={item.mbiSeq}
+                      key={item.id}
                       className="flex items-center hover:bg-gray-100 mx-5 py-7"
                       style={{ borderBottom: "1px solid #cccccc" }}
                     >
                       <div className="flex w-4/6 items-center">
                         <div className="flex flex-col justify-center ml-4 flex-grow">
                           <span className="font-bold">
-                            {item.mbiName} - {item.option}
+                            {item.mbiName} - {item.moiName}
                           </span>
                         </div>
                       </div>
                       <div className="w-1/6 flex justify-center">
-                        <span className="mx-4">{item.amount}</span>
+                        <span className="mx-4">{item.sbNumber}</span>
                       </div>
                       <div className="w-1/6 flex justify-center">
                         <span className="font-semibold">
-                          {item.mbiCost * item.amount}원
+                          {item.optionIncludePrice}원
                         </span>
                       </div>
                     </div>
@@ -92,10 +144,10 @@ const Checkout = () => {
                   <table className="mx-5">
                     <tr className="flex justify-start py-7">
                       <td className="w-1/4 text-xl font-semibold">
-                        대구 동성로
+                        {userItem.sbiBranchName}
                       </td>
                       <td className="text-slate-500 text-xl">
-                        대구광역시 중구 13길
+                        {userItem.sbiAddressDetail}
                       </td>
                     </tr>
                     <tr className="flex justify-start py-7">
@@ -108,8 +160,11 @@ const Checkout = () => {
                             className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
                             type="radio"
                             name="pick"
-                            value="pickup"
-                            checked
+                            value="1"
+                            checked={parseInt(pick) === 1}
+                            onClick={(e) => {
+                              setPick(e.target.value);
+                            }}
                           />
                           <span className="text-xl">매장픽업</span>
                         </div>
@@ -118,7 +173,11 @@ const Checkout = () => {
                             className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
                             type="radio"
                             name="pick"
-                            value="delivery"
+                            value="2"
+                            checked={parseInt(pick) === 2}
+                            onClick={(e) => {
+                              setPick(e.target.value);
+                            }}
                           />
                           <span className="text-xl">배달</span>
                         </div>
@@ -126,11 +185,15 @@ const Checkout = () => {
                     </tr>
                     <tr className="flex justify-start py-7">
                       <td className="w-1/4 text-xl font-semibold">닉네임</td>
-                      <td className="text-slate-500 text-xl">홍길동</td>
+                      <td className="text-slate-500 text-xl">
+                        {userData.miNickname}
+                      </td>
                     </tr>
                     <tr className="flex justify-start py-7">
                       <td className="w-1/4 text-xl font-semibold">전화번호</td>
-                      <td className="text-slate-500 text-xl">010-0000-0000</td>
+                      <td className="text-slate-500 text-xl">
+                        {userData.miPhoneNum}
+                      </td>
                     </tr>
                     <tr className="relative flex justify-start items-center py-3">
                       <td className="w-1/4 text-xl font-semibold">
@@ -141,128 +204,18 @@ const Checkout = () => {
                           className="w-full border border-gray-300 p-4 rounded text-base leading-4 placeholder-gray-600 text-gray-600"
                           type="text"
                           placeholder="주문시 요청사항을 입력하세요"
-                          onChange={handleResizeHeight}
+                          onChange={
+                            (handleResizeHeight,
+                            (e) => {
+                              setRequest(e.target.value);
+                            })
+                          }
                         />
                       </td>
                     </tr>
                   </table>
                 </div>
               </div>
-              {/* <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
-                <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
-                  할인 및 포인트
-                </span>
-                <div className="flex flex-col itmes-center w-full">
-                  <table className="mx-5">
-                    <tr className="relative flex justify-start items-center py-3">
-                      <td className="w-1/4 text-xl font-semibold">쿠폰 할인</td>
-                      <div
-                        className="relative w-1/4"
-                        onClick={() => setMenu(!menu)}
-                      >
-                        <button className="text-left border rounded-tr rounded-tl border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600 bg-white">
-                          {coupon}
-                        </button>
-                        <svg
-                          className={
-                            "transform  cursor-pointer absolute top-4 right-4 " +
-                            (menu ? "rotate-180" : "")
-                          }
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M3.5 5.75L8 10.25L12.5 5.75"
-                            stroke="#27272A"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        <div
-                          className={
-                            "mt-1 absolute z-10 w-full flex bg-gray-50 justify-start flex-col text-gray-600 " +
-                            (menu ? "block" : "hidden")
-                          }
-                        >
-                          {coupons.map((coupon) => (
-                            <div
-                              key={coupon}
-                              className="cursor-pointer hover:bg-gray-800 hover:text-white px-4 py-2"
-                              onClick={changeText}
-                            >
-                              {coupon}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </tr>
-                    <tr className="flex justify-start py-7">
-                      <td className="w-1/4 text-xl font-semibold">포인트</td>
-                      <td className="text-slate-500 text-xl">포인트</td>
-                    </tr>
-                  </table>
-                </div>
-              </div> */}
-              <div className="flex justify-between items-center bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
-                <span className="text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
-                  총 결제 금액
-                </span>
-                <span className="text-2xl mr-24">원</span>
-              </div>
-              {/* <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
-                <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
-                  결제
-                </span>
-                <div className="flex flex-col itmes-center w-full">
-                  <table className="mx-5">
-                    <tr className="flex flex-col justify-start py-7">
-                      <td className="w-1/4 flex items-center mb-5 text-xl font-semibold">
-                        <input
-                          className="mr-3 checkbox appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
-                          type="radio"
-                          name="pay"
-                          value="membership"
-                          checked
-                        />
-                        <span>멤버십 결제</span>
-                      </td>
-                      <td className="w-full">
-                        <div className="flex justify-center gap-16">
-                          <div className="">
-                            <img
-                              src={cardImg}
-                              alt=""
-                              className="w-96 border-2 border-black "
-                            />
-                          </div>
-                          <div className="flex flex-col justify-center">
-                            <span className="pb-6 text-lg">
-                              카드명: 닉네임 <br /> 카드잔액 : 10000원
-                            </span>
-                            <button className="p-[10px] bg-white border-2 border-[#006633] rounded font-bold">
-                              충전하기
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr className="flex justify-start py-7">
-                      <td className="w-1/4 flex items-center text-xl font-semibold">
-                        <input
-                          className="mr-3 checkbox appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
-                          type="radio"
-                          name="pay"
-                          value="payment"
-                        />
-                        <span>일반 결제</span>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div> */}
               <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   결제 수단 선택
@@ -274,7 +227,7 @@ const Checkout = () => {
                         <div className="flex justify-between w-2/5">
                           <div className="flex items-center gap-2">
                             <input
-                              className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                              className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border- checked:border-[#1B3C34]"
                               type="radio"
                               name="payment"
                               value="membership"
@@ -295,6 +248,7 @@ const Checkout = () => {
                         <Link
                           to="/payment"
                           className="flex justify-center w-[13%] px-5 py-3 text-sm text-gray-100 bg-[#1B3C34] rounded"
+                          onClick={pay}
                         >
                           <span className="text-xl">결제하기</span>
                         </Link>

@@ -1,7 +1,11 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const HeaderCart = () => {
+  const cartItems = useSelector((state) => state.userItem.items);
+
   return (
     <>
       <div className="cart">
@@ -11,7 +15,7 @@ const HeaderCart = () => {
           </svg>
           <span>장바구니</span>
           <span className="absolute left-3 -top-1 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">
-            {/* <span>_{cartAmount.items.length}</span> */}5
+            {cartItems.length}
           </span>
         </Link>
       </div>

@@ -8,6 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
 import store from "reducer/store";
+import "react-tooltip/dist/react-tooltip.css";
 
 // 스토어 export 필수!
 export let persistor = persistStore(store);
