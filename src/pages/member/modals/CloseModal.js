@@ -11,13 +11,13 @@ const CloseModal = ({ isopen, setIsOpen }) => {
 
   const clickSubmit = () => {
     alert("정말로 탈퇴하시겠습니까?");
-    const body = { miSeq: miSeq };
-    console.log("body", body);
+    console.log(miSeq);
     axios
-      .patch("member/edit", body)
+      .patch("member/leave?miSeq=" + miSeq)
       .then((res) => {
         console.log(res);
         alert("탈퇴되었습니다.");
+        navigate("/login");
       })
       .catch((err) => {
         console.log(err);

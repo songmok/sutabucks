@@ -27,18 +27,7 @@ const IdFind = () => {
         alert("정보를 재입력해주세요.");
       });
       
-    await axios
-      .post("member/phoneNum", body)
-      .then((res) => {
-        if (res.data.status) {
-          console.log("뭐지", res.data);
-        }
-      })
-      .catch((err) => {
-        console.log("오류", err);
-        setIsOpen(false);
-        alert("정보를 재입력해주세요.");
-      });
+
   };
 
   return (

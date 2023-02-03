@@ -4,15 +4,6 @@ import { Link } from "react-router-dom";
 import NoticeCss from "style/newsCss/noticeCss";
 
 const NoticeListLayout = ({ noticeList }) => {
-  // const date = [
-  //   {
-  //     date: "2023-02-01",
-  //   },
-  //   { date: "2023-01-31" },
-  //   { date: "2023-01-30" },
-  //   { date: "2023-01-26" },
-  //   { date: "2023-01-25" },
-  // ];
   return (
     <>
       <NoticeCss>

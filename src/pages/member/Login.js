@@ -23,12 +23,12 @@ const Login = () => {
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      email: "a1@aaa.net",
-      pw:"aaaa1111"
+      // email: "a1@aaa.net",
+      // pw: "aaaa1111",
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // console.log("데이터", data);
 
     // const exp = /\S+@\S+\.\S+/;
@@ -44,18 +44,21 @@ const Login = () => {
       miId: data.email,
       miPwd: data.pw,
     };
-    axios
+    await axios
       .post("member/login", body)
       .then((res) => {
-        alert(`${userNickname} 님 환영합니다.`);
         // console.log("회원정보", res.data);
-        dispatch(loginAccount(res.data));
-        // console.log(loginAccount);
-        // 나중에 홈으로 변경
-        navigate("/mypage");
+        if (res.data.status) {
+          dispatch(loginAccount(res.data));
+          console.log(userNickname);
+          alert(`${userNickname} 님 환영합니다.`);
+          // 나중에 홈으로 변경
+          navigate("/mypage");
+        }
       })
       .catch((err) => {
         console.log(err);
+        alert("존재하지 않는 회원정보 입니다.");
       });
   };
 

@@ -54,6 +54,7 @@ const HeaderCt = () => {
         {
           id: 1,
           name: "음료",
+          uri: "/menu/1",
           submenu: [
             { menu: "콜드브루" },
             { menu: "브루드" },
@@ -66,6 +67,7 @@ const HeaderCt = () => {
         {
           id: 2,
           name: "음식",
+          uri: "/menu/2",
           submenu: [
             { menu: "브레드" },
             { menu: "케이크" },
@@ -77,6 +79,7 @@ const HeaderCt = () => {
         {
           id: 3,
           name: "상품",
+          uri: "",
           submenu: [
             { menu: "머그" },
             { menu: "글라스" },
@@ -89,6 +92,7 @@ const HeaderCt = () => {
         },
         {
           id: 4,
+          uri: "",
           name: "카드",
           submenu: [{ menu: "실물카드" }, { menu: "e-Gift" }],
         },

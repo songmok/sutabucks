@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactModal from "react-modal";
 import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
@@ -6,14 +6,16 @@ import Timer from "./Timer";
 
 const PwFindModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
+  const [num, setNum] = useState("");
 
   const clickSubmit = () => {
+    setNum();
     axios
-      .get("/member/findpwd")
+      .get("/member/findpwd?authNum=" + num)
       .then((res) => {
         console.log(res.data);
         alert("인증번호가 확인되었습니다.");
-        navigate("/PwResult");
+        navigate("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -70,17 +72,27 @@ const PwFindModal = ({ isopen, setIsOpen }) => {
             </p>
             <form className=" flex flex-col space-y-3 pt-5">
               <label className="justify-items-start">인증번호 입력</label>
-              <input type="text" className=" border border-black pt-4" />
+              <input
+                type="text"
+                className=" border border-black pl-2 py-1"
+                value={num}
+                onChange={(e) => setNum(e.target.value)}
+              />
               <Timer setIsOpen={setIsOpen} />
               <button
                 onClick={() => clickSubmit()}
                 className="block w-full px-5 py-3 text-sm text-gray-100
                 bg-[#1B3C34] rounded"
               >
-                비밀번호 찾기
+                인증번호 입력
               </button>
+              <span>
+                인증번호 일치시,
+                <br />
+                가입한 이메일로 임시 비밀번호가 발급됩니다.
+              </span>
               <button
-                className="inline-block text-sm text-gray-500 underline transition underline-offset-4 hover:text-gray-600"
+                className="inline-block text-sm text-gray-500 underline transition underline-offset-4 hover:text-gray-600 pt-5"
                 onClick={() => setIsOpen(false)}
               >
                 되돌아가기

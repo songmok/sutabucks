@@ -6,7 +6,7 @@ const Maps = () => {
   return (
     <>
       <PagesTitle title={"매장찾기"} />
-      <PagesLink first={"매장찾기"} firstLink={"maps"} />
+      <PagesLink first={"매장찾기"} firstLink={"#"} count={"one"} />
       <iframe
         id="inlineFrameExample"
         title="Inline Frame Example"

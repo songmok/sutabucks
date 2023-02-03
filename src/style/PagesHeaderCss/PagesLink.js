@@ -12,6 +12,13 @@ const PagesLinkCss = styled.div`
     li {
       margin-right: 10px;
       font-weight: bold;
+      .gray {
+        color: #7e7b7b;
+        /* display: none; */
+      }
+      .black {
+        color: #000;
+      }
       &:last-child {
         margin: 0;
       }
@@ -21,7 +28,7 @@ const PagesLinkCss = styled.div`
       font-size: 10px;
       font-weight: bold;
     }
-    .items {
+    .item {
     }
   }
 `;

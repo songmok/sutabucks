@@ -31,6 +31,7 @@ const PwFind = () => {
       .then((res) => {
         console.log(res.data);
         alert(res.data.message);
+        setIsOpen(true);
       })
       .catch((err) => {
         console.log(err);
