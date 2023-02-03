@@ -9,7 +9,7 @@ import OrderSummary from "./OrderSummary";
 const Carttest = () => {
   const [totalPrice, setTotalPrice] = useState("");
   const [cartList, setCartList] = useState([]);
-  const [click, setClick] = useState(true);
+  const [click, setClick] = useState(1);
 
   const userData = useSelector((state) => state.user);
   const miSeq = userData.miSeq;
@@ -48,15 +48,10 @@ const Carttest = () => {
 
   useEffect(() => {
     getPosts();
-    dispatch(userItemActions.updateItems({ items: cartItems, totalPrice }));
   }, []);
 
-  useEffect(() => {
-    getPosts();
-    dispatch(userItemActions.updateItems({ items: cartItems, totalPrice }));
-  }, [click]);
-
-  console.log(userItems);
+  console.log(cartItems);
+  console.log(totalPrice);
 
   const toCheckout = (e) => {
     if (cartItems.length <= 0) {
@@ -93,14 +88,12 @@ const Carttest = () => {
                 주문금액
               </h3>
             </div>
-            {userItems.items.map((item) => (
+            {cartItems.map((item) => (
               <CartList
                 miSeq={miSeq}
                 item={item}
                 click={click}
                 setClick={setClick}
-                cartItems={cartItems}
-                totalPrice={totalPrice}
               />
             ))}
             <Link
@@ -116,10 +109,7 @@ const Carttest = () => {
               Continue Shopping
             </Link>
           </div>
-          <OrderSummary
-            totalPrice={userItems.totalPrice}
-            toCheckout={toCheckout}
-          />
+          <OrderSummary totalPrice={totalPrice} toCheckout={toCheckout} />
         </div>
       </div>
     </>

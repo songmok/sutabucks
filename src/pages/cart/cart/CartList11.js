@@ -1,17 +1,13 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { userItemActions } from "reducer/userItemSlice";
 
 const CartList = ({ item, miSeq, click, setClick }) => {
-  const dispatch = useDispatch();
-
   const minus = () => {
     if (item.sbNumber > 1) {
       const body = {
         miSeq: miSeq,
         sbSmcSeq: item.sbSmcSeq,
-        sbNumber: item.sbNumber - 1,
+        sbNumber: --item.sbNumber,
         sbOrderNumber: item.sbOrderNumber,
       };
       axios
@@ -19,21 +15,19 @@ const CartList = ({ item, miSeq, click, setClick }) => {
         .then((res) => {
           console.log(res);
           console.log(body);
-          dispatch(userItemActions.minusItem(item));
         })
         .catch((err) => {
           console.log(err);
           console.log(body);
         });
-      setClick(!click);
+      setClick(++click);
     }
   };
   const plus = () => {
-    console.log(item.sbNumber);
     const body = {
       miSeq: miSeq,
       sbSmcSeq: item.sbSmcSeq,
-      sbNumber: item.sbNumber + 1,
+      sbNumber: ++item.sbNumber,
       sbOrderNumber: item.sbOrderNumber,
     };
     axios
@@ -41,14 +35,12 @@ const CartList = ({ item, miSeq, click, setClick }) => {
       .then((res) => {
         console.log(res);
         console.log(body);
-        dispatch(userItemActions.plusItem(item));
       })
       .catch((err) => {
         console.log(err);
         console.log(body);
       });
-    console.log(item);
-    setClick(!click);
+    setClick(++click);
   };
   const removeItem = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -62,13 +54,12 @@ const CartList = ({ item, miSeq, click, setClick }) => {
         })
         .then((res) => {
           console.log(res);
-          dispatch(userItemActions.deliteItems(item));
         })
         .catch((err) => {
           console.log(err);
-          alert("오류 발생");
         });
     }
+    setClick(++click);
   };
   return (
     <div
