@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ordercolor, themeheadercolor } from "utils/color";
+import { ordercolor, themecolor, themeheadercolor } from "utils/color";
 import { bigsize, defaltsize, headertitle, minsize } from "utils/font";
 
 const headerCss = styled.header`
@@ -54,6 +54,9 @@ const headerCss = styled.header`
             &:hover {
               background-color: #333333;
             }
+            &.maps:hover {
+              background-color: ${themecolor};
+            }
             > a {
               padding: 20px 32px;
               display: block;
@@ -68,6 +71,7 @@ const headerCss = styled.header`
               top: 100%;
               display: none;
               justify-content: center;
+
               &.active {
                 display: block;
                 animation-name: opacity;

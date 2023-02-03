@@ -5,7 +5,7 @@ const SubMaps = ({ subMaps, count, setCount }) => {
     <>
       {count === 3 ? (
         <div
-          className="depth1-wrap active"
+          className="depth1-wrap maps"
           onMouseOver={() => {
             setCount(3);
           }}

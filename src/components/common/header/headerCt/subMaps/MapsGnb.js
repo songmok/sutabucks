@@ -8,7 +8,7 @@ const MapsGnb = ({ maps, setCount, count }) => {
       {maps.map((v, i) => {
         return (
           <li
-            className="depth1"
+            className="depth1 maps"
             onMouseOver={() => {
               setCount(v.id);
             }}

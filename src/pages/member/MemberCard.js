@@ -53,7 +53,7 @@ const MemberCard = () => {
         <div className="">
           <img
             src={cardImg}
-            alt=""
+            alt="멤버쉽카드"
             className="w-96 "
             style={{ border: "1px solid black ", borderRadius: "4px" }}
           />
