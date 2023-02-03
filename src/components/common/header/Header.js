@@ -32,8 +32,8 @@ const Header = () => {
           </Link>
           <HeaderCt />
           <HeaderRt />
-          <button className="text-lg absolute ">
-            <Link to="/teammember">멤버소개</Link>
+          <button className="text-2xl absolute top-32 right-[430px]  ">
+            <Link to="/teammember">Team</Link>
           </button>
         </div>
       </HeaderCss>
