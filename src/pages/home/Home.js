@@ -5,12 +5,12 @@ import HomeCss from "style/homeCss/homeCss";
 import HomeRolling from "components/home/HomeRolling";
 import HomeBanner from "components/home/HomeBanner";
 import HomeMembers from "components/home/HomeMembers";
-const Home = () => {
+const Home = ({ noticeList }) => {
   return (
     <>
       <HomeCss>
         <HomeBanner />
-        <HomeRolling />
+        <HomeRolling noticeList={noticeList} />
         <HomeMembers />
       </HomeCss>
     </>

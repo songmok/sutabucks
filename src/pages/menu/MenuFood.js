@@ -10,8 +10,7 @@ import PagesLink from "components/common/pagesHeader/PagesLink";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-const Menu = () => {
-  const { cate } = useParams();
+const MenuFood = () => {
   // const [data, setData] = useState([]);
   const [word, setWord] = useState("");
   const [searchData, setSearchData] = useState([]);
@@ -24,7 +23,7 @@ const Menu = () => {
     if (bt === "all") {
       await axios
         .get(
-          `http://haeji.mawani.kro.kr:9999/cate/searchmenu?parentSeq=${cate}&menuName=`
+          `http://haeji.mawani.kro.kr:9999/cate/searchmenu?parentSeq=2&menuName=`
         )
         .then((res) => {
           setSearchData(res.data.list);
@@ -57,7 +56,7 @@ const Menu = () => {
 
   const cateData = async () => {
     const params = {
-      parentSeq: cate,
+      parentSeq: 2,
     };
     await instance
       .get(request.fetchCateSeq, {
@@ -95,13 +94,8 @@ const Menu = () => {
   ));
   return (
     <section className="container mx-auto">
-      <PagesTitle title={"음료"} />
-      <PagesLink
-        first={"음료"}
-        firstLink={"/menu"}
-        count={"one"}
-        // searchData={searchData}
-      />
+      <PagesTitle title={"메뉴보기"} />
+      <PagesLink first={"메뉴보기"} firstLink={"menu"} />
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1 mr-2">
           <ul className="flex flex-col gap-2">
@@ -159,4 +153,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default MenuFood;

@@ -11,9 +11,9 @@ const requests = {
   fetchStoreMenuDetail: "store/cart/menu/list/detail",
   //새소식
   fetchEvent: "admin/eventlist",
-  fetchEventDetail: "admin/eventdetail",
+  fetchEventDetail: "admin/event",
   fetchNotice: "admin/noticelist",
-  fetchNoticeDetail: "admin/noticedetail",
+  fetchNoticeDetail: "admin/notice",
   //가게정보
   fetchMyStoreInfo: "store/search",
   fetchMyStoreMenu: "store/menu/list",

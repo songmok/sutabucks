@@ -40,13 +40,15 @@ import MyStorePage from "pages/mystore/MyStorePage";
 import MyStoreMenu from "pages/mystore/MyStoreMenu";
 import BzSignUp from "pages/member/bzmember/BzSignUp";
 import Footer from "components/common/footer/Footer";
+import MenuFood from "pages/menu/MenuFood";
+import QrMob from "pages/qrPage/QrMob";
 
 function App() {
   const [eventList, setEventList] = useState([]);
   const [noticeList, setNoticeList] = useState([]);
   const [list, setList] = useState([]);
 
-  // ?ediSeq=1
+  // data
   const fetchData = async () => {
     const rsList = await instance.get(requests.fetchList);
     setList(rsList);
@@ -59,12 +61,15 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  // params
+
   return (
     <Router>
       <Reset />
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home noticeList={noticeList} />} />
         {/* 새소식 */}
         <Route path="/news" element={<News />} />
         <Route path="/event" element={<EventList eventList={eventList} />} />
@@ -88,6 +93,7 @@ function App() {
         <Route path="/pwresult" element={<PwResult />} />
         <Route path="/membercard" element={<MemberCard />} />
         {/* 메뉴 및 상품 */}
+        <Route path="/menu/2" element={<MenuFood />} />
         {/* <Route path="/menu" element={<Menu />} /> */}
         <Route path="/menu/:cate" element={<Menu />} />
         <Route path="/menudetail/:seq" element={<Menudetail />} />
@@ -98,8 +104,9 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/qrmob" element={<QrMob />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 }

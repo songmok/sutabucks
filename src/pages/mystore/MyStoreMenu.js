@@ -12,6 +12,7 @@ const MyStoreMenu = () => {
         firstLink={"mystore"}
         second={"메뉴"}
         secondLink={"mystore/mystoremenu"}
+        count={"one"}
       />
       <MyStoreItem />
     </>

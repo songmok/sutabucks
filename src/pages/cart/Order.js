@@ -4,8 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import instance from "api/axios";
 import requests from "api/request";
 import OrderModal from "./OrderModal";
-import PagesTitle from "components/common/pagesHeader/PagesTitle";
-import PagesLink from "components/common/pagesHeader/PagesLink";
 import { useSelector } from "react-redux";
 
 const Order = () => {

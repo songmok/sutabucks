@@ -129,7 +129,7 @@ const Menu = () => {
 
   return (
     <section className="container mx-auto">
-      <PagesTitle title={"메뉴보기"} />
+      <PagesTitle title={"음식"} />
       <PagesLink first={"메뉴보기"} firstLink={"menu"} />
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1 mr-2">

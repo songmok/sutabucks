@@ -1,4 +1,4 @@
-export const logincolor = "#880303";
+export const logincolor = "#6d0808";
 export const signupcolor = "#809605";
 export const themecolor = "#046241";
 export const themeheadercolor = "#1b3c34";

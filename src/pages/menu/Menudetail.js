@@ -6,7 +6,7 @@ import request from "../../api/request";
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
 
-const Menudetail = () => {
+const Menudetail = ({ searchData }) => {
   // URI 처리 및 데이터 연동
   const [detail, setDetail] = useState([]);
 
@@ -43,11 +43,12 @@ const Menudetail = () => {
       <PagesTitle title={"메뉴보기"} />
       <PagesLink
         first={"메뉴보기"}
-        firstLink={"menu"}
+        firstLink={"menu/1"}
         second={"카테고리"}
-        secondLink={"menu"}
+        secondLink={"#"}
         third={detail.menuName}
-        thirdLink={"DD"}
+        thirdLink={"#"}
+        count={"three"}
       />
       <section className="container mx-auto my-10">
         <div className="relative block rounded-lg shadow-lg bg-white">
@@ -135,7 +136,11 @@ const Menudetail = () => {
                   </summary>
                 </details>
                 <div className="hidden sm:block">
-                  <img src={detail.menuNutritionUri} alt="Nutrition" className="w-full" />
+                  <img
+                    src={detail.menuNutritionUri}
+                    alt="Nutrition"
+                    className="w-full"
+                  />
                 </div>
               </div>
             </div>

@@ -1,8 +1,15 @@
 import styled from "@emotion/styled";
 import img from "asset/images/banner.jpg";
 import SignUp from "pages/member/SignUp";
-import { logincolor, signupcolor, themecolor } from "utils/color";
-import { midllesize } from "utils/font";
+import {
+  footercolor,
+  logincolor,
+  ordercolor,
+  signupcolor,
+  themecolor,
+  themeheadercolor,
+} from "utils/color";
+import { bigsize, midllesize } from "utils/font";
 const homeCss = styled.section`
   position: relative;
   .event {
@@ -60,14 +67,17 @@ const homeCss = styled.section`
     height: 50px;
     font-size: 0.875rem;
     letter-spacing: -1px;
-    background-color: black;
+    background-color: ${logincolor};
     .wrap {
       width: 420px;
       height: 100%;
       padding: 17px;
-      border: 1px solid #999;
-      border-radius: 2px;
+      border-left: 3px solid #555;
+      border-right: 3px solid #555;
+      display: flex;
       .title {
+        align-self: center;
+        font-size: ${midllesize};
         font-weight: bold;
         color: #fff;
         float: left;

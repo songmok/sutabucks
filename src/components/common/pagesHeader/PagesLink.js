@@ -9,52 +9,83 @@ const PagesLink = ({
   secondLink,
   third,
   thirdLink,
+  count,
 }) => {
   return (
     <PagesLinkCss>
-      <ul className="wrap">
-        <li>
-          <Link to="/" className="item">
-            홈
-          </Link>
-        </li>
-        {first === undefined ? (
-          ""
-        ) : (
-          <>
+      {count === "one" ? (
+        <>
+          <ul className="wrap">
+            <li>
+              <Link to="/" className="gray">
+                홈
+              </Link>
+            </li>
             <li className="arrow">{">"}</li>
             <li>
               <Link to={`/${firstLink}`} className="item">
                 {first}
               </Link>
             </li>
-          </>
-        )}
-        {second === undefined ? (
-          ""
-        ) : (
-          <>
+          </ul>
+        </>
+      ) : (
+        ""
+      )}
+      {count === "two" ? (
+        <ul className="wrap">
+          <li>
+            <Link to="/" className="gray">
+              홈
+            </Link>
+          </li>
+          <li className="arrow">{">"}</li>
+          <li>
+            <Link to={`${firstLink}`} className="gray">
+              {first}
+            </Link>
+          </li>
+          <li className="arrow">{">"}</li>
+          <li>
+            <Link to={`${secondLink}`} className="item">
+              {second}
+            </Link>
+          </li>
+        </ul>
+      ) : (
+        ""
+      )}
+      {count === "three" ? (
+        <>
+          <ul className="wrap">
+            <li>
+              <Link to="/" className="gray">
+                홈
+              </Link>
+            </li>
             <li className="arrow">{">"}</li>
             <li>
-              <Link to={`/${secondLink}`} className="item">
+              <Link to={`${firstLink}`} className="gray">
+                {first}
+              </Link>
+            </li>
+            <li className="arrow">{">"}</li>
+            <li>
+              <Link to={`${secondLink}`} className="gray">
                 {second}
               </Link>
             </li>
-          </>
-        )}
-        {third === undefined ? (
-          ""
-        ) : (
-          <>
             <li className="arrow">{">"}</li>
             <li>
-              <Link to={`/${thirdLink}`} className="item">
+              <Link to={`${thirdLink}`} className="item">
                 {third}
               </Link>
             </li>
-          </>
-        )}
-      </ul>
+          </ul>
+        </>
+      ) : (
+        ""
+      )}
     </PagesLinkCss>
   );
 };

@@ -7,7 +7,7 @@ const News = () => {
   return (
     <>
       <PagesTitle title={"새소식"} />
-      <PagesLink first={"새소식"} firstLink={"news"} />
+      <PagesLink first={"새소식"} firstLink={"news"} one={"one"} />
       <NewsItem />
     </>
   );

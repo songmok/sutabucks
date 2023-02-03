@@ -9,9 +9,10 @@ const EventList = ({ eventList }) => {
       <PagesTitle title={"이벤트"} />
       <PagesLink
         first={"새소식"}
-        firstLink={"news"}
+        firstLink={"/news"}
         second={"이벤트"}
-        secondLink={"event"}
+        secondLink={"#"}
+        count={"two"}
       />
       <EventListLayout eventList={eventList} />
     </>

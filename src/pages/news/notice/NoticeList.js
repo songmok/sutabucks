@@ -10,9 +10,10 @@ const NoticeList = ({ noticeList }) => {
       <PagesTitle title={"공지사항"} />
       <PagesLink
         first={"새소식"}
-        firstLink={"news"}
+        firstLink={"/news"}
         second={"공지사항"}
-        secondLink={"notice"}
+        secondLink={"#"}
+        count={"two"}
       />
       <NoticeListLayout noticeList={noticeList} />
     </>
