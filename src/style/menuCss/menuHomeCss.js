@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
-import React from "react";
 import { themecolor } from "utils/color";
 import { midllesize } from "utils/font";
 
-const NewsCss = styled.section`
+const MenuHomeCss = styled.section`
   position: relative;
   .banner {
     position: relative;
@@ -14,7 +13,7 @@ const NewsCss = styled.section`
     }
     a {
       position: absolute;
-      top: 60%;
+      top: 65%;
       font-size: ${midllesize};
       border: 1px solid ${themecolor};
       padding: 10px 20px;
@@ -25,15 +24,15 @@ const NewsCss = styled.section`
         color: #fff;
       }
     }
-    .bt-event {
+    .bt-drink {
       color: #fff;
       left: 61.07%;
     }
-    .bt-notice {
+    .bt-food {
       color: #000;
       left: 21.07%;
     }
   }
 `;
 
-export default NewsCss;
+export default MenuHomeCss;

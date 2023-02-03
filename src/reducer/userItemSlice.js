@@ -21,6 +21,30 @@ const userItemSlice = createSlice({
       state.items = cartItem.items;
       state.totalPrice = cartItem.totalPrice;
     },
+    plusItem: (state, action) => {
+      const cartItem = action.payload;
+      const existingItem = state.items.find((item) => item.id === cartItem.id);
+      console.log(existingItem);
+      if (existingItem) {
+        existingItem.sbNumber += 1;
+        state.totalPrice +=
+          existingItem.optionIncludePrice * existingItem.sbNumber;
+      }
+    },
+    minusItem: (state, action) => {
+      const cartItem = action.payload;
+      const existingItem = state.items.find((item) => item.id === cartItem.id);
+      if (existingItem) {
+        existingItem.sbNumber -= 1;
+        state.totalPrice -=
+          existingItem.optionIncludePrice * existingItem.sbNumber;
+      }
+    },
+    deliteItems: (state, action) => {
+      const cartItem = action.payload;
+      state.items = state.items.filter((item) => item.id !== cartItem.id);
+      state.totalPrice -= cartItem.optionIncludePrice * cartItem.sbNumber;
+    },
   },
 });
 

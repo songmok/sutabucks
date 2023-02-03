@@ -7,7 +7,7 @@ const SubMenuCate = ({ cate }) => {
         {cate.map((v, i) => {
           return (
             <li className="sub-list" key={i}>
-              <Link to="/"> {v.menu}</Link>
+              <Link to={v.url}>{v.menu}</Link>
             </li>
           );
         })}

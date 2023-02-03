@@ -32,7 +32,7 @@ const EventDetailLayout = () => {
           </div>
           <article>
             <img
-              src={`http://haeji.mawani.kro.kr:9999/image/event/${evd.evUri}`}
+              src={`http://haeji.mawani.kro.kr:9999/image/detail/${evd.evUri}`}
               alt={evd.evTitle}
             />
           </article>
