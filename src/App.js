@@ -31,6 +31,7 @@ import Cart from "pages/cart/cart/Cart";
 import Order from "pages/cart/order/Order";
 import Checkout from "pages/cart/Checkout";
 import Menu from "pages/menu/menuList/Menu";
+import MenuHome from "pages/menu/MenuHome";
 import Menudetail from "pages/menu/menuDetail/Menudetail";
 import Maps from "pages/maps/Maps";
 import Payment from "pages/cart/Payment";
@@ -94,6 +95,8 @@ function App() {
         <Route path="/membercard" element={<MemberCard />} />
         {/* 메뉴 및 상품 */}
         {/* <Route path="/menu" element={<Menu />} /> */}
+
+        <Route path="/menu" element={<MenuHome />} />
         <Route path="/menu/:cate" element={<Menu />} />
         <Route path="/menudetail/:seq" element={<Menudetail />} />
         <Route path="/maps" element={<Maps />} />

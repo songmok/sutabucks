@@ -16,7 +16,7 @@ const SubMenu = ({ subMenu, count, setCount }) => {
             {subMenu.map((v, i) => {
               return (
                 <li className="depth2" key={i}>
-                  <Link to={v.uri}>{v.name}</Link>
+                  <Link to={v.url}>{v.name}</Link>
                   <SubMenuCate cate={v.submenu} />
                 </li>
               );

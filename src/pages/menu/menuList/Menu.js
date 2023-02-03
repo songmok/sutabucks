@@ -20,6 +20,8 @@ const Menu = () => {
   const [bt, setBt] = useState("all");
   const [menuBt, setMenuBt] = useState([]);
 
+  console.log(cate);
+
   const fetchData = async () => {
     if (bt === "all") {
       await axios
@@ -53,7 +55,7 @@ const Menu = () => {
   }, [bt, cate]);
 
   // console.log(bt);
-  // console.log(searchData);
+  console.log(searchData);
 
   const cateData = async () => {
     const params = {
@@ -73,8 +75,34 @@ const Menu = () => {
 
   return (
     <section className="container mx-auto">
-      <PagesTitle title={"메뉴보기"} />
-      <PagesLink first={"메뉴보기"} firstLink={"menu"} />
+      {parseInt(cate) === 1 ? (
+        <>
+          <PagesTitle title={"음료"} />
+          <PagesLink
+            first={"메뉴"}
+            firstLink={"/menu"}
+            second={"음료"}
+            secondLink={"#"}
+            count={"two"}
+          />
+        </>
+      ) : (
+        ""
+      )}
+      {parseInt(cate) === 2 ? (
+        <>
+          <PagesTitle title={"음식"} />
+          <PagesLink
+            first={"메뉴"}
+            firstLink={"/menu"}
+            second={"음식"}
+            secondLink={"#"}
+            count={"two"}
+          />
+        </>
+      ) : (
+        ""
+      )}
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1 mr-2">
           <MenuBt bt={bt} setBt={setBt} menuBt={menuBt} />

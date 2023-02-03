@@ -1,6 +1,6 @@
 import React from "react";
 
-const MenuBt = ({ bt, setBt, menuBt }) => {
+const MenuBt = ({ bt, setBt, menuBt, cate }) => {
   return (
     <ul className="flex flex-col gap-2">
       <li>

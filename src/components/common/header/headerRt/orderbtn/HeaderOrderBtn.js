@@ -6,7 +6,7 @@ const HeaderOrderBtn = ({ user }) => {
       {user.miBusinessNum === "" ? (
         <div className="header-right-bottom">
           <div className="order">
-            <Link to="/order">
+            <Link to="/maps">
               <span>주문메뉴</span>
             </Link>
           </div>

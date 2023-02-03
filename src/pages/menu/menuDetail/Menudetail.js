@@ -29,8 +29,6 @@ const Menudetail = () => {
     fetchData();
   }, []);
 
-  console.log(detail);
-
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -43,15 +41,38 @@ const Menudetail = () => {
 
   return (
     <MenudetailCss>
-      <PagesTitle title={"메뉴보기"} />
-      <PagesLink
-        first={"메뉴보기"}
-        firstLink={"menu"}
-        second={"카테고리"}
-        secondLink={"menu"}
-        third={detail.menuName}
-        thirdLink={"DD"}
-      />
+      {parseInt(detail.menuCategorySeq) < 5 ? (
+        <>
+          <PagesTitle title={detail.menuName} />
+          <PagesLink
+            first={"메뉴보기"}
+            firstLink={"/menu/2"}
+            second={"음료"}
+            secondLink={"#"}
+            third={detail.menuName}
+            thirdLink={"#"}
+            count={"three"}
+          />
+        </>
+      ) : (
+        ""
+      )}
+      {parseInt(detail.menuCategorySeq) > 4 ? (
+        <>
+          <PagesTitle title={detail.menuName} />
+          <PagesLink
+            first={"메뉴보기"}
+            firstLink={"/menu/2"}
+            second={"음식"}
+            secondLink={"#"}
+            third={detail.menuName}
+            thirdLink={"#"}
+            count={"three"}
+          />
+        </>
+      ) : (
+        ""
+      )}
       <section className="container mx-auto my-10">
         <div className="relative block rounded-lg shadow-lg bg-white">
           <Link
