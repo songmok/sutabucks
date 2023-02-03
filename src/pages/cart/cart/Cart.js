@@ -23,7 +23,7 @@ const Carttest = () => {
 
   const getPosts = async () => {
     const posts = await axios.get(
-      `http://192.168.0.190:9999/cart/list?miSeq=${miSeq}&status=1`
+      `http://haeji.mawani.kro.kr:9999/cart/list?miSeq=${miSeq}&status=1`
     );
     // console.log(posts.data);
     const items = posts.data.memberBasket;
@@ -48,7 +48,7 @@ const Carttest = () => {
 
   useEffect(() => {
     getPosts();
-  }, [click]);
+  }, []);
 
   console.log(cartItems);
 
@@ -88,7 +88,14 @@ const Carttest = () => {
               </h3>
             </div>
             {userItems.items.map((item) => (
-              <CartList miSeq={miSeq} item={item} click={click} setClick={setClick} />
+              <CartList
+                miSeq={miSeq}
+                item={item}
+                click={click}
+                setClick={setClick}
+                cartItems={cartItems}
+                totalPrice={totalPrice}
+              />
             ))}
             <Link
               to="/order"

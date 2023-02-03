@@ -1,51 +1,59 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { userItemActions } from "reducer/userItemSlice";
 
 const CartList = ({ item, miSeq, click, setClick }) => {
+  const dispatch = useDispatch();
+
   const minus = () => {
     if (item.sbNumber > 1) {
       const body = {
         miSeq: miSeq,
         sbSmcSeq: item.sbSmcSeq,
-        sbNumber: --item.sbNumber,
+        sbNumber: item.sbNumber - 1,
         sbOrderNumber: item.sbOrderNumber,
       };
       axios
-        .patch("http://192.168.0.190:9999/cart/update", body)
+        .patch("http://haeji.mawani.kro.kr:9999/cart/update", body)
         .then((res) => {
           console.log(res);
           console.log(body);
+          dispatch(userItemActions.minusItem(item));
         })
         .catch((err) => {
           console.log(err);
           console.log(body);
         });
-      setClick(!click);
+      // setClick(!click);
     }
   };
   const plus = () => {
+    console.log(item.sbNumber);
     const body = {
       miSeq: miSeq,
       sbSmcSeq: item.sbSmcSeq,
-      sbNumber: ++item.sbNumber,
+      sbNumber: item.sbNumber + 1,
       sbOrderNumber: item.sbOrderNumber,
     };
     axios
-      .patch("http://192.168.0.190:9999/cart/update", body)
+      .patch("http://haeji.mawani.kro.kr:9999/cart/update", body)
       .then((res) => {
         console.log(res);
         console.log(body);
+        dispatch(userItemActions.plusItem(item));
       })
       .catch((err) => {
         console.log(err);
         console.log(body);
       });
-    setClick(!click);
+    console.log(item);
+    // setClick(!click);
   };
   const removeItem = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       axios
-        .delete("http://192.168.0.190:9999/cart/delete", {
+        .delete("http://haeji.mawani.kro.kr:9999/cart/delete", {
           data: {
             miSeq: miSeq,
             sbSmcSeq: item.sbSmcSeq,
@@ -58,7 +66,7 @@ const CartList = ({ item, miSeq, click, setClick }) => {
         .catch((err) => {
           console.log(err);
         });
-      setClick(!click);
+      dispatch(userItemActions.deliteItems(item));
     }
   };
   return (

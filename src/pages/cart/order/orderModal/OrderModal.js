@@ -45,13 +45,15 @@ const OrderModal = ({
     getModal();
   }, [menuSeq]);
 
+  console.log(modalData.menuCategorySeq);
+
   // 카트 아이템 추가
   const [totalPrice, setTotalPrice] = useState("");
   const [cartList, setCartList] = useState([]);
 
   const getPosts = async () => {
     const posts = await axios.get(
-      `http://192.168.0.190:9999/cart/list?miSeq=${miSeq}&status=1`
+      `http://haeji.mawani.kro.kr:9999/cart/list?miSeq=${miSeq}&status=1`
     );
     // console.log(posts.data);
     const items = posts.data.memberBasket;
@@ -115,7 +117,7 @@ const OrderModal = ({
       ],
     };
     axios
-      .put("http://192.168.0.190:9999/cart/add", body)
+      .put("http://haeji.mawani.kro.kr:9999/cart/add", body)
       .then((res) => {
         console.log(res);
         console.log(body);
@@ -208,6 +210,63 @@ const OrderModal = ({
                 +
               </button>
             </div>
+            {/* {parseInt(modalData.menuCategorySeq) < 5 && (
+              <ul className="flex w-3/4 justify-center items-stretch gap-2 my-1">
+                <li className="relative flex-1">
+                  <input
+                    className="sr-only peer"
+                    type="radio"
+                    value="1"
+                    name="size"
+                    id="1"
+                    checked={parseInt(option) === 1}
+                    onChange={handleOptionChange}
+                  />
+                  <label
+                    className="flex h-full items-center justify-center text-center px-2 py-2 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#CCAA86] peer-checked:ring-2 peer-checked:border-transparent"
+                    htmlFor="1"
+                  >
+                    Tall
+                  </label>
+                </li>
+                <li className="relative flex-1">
+                  <input
+                    className="sr-only peer"
+                    type="radio"
+                    value="2"
+                    name="size"
+                    id="2"
+                    checked={parseInt(option) === 2}
+                    onChange={handleOptionChange}
+                  />
+                  <label
+                    className="flex h-full items-center justify-center text-center px-2 py-2 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#B05B10] peer-checked:ring-2 peer-checked:border-transparent"
+                    htmlFor="2"
+                  >
+                    Grande
+                    <br />+ 500
+                  </label>
+                </li>
+                <li className="relative flex-1">
+                  <input
+                    className="sr-only peer"
+                    type="radio"
+                    value="3"
+                    name="size"
+                    id="3"
+                    checked={parseInt(option) === 3}
+                    onChange={handleOptionChange}
+                  />
+                  <label
+                    className="flex h-full items-center justify-center text-center px-2 py-2 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#480405] peer-checked:ring-2 peer-checked:border-transparent"
+                    htmlFor="3"
+                  >
+                    Venti
+                    <br />+ 1000
+                  </label>
+                </li>
+              </ul>
+            )} */}
             <ul className="flex w-3/4 justify-center items-stretch gap-2 my-1">
               <li className="relative flex-1">
                 <input

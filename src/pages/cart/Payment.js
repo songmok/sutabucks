@@ -17,7 +17,6 @@ const Payment = () => {
               <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                 결제
               </span>
-
               <div className="flex flex-col itmes-center w-full">
                 <table className="mx-5">
                   <tr className="flex flex-col justify-start py-7">
