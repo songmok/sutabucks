@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactModal from "react-modal";
 import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +6,12 @@ import Timer from "./Timer";
 
 const IdFindModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
+  const [num, setNum] = useState("");
 
   const clickSubmit = () => {
+    setNum();
     axios
-      .get("/member/finddid")
+      .get("/member/finddid?authNum=" + num)
       .then((res) => {
         console.log(res.data);
         alert("인증번호가 확인되었습니다.");
@@ -70,7 +72,12 @@ const IdFindModal = ({ isopen, setIsOpen }) => {
             </p>
             <form className=" flex flex-col space-y-3 pt-5">
               <label className="justify-items-start">인증번호 입력</label>
-              <input type="text" className=" border border-black pt-4" />
+              <input
+                type="text"
+                className=" border border-black pl-2 py-1"
+                value={num}
+                onChange={(e) => setNum(e.target.value)}
+              />
               <Timer setIsOpen={setIsOpen} />
               <button
                 onClick={() => clickSubmit()}

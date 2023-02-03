@@ -65,7 +65,7 @@ const SignUp = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleComplete = (e, data) => {
+  const handleComplete = (e) => {
     e.preventDefault();
     setPopup(!popup);
   };
@@ -150,7 +150,7 @@ const SignUp = () => {
                     type="radio"
                     name="gender"
                     className="accent-green-800 shadow-none"
-                    value="남"
+                    value="male"
                     {...register("gender")}
                   />
                   남자
@@ -160,7 +160,7 @@ const SignUp = () => {
                     type="radio"
                     name="gender"
                     className="accent-green-800"
-                    value="여"
+                    value="female"
                     {...register("gender")}
                   />
                   여자
@@ -204,7 +204,6 @@ const SignUp = () => {
                   required: "휴대폰 번호를 입력해주세요.",
                   maxLength: 11,
                   pattern: {
-                    value: /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g,
                     message: "010123456789 형식으로 작성해주세요.",
                   },
                 })}

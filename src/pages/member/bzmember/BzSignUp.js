@@ -202,6 +202,9 @@ const BzSignUp = () => {
                 {...register("tel", {
                   required: "휴대폰 번호를 입력해주세요.",
                   maxLength: 11,
+                  pattern: {
+                    message: "010123456789 형식으로 작성해주세요.",
+                  },
                 })}
               />
               {errors.tel && <Err>{errors.tel.message}</Err>}

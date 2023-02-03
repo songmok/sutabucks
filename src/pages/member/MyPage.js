@@ -30,17 +30,15 @@ const MyPage = () => {
       tel: `${user.miPhoneNum}`,
       address: `${user.miAddress}`,
       detailAddress: `${user.miDetailAddress}`,
-      pw: `${user.miPwd}`,
-      pwConfirm: `${user.miPwd}`,
+      // pw: `${user.miPwd}`,
+      // pwConfirm: `${user.miPwd}`,
     },
   });
 
   const onSubmit = async (data) => {
-    console.log("데이터", data);
+    // console.log("데이터", data);
     const body = {
-      miId: data.email,
-      miPwd: data.pw,
-      miName: data.name,
+      miNickname: data.nickName,
       miPhoneNum: data.tel,
       miAdress: data.address,
       miDetailAdress: data.detailAddress,
@@ -48,8 +46,10 @@ const MyPage = () => {
     axios
       .patch("member/edit?miSeq=" + user.miSeq, body)
       .then((res) => {
-        console.log(res);
         alert("회원정보가 수정되었습니다.");
+        console.log(body);
+        // dispatch(loginAccount(body));
+        navigate("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -94,10 +94,11 @@ const MyPage = () => {
             <input type="email" required disabled {...register("email")} />
           </div>
           <div className="relative items-start ">
-            <label>{user.name}</label>
+            <label>이름</label>
             <input
               type="text"
               className="w-72"
+              disabled
               {...register("name", {
                 required: "이름을 입력해주세요.",
                 maxLength: 10,
@@ -162,6 +163,9 @@ const MyPage = () => {
               {...register("tel", {
                 required: "휴대폰 번호를 입력해주세요.",
                 maxLength: 11,
+                pattern: {
+                  message: "010123456789 형식으로 작성해주세요.",
+                },
               })}
             />
             {errors.tel && <Err>{errors.tel.message}</Err>}
