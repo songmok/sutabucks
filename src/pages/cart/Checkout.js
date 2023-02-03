@@ -27,7 +27,7 @@ const Checkout = () => {
 
   const getPosts = async () => {
     const posts = await axios.get(
-      `http://192.168.0.190:9999/cart/list?miSeq=${miSeq}&status=1`
+      `http://haeji.mawani.kro.kr:9999/cart/list?miSeq=${miSeq}&status=1`
     );
     // console.log(posts.data);
     const items = posts.data.memberBasket;
@@ -73,7 +73,7 @@ const Checkout = () => {
       couponNumber: 0,
     };
     axios
-      .patch("localhost:9999/cart/order?status=1&change=5", body)
+      .patch("http://haeji.mawani.kro.kr:9999/cart/payment", body)
       .then((res) => {
         console.log(res);
         console.log(body);
@@ -114,6 +114,7 @@ const Checkout = () => {
                       <div className="flex w-4/6 items-center">
                         <div className="flex flex-col justify-center ml-4 flex-grow">
                           <span className="font-bold">
+                            {/* {item.mbiName} */}
                             {item.mbiName} - {item.moiName}
                           </span>
                         </div>
@@ -157,7 +158,7 @@ const Checkout = () => {
                       <td className="flex gap-16">
                         <div className="flex items-center gap-2">
                           <input
-                            className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                            className="focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
                             type="radio"
                             name="pick"
                             value="1"
@@ -170,7 +171,7 @@ const Checkout = () => {
                         </div>
                         <div className="flex items-center gap-2">
                           <input
-                            className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                            className="focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
                             type="radio"
                             name="pick"
                             value="2"
@@ -227,7 +228,7 @@ const Checkout = () => {
                         <div className="flex justify-between w-2/5">
                           <div className="flex items-center gap-2">
                             <input
-                              className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border- checked:border-[#1B3C34]"
+                              className="focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border- checked:border-[#1B3C34]"
                               type="radio"
                               name="payment"
                               value="membership"
@@ -237,7 +238,7 @@ const Checkout = () => {
                           </div>
                           <div className="flex items-center gap-2">
                             <input
-                              className="appearance-none focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
+                              className="focus:outline-none border border-gray-400 rounded-full cursor-pointer w-5 h-5 checked:border-[5px] checked:border-[#1B3C34]"
                               type="radio"
                               name="payment"
                               value="normal"

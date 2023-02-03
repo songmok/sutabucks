@@ -9,6 +9,7 @@ import OrderSummary from "./OrderSummary";
 const Carttest = () => {
   const [totalPrice, setTotalPrice] = useState("");
   const [cartList, setCartList] = useState([]);
+  const [click, setClick] = useState(true);
 
   const userData = useSelector((state) => state.user);
   const miSeq = userData.miSeq;
@@ -22,7 +23,7 @@ const Carttest = () => {
 
   const getPosts = async () => {
     const posts = await axios.get(
-      `http://192.168.0.190:9999/cart/list?miSeq=${miSeq}&status=1`
+      `http://haeji.mawani.kro.kr:9999/cart/list?miSeq=${miSeq}&status=1`
     );
     // console.log(posts.data);
     const items = posts.data.memberBasket;
@@ -87,7 +88,14 @@ const Carttest = () => {
               </h3>
             </div>
             {userItems.items.map((item) => (
-              <CartList miSeq={miSeq} item={item} />
+              <CartList
+                miSeq={miSeq}
+                item={item}
+                click={click}
+                setClick={setClick}
+                cartItems={cartItems}
+                totalPrice={totalPrice}
+              />
             ))}
             <Link
               to="/order"

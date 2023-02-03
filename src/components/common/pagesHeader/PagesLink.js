@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PagesLinkCss from "style/PagesHeaderCss/pagesLink";
+import PagesLinkCss from "style/PagesHeaderCss/PagesLink";
 
 const PagesLink = ({
   first,
