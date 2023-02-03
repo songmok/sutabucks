@@ -43,7 +43,7 @@ import BzSignUp from "pages/member/bzmember/BzSignUp";
 import Footer from "components/common/footer/Footer";
 
 import QrMob from "pages/qrPage/QrMob";
-import TeamMember from "components/common/header/headerCt/TeamMember";
+import TeamMember from "components/common/header/TeamMember";
 
 function App() {
   const [eventList, setEventList] = useState([]);

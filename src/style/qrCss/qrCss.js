@@ -5,7 +5,7 @@ const QrCss = styled.section`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #da7c8b;
+  background-color: #535eee;
   z-index: 10;
 `;
 export default QrCss;

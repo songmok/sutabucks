@@ -81,6 +81,14 @@ const Order = () => {
   return (
     <>
       {/* <OrderHeader /> */}
+      <PagesTitle title={store.branchName} />
+      <PagesLink
+        first={"매장찾기"}
+        firstLink={"/maps"}
+        second={store.branchName}
+        secondLink={"#"}
+        count={"two"}
+      />
       <div className="container mx-auto">
         <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
           <div className="lg:col-span-1 mr-2">
@@ -89,7 +97,7 @@ const Order = () => {
           <main className="lg:col-span-4 ml-2">
             <div className="flex justify-between items-center mb-7">
               <span className="text-2xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
-                {store.branchName}
+                {/* {store.branchName} */}
               </span>
               {/* {listName()} */}
             </div>

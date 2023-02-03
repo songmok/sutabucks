@@ -46,9 +46,9 @@ const Menudetail = () => {
           <PagesTitle title={detail.menuName} />
           <PagesLink
             first={"메뉴보기"}
-            firstLink={"/menu/2"}
+            firstLink={"/menu"}
             second={"음료"}
-            secondLink={"#"}
+            secondLink={"/menu/1"}
             third={detail.menuName}
             thirdLink={"#"}
             count={"three"}
@@ -62,9 +62,9 @@ const Menudetail = () => {
           <PagesTitle title={detail.menuName} />
           <PagesLink
             first={"메뉴보기"}
-            firstLink={"/menu/2"}
+            firstLink={"/menu"}
             second={"음식"}
-            secondLink={"#"}
+            secondLink={"/menu/2"}
             third={detail.menuName}
             thirdLink={"#"}
             count={"three"}

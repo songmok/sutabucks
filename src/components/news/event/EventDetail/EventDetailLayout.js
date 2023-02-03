@@ -13,26 +13,25 @@ const EventDetailLayout = () => {
     const resultDetail = await instance.get(requests.fetchEventDetail, {
       params,
     });
-    setEvd(resultDetail.data.event);
+    setEvd(resultDetail.data);
   };
   useEffect(() => {
     fetchData();
   }, []);
-
   return (
     <>
       <EvDetailCss>
         <div className="wrap">
           <div className="header">
             <h2>{evd.evTitle}</h2>
-          </div>
-          <div className="date">
-            <span>{evd.evStartDate}</span>
-            <span>{evd.evEndDate}</span>
+            <div className="date">
+              <span>{evd.evStartDate}</span>
+              <span>{evd.evEndDate}</span>
+            </div>
           </div>
           <article>
             <img
-              src={`http://haeji.mawani.kro.kr:9999/image/detail/${evd.evUri}`}
+              src={`http://haeji.mawani.kro.kr:9999/image/detail/${evd.ediUri}`}
               alt={evd.evTitle}
             />
           </article>
