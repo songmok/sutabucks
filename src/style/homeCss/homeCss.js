@@ -152,6 +152,21 @@ const homeCss = styled.section`
         .signup {
           background-color: ${signupcolor};
         }
+        .btStyle {
+          display: block;
+          border: 2px solid #006633;
+          padding: 25px;
+          border-radius: 10px;
+          margin-bottom: 25px;
+          background-color: #fff;
+          color: #006633;
+          font-size: ${bigsize};
+          &:hover {
+            border: 2px solid #fff;
+            background-color: ${themecolor};
+            color: #fff;
+          }
+        }
       }
     }
   }

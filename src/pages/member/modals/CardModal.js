@@ -9,7 +9,7 @@ import axios from "api/axios";
 const CardModal = ({ isopen, setIsOpen }) => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-
+  
   const clickSubmit = () => {
     const body = {
       cardName: user.miNickname,
@@ -33,6 +33,7 @@ const CardModal = ({ isopen, setIsOpen }) => {
   const customStyles = {
     overlay: {
       position: "fixed",
+      zIndex: 99999,
       top: 0,
       left: 0,
       right: 0,
