@@ -10,6 +10,7 @@ const HeaderMember = ({ user }) => {
     dispatch(logoutAccount());
     navigate("/login");
   };
+
   return (
     <>
       {user.miSeq === "" ? (
@@ -24,7 +25,7 @@ const HeaderMember = ({ user }) => {
       ) : (
         <ul className="member">
           <li className="member-list">
-            <Link to="/mypage">My page</Link>
+            <Link to="/mypage">{user.miNickname} 님 환영합니다.</Link>
           </li>
           <li className="member-list">
             <button onClick={() => logOutFn()}>로그아웃</button>
