@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MenuBt = ({ bt, setBt, menuBt, seq, childSeq, q }) => {
+const MenuBt = ({ bt, setBt, menuBt, seq, childSeq, q, setWord }) => {
   console.log(seq);
   return (
     <div className="flex flex-col gap-2">
@@ -10,6 +10,9 @@ const MenuBt = ({ bt, setBt, menuBt, seq, childSeq, q }) => {
         className={`flex justify-center px-2 py-3 text-sm rounded-lg cursor-pointer ${
           !q && !childSeq ? "bg-[#006633] text-white" : "hover:bg-gray-200"
         }`}
+        onClick={() => {
+          setWord("");
+        }}
       >
         전체 메뉴
       </Link>
@@ -23,6 +26,9 @@ const MenuBt = ({ bt, setBt, menuBt, seq, childSeq, q }) => {
               ? "bg-[#006633] text-white"
               : "hover:bg-gray-200"
           }`}
+          onClick={() => {
+            setWord("");
+          }}
         >
           {item.pcName}
         </Link>

@@ -152,6 +152,7 @@ const Menu = () => {
             q={q}
             seq={seq}
             childSeq={childSeq}
+            setWord={setWord}
           />
         </div>
         <main className="lg:col-span-4 ml-2">
