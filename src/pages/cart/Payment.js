@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import cardImg from "asset/images/card.png";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import PayQrModal from "./PayQrModal";
 
 const Payment = () => {
   const userData = useSelector((state) => state.user);
@@ -12,24 +13,24 @@ const Payment = () => {
   const userItems = useSelector((state) => state.userItem);
 
   const [detail, setDetail] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const getPosts = async () => {
-    const posts = axios
+  const chargeCard = () => {
+    setIsOpen(true);
+  };
+
+  const payPosts = async () => {
+    axios
       .get(`http://haeji.mawani.kro.kr:9999/card/detail?memberNo=${miSeq}`)
       .then((res) => {
-        console.log(res.data);
-        setDetail(res.data);
-        // console.log(detail);
+        setDetail(res.data.detail);
       })
       .catch((err) => console.log(err));
-    // console.log(posts);
   };
 
   useEffect(() => {
-    getPosts();
+    payPosts();
   }, []);
-
-  console.log(detail);
 
   return (
     <section className="container mx-auto">
@@ -60,11 +61,21 @@ const Payment = () => {
                         </div>
                         <div className="flex flex-col justify-center">
                           <span className="pb-6 text-lg">
-                            카드명: 닉네임 <br /> 카드잔액 : 10000원
+                            카드명: {detail.cardName}
+                            {/* <br /> 카드잔액 :{" "}
+                            {detail.money}원 */}
                           </span>
-                          <button className="p-[10px] bg-white border-2 border-[#006633] rounded font-bold">
+                          <button
+                            className="p-[10px] bg-white border-2 border-[#006633] rounded font-bold"
+                            onClick={chargeCard}
+                          >
                             결제하기
                           </button>
+                          <PayQrModal
+                            isopen={isOpen}
+                            setIsOpen={setIsOpen}
+                            detail={detail}
+                          />
                         </div>
                       </div>
                     </div>

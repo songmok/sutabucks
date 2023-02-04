@@ -99,7 +99,8 @@ function App() {
         {/* <Route path="/menu" element={<Menu />} /> */}
 
         <Route path="/menu" element={<MenuHome />} />
-        <Route path="/menu/:cate" element={<Menu />} />
+        {/* <Route path="/menu/:cate" element={<Menu />} /> */}
+        <Route path="/menu/cate" element={<Menu />} />
         <Route path="/menudetail/:seq" element={<Menudetail />} />
         <Route path="/maps" element={<Maps />} />
         <Route path="/order/:storeNo" element={<Order />} />

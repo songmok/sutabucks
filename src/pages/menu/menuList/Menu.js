@@ -5,13 +5,19 @@ import request from "../../../api/request";
 
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
 import PagesLink from "components/common/pagesHeader/PagesLink";
-import { Link, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import axios from "axios";
 import MenuBt from "./MenuBt";
 import MenuItem from "../ui/MenuItem";
 
 const Menu = () => {
-  const { cate } = useParams();
+  // const { cate } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   // const [data, setData] = useState([]);
   const [word, setWord] = useState("");
   const [searchData, setSearchData] = useState([]);
@@ -20,13 +26,34 @@ const Menu = () => {
   const [bt, setBt] = useState("all");
   const [menuBt, setMenuBt] = useState([]);
 
-  console.log(cate);
+  // console.log(cate);
+
+  const seq = searchParams.get("seq");
+  const childSeq = searchParams.get("childSeq");
+  const q = searchParams.get("q");
+
+  console.log(`seq는 ${seq}`);
+  console.log(`childSeq는 ${childSeq}`);
+
+  const navigate = useNavigate();
 
   const fetchData = async () => {
-    if (bt === "all") {
+    if (childSeq) {
+      await axios
+        .get(`http://haeji.mawani.kro.kr:9999/cate/detail/menu?childSeq=${childSeq}`)
+        .then((res) => {
+          console.log(res.data.list);
+          setSearchData(res.data.list);
+          setStatus(res.data.status);
+        })
+        .catch((err) => {
+          console.log(err);
+          setStatus(err.response.data.status);
+        });
+    } else if (q) {
       await axios
         .get(
-          `http://haeji.mawani.kro.kr:9999/cate/searchmenu?parentSeq=${cate}&menuName=`
+          `http://haeji.mawani.kro.kr:9999/cate/searchmenu?parentSeq=${seq}&menuName=${q}`
         )
         .then((res) => {
           setSearchData(res.data.list);
@@ -38,9 +65,10 @@ const Menu = () => {
         });
     } else {
       await axios
-        .get(`http://haeji.mawani.kro.kr:9999/cate/detail/menu?childSeq=${bt}`)
+        .get(
+          `http://haeji.mawani.kro.kr:9999/cate/searchmenu?parentSeq=${seq}&menuName=`
+        )
         .then((res) => {
-          console.log(res.data.list);
           setSearchData(res.data.list);
           setStatus(res.data.status);
         })
@@ -50,16 +78,21 @@ const Menu = () => {
         });
     }
   };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
     fetchData();
-  }, [bt, cate]);
+  }, [seq, childSeq, q]);
 
   // console.log(bt);
   console.log(searchData);
 
   const cateData = async () => {
     const params = {
-      parentSeq: cate,
+      parentSeq: seq,
     };
     await instance
       .get(request.fetchCateSeq, {
@@ -73,9 +106,43 @@ const Menu = () => {
     cateData();
   }, []);
 
+  // const searchResult = async () => {
+  //   await axios
+  //     .get(
+  //       `http://haeji.mawani.kro.kr:9999/cate/searchmenu?parentSeq=${cate}&menuName=${word}`
+  //     )
+  //     .then((res) => {
+  //       setSearchData(res.data.list);
+  //       setStatus(res.data.status);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       setStatus(err.response.data.status);
+  //     });
+  // };
+
+  // const searchResult = (e) => {
+  //   if (e.key === "Enter") {
+  //     let keyword = e.target.value;
+  //     navigate(`/?q=${keyword}`);
+  //   }
+  // };
+
+  // const handleOnClick = () => {
+  //   setBt("search");
+  // };
+  // const handleOnKeyPress = (e) => {
+  //   if (e.key === "Enter") {
+  //     let keyword = e.target.value;
+  //     navigate(`/?=${keyword}`);
+  //   }
+  // };
+
+  console.log(bt);
+
   return (
     <section className="container mx-auto">
-      {parseInt(cate) === 1 ? (
+      {parseInt(seq) === 1 ? (
         <>
           <PagesTitle title={"음료"} />
           <PagesLink
@@ -89,7 +156,7 @@ const Menu = () => {
       ) : (
         ""
       )}
-      {parseInt(cate) === 2 ? (
+      {parseInt(seq) === 2 ? (
         <>
           <PagesTitle title={"음식"} />
           <PagesLink
@@ -105,21 +172,70 @@ const Menu = () => {
       )}
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1 mr-2">
-          <MenuBt bt={bt} setBt={setBt} menuBt={menuBt} />
+          <MenuBt bt={bt} setBt={setBt} menuBt={menuBt} seq={seq} childSeq={childSeq} />
         </div>
         <main className="lg:col-span-4 ml-2">
-          <div className="coffee mb-10">
-            <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
-              {searchData.map((item) => (
-                <MenuItem
-                  link={`/menudetail/${item.menuNo}`}
-                  key={item.menuNo}
-                  img={item.menuUri}
-                  name={item.menuName}
-                  price={item.menuCost}
+          {/* <div className="flex flex-wrap justify-between items-center lg:mb-7">
+            <form className="w-full lg:w-[35%]">
+              <div className="relative">
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg block w-full pl-5 p-2.5"
+                  placeholder="Search Menu"
+                  // required
+                  value={word}
+                  onChange={(e) => {
+                    setWord(e.target.value);
+                  }}
+                  // onKeyPress={handleOnKeyPress}
                 />
-              ))}
-            </div>
+                <button
+                  className="absolute inset-y-0 right-3 flex items-center pl-3 cursor-pointer"
+                  onClick={()=>{setBt("search")}}
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="w-5 h-5 text-[#1B3C34] dark:text-gray-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </form>
+            <input
+              type="search"
+              className="px-5 py-2 w-4/5"
+              placeholder="Search Menu"
+              onKeyPress={(e) => searchResult(e)}
+            />
+          </div> */}
+          <div className="coffee mb-10">
+            {status ? (
+              <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
+                {searchData.map((item) => (
+                  <MenuItem
+                    link={`/menudetail/${item.menuNo}`}
+                    key={item.menuNo}
+                    img={item.menuUri}
+                    name={item.menuName}
+                    price={item.menuCost}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div class="flex justify-center items-center h-[30vh] px-4 bg-white">
+                <h1 class="tracking-widest text-gray-500">
+                  검색 결과가 없습니다.
+                </h1>
+              </div>
+            )}
           </div>
         </main>
       </div>

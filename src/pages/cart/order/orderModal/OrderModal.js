@@ -43,12 +43,13 @@ const OrderModal = ({
 
   useEffect(() => {
     getModal();
-  }, [modalIsOpen]);
+  }, [menuSeq]);
+
+  console.log(modalData.menuCategorySeq);
 
   // 카트 아이템 추가
   const [totalPrice, setTotalPrice] = useState("");
   const [cartList, setCartList] = useState([]);
-  const [push, setPush] = useState(true);
 
   const getPosts = async () => {
     const posts = await axios.get(
@@ -72,15 +73,16 @@ const OrderModal = ({
       mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
       sbOrderNumber: item.sbOrderNumber,
       sbSmcSeq: item["storeMenuConnect"].smcSeq,
+      sbBasketPrice: item.sbBasketPrice,
     };
   });
 
   useEffect(() => {
     getPosts();
-    dispatch(userItemActions.updateItems({ items: cartItems, totalPrice }));
   }, [modalIsOpen]);
 
-  // console.log(cartItems);
+  // console.log(storeSeq);
+  // console.log(option);
 
   const handleOptionChange = (changeEvent) => {
     setOption(changeEvent.target.value);
@@ -91,6 +93,14 @@ const OrderModal = ({
   const decrease = () => {
     amount > 1 && setAmount(parseInt(amount) - 1);
   };
+  // const dispatch = useDispatch();
+
+  // const pushCart = () => {
+  //   const item = { ...modalData, amount, option, checked: true };
+  //   dispatch(cartActions.addCartItem(item));
+  //   setAmount(1);
+  //   setModalIsOpen(false);
+  // };
 
   const pushCart = () => {
     const body = {
@@ -112,15 +122,13 @@ const OrderModal = ({
       .then((res) => {
         console.log(res);
         console.log(body);
-        setAmount(1);
-        setModalIsOpen(false);
       })
       .catch((err) => {
         console.log(err);
-        setAmount(1);
-        setModalIsOpen(false);
-        alert("에러가 발생했습니다");
       });
+    setAmount(1);
+    setModalIsOpen(false);
+    dispatch(userItemActions.updateItems({ items: cartItems, totalPrice }));
   };
 
   const customStyles = {
@@ -203,6 +211,63 @@ const OrderModal = ({
                 +
               </button>
             </div>
+            {/* {parseInt(modalData.menuCategorySeq) < 5 && (
+              <ul className="flex w-3/4 justify-center items-stretch gap-2 my-1">
+                <li className="relative flex-1">
+                  <input
+                    className="sr-only peer"
+                    type="radio"
+                    value="1"
+                    name="size"
+                    id="1"
+                    checked={parseInt(option) === 1}
+                    onChange={handleOptionChange}
+                  />
+                  <label
+                    className="flex h-full items-center justify-center text-center px-2 py-2 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#CCAA86] peer-checked:ring-2 peer-checked:border-transparent"
+                    htmlFor="1"
+                  >
+                    Tall
+                  </label>
+                </li>
+                <li className="relative flex-1">
+                  <input
+                    className="sr-only peer"
+                    type="radio"
+                    value="2"
+                    name="size"
+                    id="2"
+                    checked={parseInt(option) === 2}
+                    onChange={handleOptionChange}
+                  />
+                  <label
+                    className="flex h-full items-center justify-center text-center px-2 py-2 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#B05B10] peer-checked:ring-2 peer-checked:border-transparent"
+                    htmlFor="2"
+                  >
+                    Grande
+                    <br />+ 500
+                  </label>
+                </li>
+                <li className="relative flex-1">
+                  <input
+                    className="sr-only peer"
+                    type="radio"
+                    value="3"
+                    name="size"
+                    id="3"
+                    checked={parseInt(option) === 3}
+                    onChange={handleOptionChange}
+                  />
+                  <label
+                    className="flex h-full items-center justify-center text-center px-2 py-2 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#480405] peer-checked:ring-2 peer-checked:border-transparent"
+                    htmlFor="3"
+                  >
+                    Venti
+                    <br />+ 1000
+                  </label>
+                </li>
+              </ul>
+            )} */}
             <ul className="flex w-3/4 justify-center items-stretch gap-2 my-1">
               <li className="relative flex-1">
                 <input

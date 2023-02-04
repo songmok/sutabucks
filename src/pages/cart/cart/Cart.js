@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userItemActions } from "reducer/userItemSlice";
 import CartList from "./CartList";
 import OrderSummary from "./OrderSummary";
@@ -9,14 +9,12 @@ import OrderSummary from "./OrderSummary";
 const Carttest = () => {
   const [totalPrice, setTotalPrice] = useState("");
   const [cartList, setCartList] = useState([]);
-  const [click, setClick] = useState(true);
+  const [click, setClick] = useState(1);
+
+  const navigate = useNavigate();
 
   const userData = useSelector((state) => state.user);
   const miSeq = userData.miSeq;
-
-  const userItems = useSelector((state) => state.userItem);
-
-  const dispatch = useDispatch();
 
   // console.log(miSeq);
   // const miSeq = 70;
@@ -43,27 +41,24 @@ const Carttest = () => {
       mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
       sbOrderNumber: item.sbOrderNumber,
       sbSmcSeq: item["storeMenuConnect"].smcSeq,
+      sbBasketPrice: item.sbBasketPrice,
     };
   });
 
   useEffect(() => {
     getPosts();
-    dispatch(userItemActions.updateItems({ items: cartItems, totalPrice }));
   }, []);
 
   useEffect(() => {
     getPosts();
-    dispatch(userItemActions.updateItems({ items: cartItems, totalPrice }));
   }, [click]);
 
-  console.log(userItems);
+  // console.log(cartItems);
 
   const toCheckout = (e) => {
     if (cartItems.length <= 0) {
       e.preventDefault();
       alert("장바구니에 담긴 상품이 없습니다.");
-    } else {
-      dispatch(userItemActions.updateItems({ items: cartItems, totalPrice }));
     }
   };
 
@@ -93,19 +88,20 @@ const Carttest = () => {
                 주문금액
               </h3>
             </div>
-            {userItems.items.map((item) => (
+            {cartItems.map((item) => (
               <CartList
                 miSeq={miSeq}
                 item={item}
+                totalPrice={totalPrice}
                 click={click}
                 setClick={setClick}
-                cartItems={cartItems}
-                totalPrice={totalPrice}
               />
             ))}
-            <Link
-              to="/order"
-              className="flex font-semibold text-indigo-600 text-sm mt-10"
+            <div
+              className="flex font-semibold text-indigo-600 text-sm mt-10 cursor-pointer"
+              onClick={() => {
+                navigate(-1);
+              }}
             >
               <svg
                 className="fill-current mr-2 text-indigo-600 w-4"
@@ -114,12 +110,9 @@ const Carttest = () => {
                 <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
               </svg>
               Continue Shopping
-            </Link>
+            </div>
           </div>
-          <OrderSummary
-            totalPrice={userItems.totalPrice}
-            toCheckout={toCheckout}
-          />
+          <OrderSummary totalPrice={totalPrice} toCheckout={toCheckout} />
         </div>
       </div>
     </>
