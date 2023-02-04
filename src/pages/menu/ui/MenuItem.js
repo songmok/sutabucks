@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const MenuItem = (props) => {
@@ -6,7 +6,7 @@ const MenuItem = (props) => {
     <Link
       to={props.link}
       key={props.key}
-      className="block group cursor-pointer"
+      className="wow fadeIn block group cursor-pointer"
     >
       <img
         src={props.img}

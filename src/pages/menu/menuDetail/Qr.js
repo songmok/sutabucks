@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import WOW from "wowjs";
 
-const Qr = ({ closeModal, detail }) => {
+const Qr = ({ closeModal, detail, modalIsOpen }) => {
+  useEffect(() => {
+    new WOW.WOW().init();
+  }, [modalIsOpen]);
   return (
-    <div className="absolute w-full h-full rounded" onClick={closeModal}>
+    <div
+      className="wow flipInX absolute w-full h-full rounded"
+      onClick={closeModal}
+    >
       <button className="absolute block top-5 right-5 z-10">
         <svg
           xmlns="http://www.w3.org/2000/svg"
