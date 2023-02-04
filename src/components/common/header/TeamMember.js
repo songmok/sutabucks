@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cloneElement } from "react";
 import { Layout } from "utils/layout";
 import img from "asset/images/card.png";
 
@@ -11,6 +11,7 @@ const TeamMember = () => {
     fontWeight: "bold",
     borderRadius: "10px",
   };
+
   return (
     <Layout>
       <h1 className="text-xl text-center pt-32">
@@ -30,7 +31,14 @@ const TeamMember = () => {
             <span className="pb-6 text-lg">
               이름 : 오한수 <br /> 역할 : 프론트 팀장
             </span>
-            <button style={btStyle}>더 알아보기</button>
+            <button
+              style={btStyle}
+              onClick={() => {
+                window.open("https://github.com/songmok/sutabucks.git");
+              }}
+            >
+              더 알아보기
+            </button>
           </div>
         </div>
         <div className="flex justify-center gap-16 pt-14">
@@ -45,7 +53,14 @@ const TeamMember = () => {
             <span className="pb-6 text-lg">
               이름 : 김철호 <br /> 역할 : 든든한 팀원
             </span>
-            <button style={btStyle}>더 알아보기</button>
+            <button
+              style={btStyle}
+              onClick={() => {
+                window.open("https://github.com/Haeparic/sutabucks.git");
+              }}
+            >
+              더 알아보기
+            </button>
           </div>
         </div>
         <div className="flex justify-center gap-16 pt-14">
@@ -60,7 +75,14 @@ const TeamMember = () => {
             <span className="pb-6 text-lg">
               이름 : 이예은 <br /> 역할 : 든든한 팀원
             </span>
-            <button style={btStyle}>더 알아보기</button>
+            <button
+              style={btStyle}
+              onClick={() => {
+                window.open("https://github.com/Yenhj/sutabucks-1.git");
+              }}
+            >
+              더 알아보기
+            </button>
           </div>
         </div>
       </div>
@@ -77,7 +99,14 @@ const TeamMember = () => {
             <span className="pb-6 text-lg">
               이름 : 이도영 <br /> 역할 : 백엔드 팀장
             </span>
-            <button style={btStyle}>더 알아보기</button>
+            <button
+              style={btStyle}
+              onClick={() => {
+                window.open("https://github.com/doyouee/Project1st");
+              }}
+            >
+              더 알아보기
+            </button>
           </div>
         </div>
         <div className="flex justify-center gap-16 pt-14">
@@ -92,7 +121,14 @@ const TeamMember = () => {
             <span className="pb-6 text-lg">
               이름 : 류승지 <br /> 역할 : 든든한 팀원
             </span>
-            <button style={btStyle}>더 알아보기</button>
+            <button
+              style={btStyle}
+              onClick={() => {
+                window.open("https://github.com/songmok/sutabucks.git");
+              }}
+            >
+              더 알아보기
+            </button>
           </div>
         </div>
         <div className="flex justify-center gap-16 pt-14">
@@ -107,7 +143,14 @@ const TeamMember = () => {
             <span className="pb-6 text-lg">
               이름 : 박진혁 <br /> 역할 : 든든한 팀원
             </span>
-            <button style={btStyle}>더 알아보기</button>
+            <button
+              style={btStyle}
+              onClick={() => {
+                window.open("https://github.com/songmok/sutabucks.git");
+              }}
+            >
+              더 알아보기
+            </button>
           </div>
         </div>
         <div className="flex justify-center gap-16 pt-14">
@@ -122,7 +165,14 @@ const TeamMember = () => {
             <span className="pb-6 text-lg">
               이름 : 주봉진 <br /> 역할 : 든든한 팀원
             </span>
-            <button style={btStyle}>더 알아보기</button>
+            <button
+              style={btStyle}
+              onClick={() => {
+                window.open("https://github.com/songmok/sutabucks.git");
+              }}
+            >
+              더 알아보기
+            </button>
           </div>
         </div>
       </div>

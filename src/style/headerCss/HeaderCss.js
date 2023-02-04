@@ -1,6 +1,12 @@
 import styled from "@emotion/styled";
 import { ordercolor, themecolor, themeheadercolor } from "utils/color";
-import { bigsize, defaltsize, headertitle, minsize } from "utils/font";
+import {
+  bigsize,
+  defaltsize,
+  headertitle,
+  midllesize,
+  minsize,
+} from "utils/font";
 
 const headerCss = styled.header`
   position: relative;
@@ -11,9 +17,6 @@ const headerCss = styled.header`
   * {
     color: #fff;
     font-weight: bold;
-  }
-  .change_header {
-    display: none;
   }
   .original_header {
     position: static;
@@ -155,6 +158,7 @@ const headerCss = styled.header`
         gap: 40px;
         .cart {
           .cart-link {
+            padding-top: 4px;
             display: flex;
             align-items: center;
             > img {
@@ -176,7 +180,42 @@ const headerCss = styled.header`
               &::after {
                 content: "";
                 position: absolute;
-                top: 0;
+                top: 4px;
+                right: -15px;
+                transform: translateX(50%);
+                width: 2px;
+                height: 18px;
+                background-color: #fff;
+              }
+            }
+            > a {
+              display: block;
+              font-size: ${defaltsize};
+              &:hover strong {
+                border-bottom: 1px solid #ccc;
+              }
+              strong {
+                white-space: nowrap;
+                font-size: ${midllesize} !important;
+                display: inline-block;
+              }
+            }
+            &:hover button {
+              color: red;
+            }
+            button {
+              margin-top: 4px;
+            }
+          }
+          .member-lists {
+            position: relative;
+            top: 2px;
+            &:nth-of-type(1) {
+              margin-right: 30px;
+              &::after {
+                content: "";
+                position: absolute;
+                top: 0px;
                 right: -15px;
                 transform: translateX(50%);
                 width: 2px;

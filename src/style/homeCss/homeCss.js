@@ -10,7 +10,7 @@ import {
   themeheadercolor,
 } from "utils/color";
 import { bigsize, midllesize } from "utils/font";
-const homeCss = styled.section`
+const HomeCss = styled.section`
   position: relative;
   .event {
     width: 100%;
@@ -171,4 +171,4 @@ const homeCss = styled.section`
     }
   }
 `;
-export default homeCss;
+export default HomeCss;

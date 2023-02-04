@@ -60,22 +60,40 @@ const Payment = () => {
                           />
                         </div>
                         <div className="flex flex-col justify-center">
-                          <span className="pb-6 text-lg">
-                            카드명: {detail.cardName}
-                            {/* <br /> 카드잔액 :{" "}
-                            {detail.money}원 */}
-                          </span>
-                          <button
-                            className="p-[10px] bg-white border-2 border-[#006633] rounded font-bold"
-                            onClick={chargeCard}
-                          >
-                            결제하기
-                          </button>
-                          <PayQrModal
-                            isopen={isOpen}
-                            setIsOpen={setIsOpen}
-                            detail={detail}
-                          />
+                          {detail.money < userItems.totalPrice ? (
+                            <>
+                              <span className="pb-6 text-lg">
+                                카드명: {detail.cardName}
+                                <br /> 카드잔액 : {detail.money}원
+                              </span>
+                              <button
+                                className="p-[10px] bg-white border-2 border-[#006633] rounded font-bold"
+                                onClick={chargeCard}
+                              >
+                                결제하기
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <span className="pb-6 text-lg">
+                                카드명: {detail.cardName}
+                                <br /> 카드잔액 : {detail.money}원
+                              </span>
+                              <button
+                                className="p-[10px] bg-white border-2 border-[#006633] rounded font-bold"
+                                onClick={chargeCard}
+                              >
+                                충전하기
+                              </button>
+                            </>
+                          )}
+                          <>
+                            <PayQrModal
+                              isopen={isOpen}
+                              setIsOpen={setIsOpen}
+                              detail={detail}
+                            />
+                          </>
                         </div>
                       </div>
                     </div>

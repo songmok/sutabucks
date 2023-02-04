@@ -17,7 +17,7 @@ const HomeBanner = ({ WOW }) => {
             className="wow fadeInLeft"
             data-wow-delay="1.5s"
           />
-          <Link to="/menu/1">자세히 보기</Link>
+          <Link to="/menu/cate?seq=1">자세히 보기</Link>
         </div>
         <div className="items">
           <img
