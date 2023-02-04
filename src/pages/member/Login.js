@@ -2,11 +2,10 @@ import React from "react";
 import axios from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginAccount } from "../../reducer/loggedState";
 import LoginDiv, { BgSection } from "../../style/memberCss/loginCSS";
 import { Err } from "../../style/memberCss/basicCSS";
-import { Layout } from "utils/layout";
 
 const Login = () => {
   const dispatch = useDispatch();
