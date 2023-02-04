@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MenuBt = ({ bt, setBt, menuBt, seq, childSeq }) => {
+const MenuBt = ({ bt, setBt, menuBt, seq, childSeq, q }) => {
   console.log(seq);
   return (
     <div className="flex flex-col gap-2">
       <Link
         to={`/menu/cate?seq=${seq}`}
         className={`flex justify-center px-2 py-3 text-sm rounded-lg cursor-pointer ${
-          !childSeq ? "bg-[#006633] text-white" : "hover:bg-gray-200"
+          !q && !childSeq ? "bg-[#006633] text-white" : "hover:bg-gray-200"
         }`}
       >
         전체 메뉴

@@ -16,7 +16,6 @@ import MenuBt from "./MenuBt";
 import MenuItem from "../ui/MenuItem";
 
 const Menu = () => {
-  // const { cate } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   // const [data, setData] = useState([]);
   const [word, setWord] = useState("");
@@ -26,21 +25,22 @@ const Menu = () => {
   const [bt, setBt] = useState("all");
   const [menuBt, setMenuBt] = useState([]);
 
-  // console.log(cate);
-
   const seq = searchParams.get("seq");
   const childSeq = searchParams.get("childSeq");
   const q = searchParams.get("q");
 
   console.log(`seq는 ${seq}`);
   console.log(`childSeq는 ${childSeq}`);
+  console.log(`q는 ${q}`);
 
   const navigate = useNavigate();
 
   const fetchData = async () => {
     if (childSeq) {
       await axios
-        .get(`http://haeji.mawani.kro.kr:9999/cate/detail/menu?childSeq=${childSeq}`)
+        .get(
+          `http://haeji.mawani.kro.kr:9999/cate/detail/menu?childSeq=${childSeq}`
+        )
         .then((res) => {
           console.log(res.data.list);
           setSearchData(res.data.list);
@@ -79,10 +79,6 @@ const Menu = () => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
     fetchData();
   }, [seq, childSeq, q]);
@@ -106,39 +102,11 @@ const Menu = () => {
     cateData();
   }, []);
 
-  // const searchResult = async () => {
-  //   await axios
-  //     .get(
-  //       `http://haeji.mawani.kro.kr:9999/cate/searchmenu?parentSeq=${cate}&menuName=${word}`
-  //     )
-  //     .then((res) => {
-  //       setSearchData(res.data.list);
-  //       setStatus(res.data.status);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       setStatus(err.response.data.status);
-  //     });
-  // };
-
-  // const searchResult = (e) => {
-  //   if (e.key === "Enter") {
-  //     let keyword = e.target.value;
-  //     navigate(`/?q=${keyword}`);
-  //   }
-  // };
-
-  // const handleOnClick = () => {
-  //   setBt("search");
-  // };
-  // const handleOnKeyPress = (e) => {
-  //   if (e.key === "Enter") {
-  //     let keyword = e.target.value;
-  //     navigate(`/?=${keyword}`);
-  //   }
-  // };
-
-  console.log(bt);
+  const searchResult = (e) => {
+    if (e.key === "Enter") {
+      navigate(`/menu/cate?seq=${seq}&q=${word}`);
+    }
+  };
 
   return (
     <section className="container mx-auto">
@@ -172,26 +140,34 @@ const Menu = () => {
       )}
       <div className="pt-16 px-10 grid lg:grid-cols-5 pb-20">
         <div className="lg:col-span-1 mr-2">
-          <MenuBt bt={bt} setBt={setBt} menuBt={menuBt} seq={seq} childSeq={childSeq} />
+          <MenuBt
+            bt={bt}
+            setBt={setBt}
+            menuBt={menuBt}
+            q={q}
+            seq={seq}
+            childSeq={childSeq}
+          />
         </div>
         <main className="lg:col-span-4 ml-2">
-          {/* <div className="flex flex-wrap justify-between items-center lg:mb-7">
-            <form className="w-full lg:w-[35%]">
+          <div className="flex flex-wrap justify-end items-center lg:mb-7">
+            <div className="w-full lg:w-[35%]">
               <div className="relative">
                 <input
                   type="text"
                   className="bg-gray-50 border border-[#1B3C34] text-gray-900 text-sm rounded-lg block w-full pl-5 p-2.5"
                   placeholder="Search Menu"
-                  // required
                   value={word}
                   onChange={(e) => {
                     setWord(e.target.value);
                   }}
-                  // onKeyPress={handleOnKeyPress}
+                  onKeyPress={(e) => searchResult(e)}
                 />
                 <button
                   className="absolute inset-y-0 right-3 flex items-center pl-3 cursor-pointer"
-                  onClick={()=>{setBt("search")}}
+                  onClick={() => {
+                    navigate(`/menu/cate?seq=${seq}&q=${word}`);
+                  }}
                 >
                   <svg
                     aria-hidden="true"
@@ -208,14 +184,8 @@ const Menu = () => {
                   </svg>
                 </button>
               </div>
-            </form>
-            <input
-              type="search"
-              className="px-5 py-2 w-4/5"
-              placeholder="Search Menu"
-              onKeyPress={(e) => searchResult(e)}
-            />
-          </div> */}
+            </div>
+          </div>
           <div className="coffee mb-10">
             {status ? (
               <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">

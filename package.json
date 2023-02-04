@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.10.5",
     "@fullpage/react-fullpage": "^0.1.31",
     "@reduxjs/toolkit": "^1.9.1",
+    "animate.css": "^4.1.1",
     "axios": "^1.2.2",
     "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
