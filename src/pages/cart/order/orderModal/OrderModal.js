@@ -73,6 +73,7 @@ const OrderModal = ({
       mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
       sbOrderNumber: item.sbOrderNumber,
       sbSmcSeq: item["storeMenuConnect"].smcSeq,
+      sbBasketPrice: item.sbBasketPrice,
     };
   });
 

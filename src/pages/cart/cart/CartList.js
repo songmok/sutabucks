@@ -3,9 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userItemActions } from "reducer/userItemSlice";
 
-const CartList = ({ item, miSeq, click, setClick }) => {
-  const dispatch = useDispatch();
-
+const CartList = ({ item, miSeq, click, setClick, totalPrice }) => {
   const minus = () => {
     if (item.sbNumber > 1) {
       const body = {
@@ -19,7 +17,7 @@ const CartList = ({ item, miSeq, click, setClick }) => {
         .then((res) => {
           console.log(res);
           console.log(body);
-          dispatch(userItemActions.minusItem(item));
+          setClick(click + 1);
         })
         .catch((err) => {
           console.log(err);
@@ -41,7 +39,7 @@ const CartList = ({ item, miSeq, click, setClick }) => {
       .then((res) => {
         console.log(res);
         console.log(body);
-        dispatch(userItemActions.plusItem(item));
+        setClick(click + 1);
       })
       .catch((err) => {
         console.log(err);
@@ -62,11 +60,11 @@ const CartList = ({ item, miSeq, click, setClick }) => {
         })
         .then((res) => {
           console.log(res);
+          setClick(click + 1);
         })
         .catch((err) => {
           console.log(err);
         });
-      dispatch(userItemActions.deliteItems(item));
     }
   };
   return (
@@ -118,9 +116,7 @@ const CartList = ({ item, miSeq, click, setClick }) => {
         </button>
       </div>
       <div className="w-1/6 flex justify-center">
-        <span className="font-semibold text-sm">
-          {item.optionIncludePrice}원
-        </span>
+        <span className="font-semibold text-sm">{item.sbBasketPrice}원</span>
       </div>
     </div>
   );

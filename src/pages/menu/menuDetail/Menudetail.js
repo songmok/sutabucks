@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import MenudetailCss from "../../../style/menuCss/MenudetailCss";
 import instance from "../../../api/axios";
 import request from "../../../api/request";
@@ -12,6 +12,8 @@ import { Tooltip } from "react-tooltip";
 const Menudetail = () => {
   // URI 처리 및 데이터 연동
   const [detail, setDetail] = useState([]);
+
+  const navigate = useNavigate();
 
   const { seq } = useParams();
 
@@ -75,9 +77,11 @@ const Menudetail = () => {
       )}
       <section className="container mx-auto my-10">
         <div className="relative block rounded-lg shadow-lg bg-white">
-          <Link
-            to="/menu"
-            className="absolute block top-7 right-7 text-gray-600"
+          <div
+            className="absolute block top-7 right-7 text-gray-600 cursor-pointer"
+            onClick={() => {
+              navigate(-1);
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +97,7 @@ const Menudetail = () => {
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-          </Link>
+          </div>
           <div className="flex flex-wrap items-center p-5">
             <div className="relative block w-full lg:flex grow-0 shrink-0 basis-auto lg:w-6/12 xl:w-4/12">
               <img

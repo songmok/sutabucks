@@ -2,36 +2,29 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { cartActions } from "reducer/cartSlice";
 import CheckouttCss from "style/cartCss/CheckoutCss";
 
 const Checkout = () => {
-  const dispatch = useDispatch();
-
   const userData = useSelector((state) => state.user);
-  const userItem = useSelector((state) => state.userItem.items[0]);
-  console.log(userData);
+  const miSeq = userData.miSeq;
 
-  // const cartItemData = cartData.items;
-
-  // const totalPrice = cartItemData.reduce(
-  //   (acc, cur) => acc + cur.mbiCost * cur.amount,
-  //   0
-  // );
   const [totalPrice, setTotalPrice] = useState("");
   const [cartList, setCartList] = useState([]);
   const [request, setRequest] = useState("");
+  const [store, setStore] = useState([]);
   const [pick, setPick] = useState(1);
-
-  const miSeq = 70;
 
   const getPosts = async () => {
     const posts = await axios.get(
       `http://haeji.mawani.kro.kr:9999/cart/list?miSeq=${miSeq}&status=1`
     );
-    // console.log(posts.data);
-    const items = posts.data.memberBasket;
-    setCartList(items);
+    setStore({
+      sbiBranchName:
+        posts.data.memberBasket[0].storeMenuConnect.store.sbiBranchName,
+      sbiAddressDetail:
+        posts.data.memberBasket[0].storeMenuConnect.store.sbiAddressDetail,
+    });
+    setCartList(posts.data.memberBasket);
     setTotalPrice(posts.data.totalPrice);
   };
 
@@ -47,15 +40,13 @@ const Checkout = () => {
       mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
       sbOrderNumber: item.sbOrderNumber,
       sbSmcSeq: item["storeMenuConnect"].smcSeq,
+      sbBasketPrice: item.sbBasketPrice,
     };
   });
 
   useEffect(() => {
     getPosts();
   }, []);
-
-  console.log(cartList);
-  // console.log(cartItems[0]);
 
   const textarea = useRef();
   const handleResizeHeight = () => {
@@ -124,7 +115,7 @@ const Checkout = () => {
                       </div>
                       <div className="w-1/6 flex justify-center">
                         <span className="font-semibold">
-                          {item.optionIncludePrice}원
+                          {item.sbBasketPrice}원
                         </span>
                       </div>
                     </div>
@@ -145,10 +136,10 @@ const Checkout = () => {
                   <table className="mx-5">
                     <tr className="flex justify-start py-7">
                       <td className="w-1/4 text-xl font-semibold">
-                        {userItem.sbiBranchName}
+                        {store.sbiBranchName}
                       </td>
                       <td className="text-slate-500 text-xl">
-                        {userItem.sbiAddressDetail}
+                        {store.sbiAddressDetail}
                       </td>
                     </tr>
                     <tr className="flex justify-start py-7">
@@ -193,7 +184,7 @@ const Checkout = () => {
                     <tr className="flex justify-start py-7">
                       <td className="w-1/4 text-xl font-semibold">전화번호</td>
                       <td className="text-slate-500 text-xl">
-                        {userData.miPhoneNum}
+                        {userData.miPhoneNum.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
                       </td>
                     </tr>
                     <tr className="relative flex justify-start items-center py-3">

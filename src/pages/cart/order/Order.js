@@ -95,14 +95,14 @@ const Order = () => {
             <OrderBt bt={bt} setBt={setBt} />
           </div>
           <main className="lg:col-span-4 ml-2">
-            <div className="flex justify-between items-center mb-7">
+            {/* <div className="flex justify-between items-center mb-7">
               <span className="text-2xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
-                {/* {store.branchName} */}
+                {store.branchName}
               </span>
-              {/* {listName()} */}
-            </div>
+              {listName()}
+            </div> */}
             <div className="coffee mb-10">
-              <div className="mt-5 grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
+              <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
                 <OrderList
                   data={data}
                   setMenuSeq={setMenuSeq}
