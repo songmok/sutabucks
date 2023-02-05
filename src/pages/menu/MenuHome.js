@@ -1,6 +1,7 @@
 import PagesLink from "components/common/pagesHeader/PagesLink";
 import PagesTitle from "components/common/pagesHeader/PagesTitle";
-import MenuBanner from "components/menu/MenuBanner";
+import MenuBanner from "components/menuHome/MenuBanner";
+
 import React from "react";
 import MenuHomeCss from "style/menuCss/menuHomeCss";
 

@@ -4,7 +4,7 @@ import MapsGnb from "./subMaps/MapsGnb";
 import MenuGnb from "./subMenu/MenuGnb";
 import NewsGnb from "./subNews/NewsGnb";
 
-const HeaderCt = () => {
+const HeaderCt = ({ scrollPosition, WOW }) => {
   const [count, setCount] = useState(0);
   const news = [
     {
@@ -54,10 +54,10 @@ const HeaderCt = () => {
         {
           id: 1,
           name: "음료",
-          url: "/menu/1",
+          url: "/menu/cate?seq=1",
           submenu: [
-            { menu: "에스프레소", url: "/menu/1" },
-            { menu: "프라푸치노", url: "/menu/1" },
+            { menu: "에스프레소", url: "/menu/cate?seq=1&childSeq=5" },
+            { menu: "프라푸치노", url: "/menu/cate?seq=1&childSeq=4" },
             { menu: "콜드브루", url: "/menu/1" },
             { menu: "브루드", url: "/menu/1" },
             { menu: "블렌디드", url: "/menu/1" },
@@ -67,10 +67,10 @@ const HeaderCt = () => {
         {
           id: 2,
           name: "음식",
-          url: "/menu/2",
+          url: "/menu/cate?seq=2",
           submenu: [
-            { menu: "케이크", url: "/menu/2" },
-            { menu: "샌드위치 & 샐러드", url: "/menu/2" },
+            { menu: "케이크", url: "/menu/cate?seq=2&childSeq=5" },
+            { menu: "샌드위치 & 샐러드", url: "/menu/cate?seq=2&childSeq=6" },
             { menu: "브레드", url: "/menu/2" },
             { menu: "과일 & 요거트", url: "/menu/2" },
             { menu: "아이스크림", url: "/menu/2" },
@@ -116,11 +116,10 @@ const HeaderCt = () => {
       <div className="header-center">
         <h1 className="title">SUTABUCKS</h1>
         <nav>
-          <ul className="gnb">
+          <ul className={scrollPosition < 100 ? "gnb" : "gnbsr"}>
             <NewsGnb news={news} count={count} setCount={setCount} />
             <MenuGnb menu={menu} count={count} setCount={setCount} />
             <MapsGnb maps={maps} count={count} setCount={setCount} />
-      
           </ul>
         </nav>
       </div>

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo1 from "asset/images/logo1.png";
-import HeaderCss from "style/headerCss/HeaderCss";
+import HeaderCss from "style/headerCss/headerCss";
+import HeaderScrollCss from "style/headerCss/headerScrollCss";
 import HeaderRt from "./headerRt/HeaderRt";
 import HeaderCt from "./headerCt/HeaderCt";
+import WOW from "wowjs";
 
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -19,24 +21,34 @@ const Header = () => {
       window.removeEventListener("scroll", updateScroll);
     };
   }, []);
+  useEffect(() => {
+    new WOW.WOW().init();
+  }, []);
   return (
     <>
-      <HeaderCss>
-        <div
-          className={
-            scrollPosition < 10 ? "original_header wrap" : "change_header wrap"
-          }
-        >
-          <Link to="/" className="logo">
-            <img src={logo1} alt="logo" />
-          </Link>
-          <HeaderCt />
-          <HeaderRt />
-          <button className="text-2xl absolute top-32 right-[430px]  ">
-            <Link to="/teammember">Team</Link>
-          </button>
-        </div>
-      </HeaderCss>
+      {scrollPosition < 100 ? (
+        <HeaderCss>
+          <div className="original_header wrap">
+            <Link to="/" className="logo">
+              <img src={logo1} alt="logo" />
+            </Link>
+            <HeaderCt scrollPosition={scrollPosition} WOW={WOW} />
+            <HeaderRt scrollPosition={scrollPosition} WOW={WOW} />
+          </div>
+        </HeaderCss>
+      ) : (
+        <HeaderScrollCss>
+          <div className="change_wrap">
+            <div className="wrap">
+              <Link to="/" className="logo">
+                <img src={logo1} alt="logo" />
+              </Link>
+              <HeaderCt scrollPosition={scrollPosition} />
+              <HeaderRt scrollPosition={scrollPosition} />
+            </div>
+          </div>
+        </HeaderScrollCss>
+      )}
     </>
   );
 };
