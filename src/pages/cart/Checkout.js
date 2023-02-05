@@ -159,7 +159,7 @@ const Checkout = () => {
                       </div>
                       <div className="w-1/6 flex justify-center">
                         <span className="font-semibold">
-                          {item.sbBasketPrice}원
+                          {item.optionIncludePrice}원
                         </span>
                       </div>
                     </div>

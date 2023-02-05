@@ -117,7 +117,7 @@ const CartList = ({ item, miSeq, click, setClick, totalPrice }) => {
         </button>
       </div>
       <div className="w-1/6 flex justify-center">
-        <span className="font-semibold text-sm">{item.sbBasketPrice}원</span>
+        <span className="font-semibold text-sm">{item.optionIncludePrice}원</span>
       </div>
     </div>
   );
