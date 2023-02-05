@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CheckouttCss from "style/cartCss/CheckoutCss";
 import cardImg from "asset/images/card.png";
 import CardQrModal from "pages/member/modals/CardQrModal";
+import WOW from "wowjs";
 
 const Checkout = () => {
   const userData = useSelector((state) => state.user);
@@ -45,8 +46,6 @@ const Checkout = () => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {}, []);
-
   const cartItems = cartList.map((item) => {
     // console.log(item.shoppingBasketOption);
     let itemArr = item.shoppingBasketOption;
@@ -85,6 +84,7 @@ const Checkout = () => {
   useEffect(() => {
     payPosts();
     getPosts();
+    new WOW.WOW().init();
   }, []);
 
   const textarea = useRef();
@@ -137,7 +137,7 @@ const Checkout = () => {
               </Link>
             </div>
             <div className="flex flex-col justify-center space-y-6 w-full">
-              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
+              <div className="wow fadeInUp flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   주문메뉴
                 </span>
@@ -174,7 +174,7 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
+              <div className="wow fadeInUp flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   주문매장
                 </span>
@@ -274,7 +274,7 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
+              <div className="wow fadeInUp flex flex-col bg-gray-100 py-7 xl:py-10 px-10 xl:w-full shadow-md">
                 <span className="mb-4 text-2xl lg:text-3xl font-semibold leading-7 lg:leading-9 text-[#006633] drop-shadow-sm">
                   결제 수단 선택
                 </span>

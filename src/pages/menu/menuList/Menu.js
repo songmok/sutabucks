@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import MenuBt from "./MenuBt";
 import MenuItem from "../ui/MenuItem";
+import WOW from "wowjs";
 
 const Menu = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -81,6 +82,7 @@ const Menu = () => {
 
   useEffect(() => {
     fetchData();
+    new WOW.WOW().init();
   }, [seq, childSeq, q]);
 
   console.log(searchData);
@@ -186,11 +188,9 @@ const Menu = () => {
               </div>
             </div>
           </div>
-          <div className="coffee mb-10">
+          <div className="wow fadeIn coffee mb-10" data-wow-slow="1.5s">
             {status ? (
-              <div
-                className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5"
-              >
+              <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
                 {searchData.map((item) => (
                   <MenuItem
                     link={`/menudetail/${item.menuNo}`}

@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
-import WOW from "wowjs";
+import { motion } from "framer-motion";
 
 const Qr = ({ closeModal, detail, modalIsOpen }) => {
-  useEffect(() => {
-    new WOW.WOW().init();
-  }, [modalIsOpen]);
+  useEffect(() => {}, [modalIsOpen]);
+  const variants = {
+    open: { opacity: 1, scale: 1 },
+    closed: { opacity: 0, scale: 0 },
+  };
   return (
-    <div
-      className="wow flipInX absolute w-full h-full rounded"
+    <motion.div
+      animate={modalIsOpen ? "open" : "closed"}
+      variants={variants}
+      className="absolute w-full h-full rounded"
       onClick={closeModal}
     >
       <button className="absolute block top-5 right-5 z-10">
@@ -32,7 +36,7 @@ const Qr = ({ closeModal, detail, modalIsOpen }) => {
         className="absolute w-1/2 h-1/2 top-1/4 left-1/4 z-10"
       />
       <div className="absolute w-full h-full bg-white opacity-50"></div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -11,6 +11,7 @@ import OrderList from "./OrderList";
 import OrderBt from "./OrderBt";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import WOW from "wowjs";
 
 const Order = () => {
   const { storeNo } = useParams();
@@ -29,6 +30,7 @@ const Order = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [menuSeq, setMenuSeq] = useState("");
+  const [bt, setBt] = useState("all");
 
   const getPosts = async () => {
     const params = {
@@ -45,11 +47,13 @@ const Order = () => {
     getPosts();
   }, []);
 
+  useEffect(() => {
+    new WOW.WOW().init();
+  }, [bt]);
+
   // console.log(data);
   // console.log(store);
   console.log(menuSeq);
-
-  const [bt, setBt] = useState("all");
 
   // const listName = () => {
   //   switch (bt) {
@@ -104,7 +108,7 @@ const Order = () => {
               </span>
               {listName()}
             </div> */}
-            <div className="coffee mb-10">
+            <div className="wow fadeIn coffee mb-10" data-wow-slow="1.5s">
               <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-5">
                 <OrderList
                   data={data}

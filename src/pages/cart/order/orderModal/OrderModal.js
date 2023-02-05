@@ -8,6 +8,7 @@ import { userItemActions } from "reducer/userItemSlice";
 import instance from "../../../../api/axios";
 import request from "../../../../api/request";
 import ItemDetail from "./ItemDetail";
+import { motion } from "framer-motion";
 
 const OrderModal = ({
   // amount,

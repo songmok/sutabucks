@@ -120,7 +120,18 @@ const Menudetail = () => {
                 anchorId="props-basic"
                 content="상세정보를 확인해보세요!"
               />
-              {modalIsOpen && <Qr closeModal={closeModal} detail={detail} modalIsOpen={modalIsOpen} />}
+              {/* {modalIsOpen && (
+                <Qr
+                  closeModal={closeModal}
+                  detail={detail}
+                  modalIsOpen={modalIsOpen}
+                />
+              )} */}
+              <Qr
+                closeModal={closeModal}
+                detail={detail}
+                modalIsOpen={modalIsOpen}
+              />
             </div>
             <DetailTxt detail={detail} />
           </div>
