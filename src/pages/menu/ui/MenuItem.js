@@ -6,7 +6,7 @@ const MenuItem = (props) => {
     <Link
       to={props.link}
       key={props.key}
-      className="wow fadeIn block group cursor-pointer"
+      className="block group cursor-pointer"
     >
       <img
         src={props.img}

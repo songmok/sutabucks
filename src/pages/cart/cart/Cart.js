@@ -35,7 +35,7 @@ const Carttest = () => {
     // console.log(item.shoppingBasketOption);
     let itemArr = item.shoppingBasketOption;
     // console.log("itemArr : ", itemArr);
-    if (itemArr.length == 0) {
+    if (itemArr.length === 0) {
       return {
         id: item.id,
         sbiBranchName: item["storeMenuConnect"]["store"].sbiBranchName,

@@ -9,6 +9,8 @@ import PagesLink from "components/common/pagesHeader/PagesLink";
 import { useSelector } from "react-redux";
 import OrderList from "./OrderList";
 import OrderBt from "./OrderBt";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Order = () => {
   const { storeNo } = useParams();
@@ -77,6 +79,7 @@ const Order = () => {
   //       );
   //   }
   // };
+  const notify = () => toast.success("장바구니에 추가되었습니다 👏");
 
   return (
     <>
@@ -116,6 +119,14 @@ const Order = () => {
                 miSeq={userData.miSeq}
                 storeNo={storeNo}
                 menuSeq={menuSeq}
+                notify={notify}
+              />
+              <ToastContainer
+                position="bottom-center"
+                limit={1}
+                closeButton={true}
+                autoClose={1000}
+                hideProgressBar={false}
               />
             </div>
           </main>

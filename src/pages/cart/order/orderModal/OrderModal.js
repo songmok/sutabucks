@@ -17,6 +17,7 @@ const OrderModal = ({
   storeNo,
   menuSeq,
   miSeq,
+  notify,
 }) => {
   // const [modalIsOpen, setModalIsOpen] = useState(false);
   const [option, setOption] = useState(1);
@@ -85,6 +86,7 @@ const OrderModal = ({
         .then((res) => {
           console.log(res);
           console.log(body);
+          notify();
         })
         .catch((err) => {
           console.log(err);
@@ -112,6 +114,7 @@ const OrderModal = ({
         });
       setAmount(1);
       setModalIsOpen(false);
+      notify();
     }
   };
 
@@ -256,7 +259,9 @@ const OrderModal = ({
           <div className="space-y-3 text-center">
             <button
               className="block w-full px-5 py-3 text-sm text-gray-100 bg-[#1B3C34] rounded"
-              onClick={pushCart}
+              onClick={() => {
+                pushCart();
+              }}
             >
               Add to Cart
             </button>

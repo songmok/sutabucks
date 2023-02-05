@@ -14,7 +14,6 @@ import {
 import axios from "axios";
 import MenuBt from "./MenuBt";
 import MenuItem from "../ui/MenuItem";
-import WOW from "wowjs";
 
 const Menu = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -84,11 +83,6 @@ const Menu = () => {
     fetchData();
   }, [seq, childSeq, q]);
 
-  useEffect(() => {
-    new WOW.WOW().init();
-  }, [seq, childSeq, q]);
-
-  // console.log(bt);
   console.log(searchData);
 
   const cateData = async () => {

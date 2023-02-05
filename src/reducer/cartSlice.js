@@ -86,7 +86,6 @@ const cartSlice = createSlice({
       }
     },
     allClick: (state) => {
-      // const currentItem = action.payload;
       const existingItem = state.items.find((item) => item.checked === false);
       if (existingItem) {
         state.items.map((item) => (item.checked = true));
