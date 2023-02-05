@@ -29,20 +29,41 @@ const Carttest = () => {
     setTotalPrice(posts.data.totalPrice);
   };
 
+  console.log(cartList);
+
   const cartItems = cartList.map((item) => {
-    return {
-      id: item.id,
-      sbiBranchName: item["storeMenuConnect"]["store"].sbiBranchName,
-      sbiAddressDetail: item["storeMenuConnect"]["store"].sbiAddressDetail,
-      mbiName: item["storeMenuConnect"]["menu"].mbiName,
-      moiName: item["shoppingBasketOption"][0]["menuOption"].moiName,
-      sbNumber: item.sbNumber,
-      optionIncludePrice: item.optionIncludePrice,
-      mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
-      sbOrderNumber: item.sbOrderNumber,
-      sbSmcSeq: item["storeMenuConnect"].smcSeq,
-      sbBasketPrice: item.sbBasketPrice,
-    };
+    // console.log(item.shoppingBasketOption);
+    let itemArr = item.shoppingBasketOption;
+    // console.log("itemArr : ", itemArr);
+    if (itemArr.length === 0) {
+      return {
+        id: item.id,
+        sbiBranchName: item["storeMenuConnect"]["store"].sbiBranchName,
+        sbiAddressDetail: item["storeMenuConnect"]["store"].sbiAddressDetail,
+        mbiName: item["storeMenuConnect"]["menu"].mbiName,
+        sbNumber: item.sbNumber,
+        optionIncludePrice: item.optionIncludePrice,
+        mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
+        sbOrderNumber: item.sbOrderNumber,
+        sbSmcSeq: item["storeMenuConnect"].smcSeq,
+        sbBasketPrice: item.sbBasketPrice,
+        moiName: "",
+      };
+    } else {
+      return {
+        id: item.id,
+        sbiBranchName: item["storeMenuConnect"]["store"].sbiBranchName,
+        sbiAddressDetail: item["storeMenuConnect"]["store"].sbiAddressDetail,
+        mbiName: item["storeMenuConnect"]["menu"].mbiName,
+        sbNumber: item.sbNumber,
+        optionIncludePrice: item.optionIncludePrice,
+        mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
+        sbOrderNumber: item.sbOrderNumber,
+        sbSmcSeq: item["storeMenuConnect"].smcSeq,
+        sbBasketPrice: item.sbBasketPrice,
+        moiName: item["shoppingBasketOption"][0]["menuOption"].moiName,
+      };
+    }
   });
 
   useEffect(() => {
@@ -53,7 +74,7 @@ const Carttest = () => {
     getPosts();
   }, [click]);
 
-  // console.log(cartItems);
+  console.log(cartItems);
 
   const toCheckout = (e) => {
     if (cartItems.length <= 0) {

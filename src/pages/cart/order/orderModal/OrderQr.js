@@ -1,6 +1,10 @@
 import React from "react";
 
-const OrderQr = ({ closeModal, modalData }) => {
+const OrderQr = ({ closeModal, modalData, modalIsOpen }) => {
+  const variants = {
+    open: { opacity: 1, scale: 1 },
+    closed: { opacity: 0, scale: 0 },
+  };
   return (
     <div
       className="absolute inset-0 w-full h-full rounded"

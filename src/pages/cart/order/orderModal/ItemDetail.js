@@ -30,7 +30,11 @@ const ItemDetail = ({ modalData, amount }) => {
         </button>
         <Tooltip anchorId="props-basic" content="상세정보를 확인해보세요!" />
         {modalIsOpen && (
-          <OrderQr closeModal={closeModal} modalData={modalData} />
+          <OrderQr
+            modalIsOpen={modalIsOpen}
+            closeModal={closeModal}
+            modalData={modalData}
+          />
         )}
       </div>
       <span className="block font-bold text-3xl text-center">

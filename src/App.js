@@ -34,7 +34,7 @@ import Menu from "pages/menu/menuList/Menu";
 import MenuHome from "pages/menu/MenuHome";
 import Menudetail from "pages/menu/menuDetail/Menudetail";
 import Maps from "pages/maps/Maps";
-import Payment from "pages/cart/Payment";
+// import Payment from "pages/cart/Payment";
 
 import SignUpSelect from "pages/member/SignUpSelect";
 import MyStorePage from "pages/mystore/MyStorePage";
@@ -107,7 +107,7 @@ function App() {
         {/* <Route path="/order" element={<Order />} /> */}
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/payment" element={<Payment />} />
+        {/* <Route path="/payment" element={<Payment />} /> */}
         <Route path="*" element={<NotFound />} />
         <Route path="/qrmob" element={<QrMob />} />
       </Routes>

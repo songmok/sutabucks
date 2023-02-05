@@ -8,6 +8,7 @@ import { userItemActions } from "reducer/userItemSlice";
 import instance from "../../../../api/axios";
 import request from "../../../../api/request";
 import ItemDetail from "./ItemDetail";
+import { motion } from "framer-motion";
 
 const OrderModal = ({
   // amount,
@@ -17,6 +18,7 @@ const OrderModal = ({
   storeNo,
   menuSeq,
   miSeq,
+  notify,
 }) => {
   // const [modalIsOpen, setModalIsOpen] = useState(false);
   const [option, setOption] = useState(1);
@@ -24,8 +26,6 @@ const OrderModal = ({
   const [amount, setAmount] = useState(1);
 
   const [storeSeq, setStoreSeq] = useState([]);
-
-  const dispatch = useDispatch();
 
   const getModal = async () => {
     const params = {
@@ -38,7 +38,6 @@ const OrderModal = ({
     console.log(modalPosts.data.MenuDetail);
     setStoreSeq(modalPosts.data.MenuDetail.sbSmcSeq);
     setModalData(modalPosts.data.MenuDetail.detail);
-    // setOption(modalPosts.data.MenuDetail.options[0].option);
   };
 
   useEffect(() => {
@@ -47,42 +46,7 @@ const OrderModal = ({
 
   console.log(modalData.menuCategorySeq);
 
-  // 카트 아이템 추가
-  const [totalPrice, setTotalPrice] = useState("");
-  const [cartList, setCartList] = useState([]);
-
-  const getPosts = async () => {
-    const posts = await axios.get(
-      `http://haeji.mawani.kro.kr:9999/cart/list?miSeq=${miSeq}&status=1`
-    );
-    // console.log(posts.data);
-    const items = posts.data.memberBasket;
-    setCartList(items);
-    setTotalPrice(posts.data.totalPrice);
-  };
-
-  const cartItems = cartList.map((item) => {
-    return {
-      id: item.id,
-      sbiBranchName: item["storeMenuConnect"]["store"].sbiBranchName,
-      sbiAddressDetail: item["storeMenuConnect"]["store"].sbiAddressDetail,
-      mbiName: item["storeMenuConnect"]["menu"].mbiName,
-      moiName: item["shoppingBasketOption"][0]["menuOption"].moiName,
-      sbNumber: item.sbNumber,
-      optionIncludePrice: item.optionIncludePrice,
-      mbiSeq: item["storeMenuConnect"]["menu"].mbiSeq,
-      sbOrderNumber: item.sbOrderNumber,
-      sbSmcSeq: item["storeMenuConnect"].smcSeq,
-      sbBasketPrice: item.sbBasketPrice,
-    };
-  });
-
-  useEffect(() => {
-    getPosts();
-  }, [modalIsOpen]);
-
   // console.log(storeSeq);
-  // console.log(option);
 
   const handleOptionChange = (changeEvent) => {
     setOption(changeEvent.target.value);
@@ -103,32 +67,56 @@ const OrderModal = ({
   // };
 
   const pushCart = () => {
-    const body = {
-      miSeq: miSeq,
-      sbSmcSeq: storeSeq,
-      shoppingBasketVo: {
-        sbSmcSeq: menuSeq,
-        sbNumber: amount,
-      },
-      shoppingBasketOption: [
-        {
-          sboNumber: amount,
-          sboMoiSeq: option,
+    if (modalData.menuCategorySeq < 5) {
+      const body = {
+        miSeq: miSeq,
+        sbSmcSeq: storeSeq,
+        shoppingBasketVo: {
+          sbSmcSeq: menuSeq,
+          sbNumber: amount,
         },
-      ],
-    };
-    axios
-      .put("http://haeji.mawani.kro.kr:9999/cart/add", body)
-      .then((res) => {
-        console.log(res);
-        console.log(body);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setAmount(1);
-    setModalIsOpen(false);
-    dispatch(userItemActions.updateItems({ items: cartItems, totalPrice }));
+        shoppingBasketOption: [
+          {
+            sboNumber: amount,
+            sboMoiSeq: option,
+          },
+        ],
+      };
+      axios
+        .put("http://haeji.mawani.kro.kr:9999/cart/add", body)
+        .then((res) => {
+          console.log(res);
+          console.log(body);
+          notify();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setAmount(1);
+      setModalIsOpen(false);
+    } else {
+      const body = {
+        miSeq: miSeq,
+        sbSmcSeq: storeSeq,
+        shoppingBasketVo: {
+          sbSmcSeq: menuSeq,
+          sbNumber: amount,
+        },
+      };
+      axios
+        .put("http://haeji.mawani.kro.kr:9999/cart/add", body)
+        .then((res) => {
+          console.log(res);
+          console.log(body);
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(body);
+        });
+      setAmount(1);
+      setModalIsOpen(false);
+      notify();
+    }
   };
 
   const customStyles = {
@@ -211,7 +199,7 @@ const OrderModal = ({
                 +
               </button>
             </div>
-            {/* {parseInt(modalData.menuCategorySeq) < 5 && (
+            {parseInt(modalData.menuCategorySeq) < 5 && (
               <ul className="flex w-3/4 justify-center items-stretch gap-2 my-1">
                 <li className="relative flex-1">
                   <input
@@ -267,67 +255,14 @@ const OrderModal = ({
                   </label>
                 </li>
               </ul>
-            )} */}
-            <ul className="flex w-3/4 justify-center items-stretch gap-2 my-1">
-              <li className="relative flex-1">
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  value="1"
-                  name="size"
-                  id="1"
-                  checked={parseInt(option) === 1}
-                  onChange={handleOptionChange}
-                />
-                <label
-                  className="flex h-full items-center justify-center text-center px-2 py-2 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#CCAA86] peer-checked:ring-2 peer-checked:border-transparent"
-                  htmlFor="1"
-                >
-                  Tall
-                </label>
-              </li>
-              <li className="relative flex-1">
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  value="2"
-                  name="size"
-                  id="2"
-                  checked={parseInt(option) === 2}
-                  onChange={handleOptionChange}
-                />
-                <label
-                  className="flex h-full items-center justify-center text-center px-2 py-2 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#B05B10] peer-checked:ring-2 peer-checked:border-transparent"
-                  htmlFor="2"
-                >
-                  Grande
-                  <br />+ 500
-                </label>
-              </li>
-              <li className="relative flex-1">
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  value="3"
-                  name="size"
-                  id="3"
-                  checked={parseInt(option) === 3}
-                  onChange={handleOptionChange}
-                />
-                <label
-                  className="flex h-full items-center justify-center text-center px-2 py-2 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[#480405] peer-checked:ring-2 peer-checked:border-transparent"
-                  htmlFor="3"
-                >
-                  Venti
-                  <br />+ 1000
-                </label>
-              </li>
-            </ul>
+            )}
           </div>
           <div className="space-y-3 text-center">
             <button
               className="block w-full px-5 py-3 text-sm text-gray-100 bg-[#1B3C34] rounded"
-              onClick={pushCart}
+              onClick={() => {
+                pushCart();
+              }}
             >
               Add to Cart
             </button>

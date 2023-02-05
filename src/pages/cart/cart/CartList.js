@@ -76,7 +76,8 @@ const CartList = ({ item, miSeq, click, setClick, totalPrice }) => {
         <div className="flex flex-col gap-2 justify-center flex-grow">
           <span className="text-sm">{item.sbiBranchName}</span>
           <span className="font-bold">
-            {item.mbiName} - {item.moiName}
+            {item.mbiName} &nbsp;
+            <span className="font-normal">{item.moiName}</span>
           </span>
         </div>
       </div>
@@ -116,7 +117,7 @@ const CartList = ({ item, miSeq, click, setClick, totalPrice }) => {
         </button>
       </div>
       <div className="w-1/6 flex justify-center">
-        <span className="font-semibold text-sm">{item.sbBasketPrice}원</span>
+        <span className="font-semibold text-sm">{item.optionIncludePrice}원</span>
       </div>
     </div>
   );
