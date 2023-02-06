@@ -1,5 +1,5 @@
 import React from "react";
-import PagesHeaderCss from "style/PagesHeaderCss/PagesHeaderCss";
+import PagesHeaderCss from "style/pagesHeaderCss/pagesHeaderCss";
 
 const PagesTitle = ({ title }) => {
   return (

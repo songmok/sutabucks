@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Tooltip } from "react-tooltip";
 import OrderQr from "./OrderQr";
-
+import { Frame } from "framer";
 const ItemDetail = ({ modalData, amount }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
