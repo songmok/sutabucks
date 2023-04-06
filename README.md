@@ -63,34 +63,34 @@ Sutabucks 이용자들
 
 ## 📌 주요 기능
 
-#### 홈 화면 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A9%94%EC%9D%B8-Page)" >상세보기 - WIKI 이동</a>
+#### 홈 화면 
 
 - 헤더 스크롤 반응 적용
 - 서브헤더 구현
 - 공지사항 미리보기 구현
 
-#### 공지사항 및 이벤트 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A9%94%EC%9D%B8-Page)" >상세보기 - WIKI 이동</a>
+#### 공지사항 및 이벤트 
 
 - 공지사항 리스트 및 상세페이지
 - 이벤트 리스트 및 상세페이지
 
-#### 회원관리 - <a href="https://github.com/Yenhj/monthlycoffee/wiki" >상세보기 - WIKI 이동</a>
+#### 회원관리 
 
 - 개인/점주 회원 회원가입
 - Redux-persist를 이용해 로그인 및 로그아웃 구현
 - 인증번호를 통한 아이디, 비밀번호 찾기
 
-#### 멤버십 카드 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Member)" >상세보기 - WIKI 이동</a>
+#### 멤버십 카드 
 
 - 멤버십 생성
 - 멤버십 QR충전
 
-#### 메뉴 - <a href="https://github.com/Haeparic/monthlycoffee/wiki" >상세보기 - WIKI 이동</a>
+#### 메뉴 
 
 - 메뉴 항목
 - QR코드로 메뉴 상세 페이지 링크 기능
 
-#### 주문 및 결제 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A9%94%EC%9D%B8-Page)" >상세보기 - WIKI 이동</a>
+#### 주문 및 결제 
 
 - 주문메뉴 카테고리 구분
 - 주문 모달창 구현
